@@ -52,3 +52,12 @@ export interface IParticipants_DrawVO {
   status?: string,
   deleted_at?: string
 }
+
+export interface IWinner_Draw {
+  winner_id?: number;
+  participants_draw_participant_id?: number;
+  image?: number;
+  video?: number;
+  deleted_at?: number;
+  created_at?: number;
+}
