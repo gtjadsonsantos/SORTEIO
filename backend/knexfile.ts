@@ -1,5 +1,3 @@
-require('ts-node/register');
-
 export default {
   development: {
     client: "sqlite3",

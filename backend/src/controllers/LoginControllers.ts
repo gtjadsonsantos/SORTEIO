@@ -4,7 +4,7 @@ import UserVO from "../models/vo/UserVO";
 import { ILogin } from "../types";
 
 export default {
-  async create(req: Request, res: Response) {
+  async create(req: Request, res: Response):Promise<void>  {
     try {
       const { password, username }: ILogin = req.body;
 
@@ -20,5 +20,5 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 };

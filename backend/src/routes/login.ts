@@ -1,9 +1,9 @@
 import { Router } from "express";
-import ControllerLogin from "../controllers/ControllerLogin";
+import LoginController from "../controllers/LoginControllers";
 
 const routeLogin = Router();
 
-routeLogin.post("/login", ControllerLogin.create);
+routeLogin.post("/login",LoginController.create)
 
 
 
