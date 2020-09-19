@@ -37,20 +37,20 @@ export interface IImage {
   draws_draw_id?: number;
 }
 
-export interface  IDraw_QuotasVO {
-   draw_quota_id?: number;
-   number?: string;
-   created_at?: string;
-   deleted_at?: string;
+export interface IDraw_QuotasVO {
+  draw_quota_id?: number;
+  number?: string;
+  created_at?: string;
+  deleted_at?: string;
 }
 export interface IParticipants_DrawVO {
-  participant_id?: number,
-  draw_quotas_draw_quota_id?: number,
-  users_user_id?: number,
-  draws_draw_id?: number,
-  created_at?: string,
-  status?: string,
-  deleted_at?: string
+  participant_id?: number;
+  draw_quotas_draw_quota_id?: number;
+  users_user_id?: number;
+  draws_draw_id?: number;
+  created_at?: string;
+  status?: string;
+  deleted_at?: string;
 }
 
 export interface IWinner_Draw {
@@ -63,13 +63,24 @@ export interface IWinner_Draw {
 }
 
 export interface IBank_Account {
-  bank_account_id?: number,
-  name?: string,
-  agency?: string,
-  number_account?: string,
-  created_at?: string,
-  image?: string,
-  cpf?: string,
-  cnpj?: string,
-  deleted_at?: string
+  bank_account_id?: number;
+  name?: string;
+  agency?: string;
+  number_account?: string;
+  created_at?: string;
+  image?: string;
+  cpf?: string;
+  cnpj?: string;
+  deleted_at?: string;
+}
+
+export interface IBusiness {
+  business_id?: number;
+  cnpj?: string;
+  fantasy_name?: string;
+  logo?: string;
+  social?: string;
+  phone?: string;
+  deleted_at?: string;
+  regulation?: string;
 }
