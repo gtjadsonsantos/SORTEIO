@@ -9,7 +9,7 @@ export default {
     const dataUser:UserVO[] = await LoginDAO.indexOne(userVO)
     let payload:object = {
         dataUser,
-        usertype: dataUser[0].getType()
+        usertype: dataUser[0]?.getType()
     }
     let response:any|string = ""
 

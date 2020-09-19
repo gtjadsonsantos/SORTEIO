@@ -9,7 +9,7 @@ async function validateJWT(req: Request, res: Response, next: NextFunction) {
     const decode = jwt.verify(token, config.hashjwt);
     const { usertype } = decode;
 
-    if (usertype == "admin") {
+    if (usertype == "comum") {
       next();
     } else {
       res.status(401).send({ status: "Não autorizado" });

@@ -36,3 +36,19 @@ export interface IImage {
   deleted_at?: string;
   draws_draw_id?: number;
 }
+
+export interface  IDraw_QuotasVO {
+   draw_quota_id?: number;
+   number?: string;
+   created_at?: string;
+   deleted_at?: string;
+}
+export interface IParticipants_DrawVO {
+  participant_id?: number,
+  draw_quotas_draw_quota_id?: number,
+  users_user_id?: number,
+  draws_draw_id?: number,
+  created_at?: string,
+  status?: string,
+  deleted_at?: string
+}
