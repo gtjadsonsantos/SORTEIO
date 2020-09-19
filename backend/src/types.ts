@@ -61,3 +61,15 @@ export interface IWinner_Draw {
   deleted_at?: number;
   created_at?: number;
 }
+
+export interface IBank_Account {
+  bank_account_id?: number,
+  name?: string,
+  agency?: string,
+  number_account?: string,
+  created_at?: string,
+  image?: string,
+  cpf?: string,
+  cnpj?: string,
+  deleted_at?: string
+}
