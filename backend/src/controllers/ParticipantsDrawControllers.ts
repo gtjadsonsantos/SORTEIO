@@ -70,7 +70,10 @@ export default {
             const participant_draw:IParticipants_DrawVO = req.body
             const participant_DrawVO = new Participants_DrawVO()
 
-            participant_DrawVO.setParticipant_id(participant_draw.participant_id)                
+            participant_DrawVO.setParticipant_id(participant_draw.participant_id)     
+            participant_DrawVO.setDraw_quotas_draw_quota_id(participant_draw.draw_quotas_draw_quota_id)
+            participant_DrawVO.setUsers_user_id(participant_draw.users_user_id)
+            participant_DrawVO.setDraws_draw_id(participant_draw.draws_draw_id)
 
             const response = await ParticipantsDrawBO.delete(participant_DrawVO)
 
