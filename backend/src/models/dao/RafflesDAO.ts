@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import conn from "../../database/conn";
-import { IRaflles } from "../../types";
+import { IRaffles } from "../../types";
 import RafflesVO from "../vo/RafflesVO";
 
 export default {
   async indexOne(rafflesVO: RafflesVO): Promise<RafflesVO[]> {
     const listRafflesVO: RafflesVO[] = [];
-    const listRaffles: IRaflles[] = await conn("raffles")
+    const listRaffles: IRaffles[] = await conn("raffles")
       .select("*")
       .where("raffle_id", "=", `${rafflesVO.getRaffle_id()}`)
       .where("deleted_at", null);
@@ -32,7 +32,7 @@ export default {
   },
   async indexAll(): Promise<RafflesVO[]> {
     const listRafflesVO: RafflesVO[] = [];
-    const listRaffles: IRaflles[] = await conn("raffles")
+    const listRaffles: IRaffles[] = await conn("raffles")
       .select("*")
       .where("deleted_at", null);
 

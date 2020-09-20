@@ -1,4 +1,4 @@
-export default class Quotas_RaflleVO {
+export default class Quotas_RaffleVO {
   private quota_raffle_id?: number;
   private number?: string;
   private created_at?: string;

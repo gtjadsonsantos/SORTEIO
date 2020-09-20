@@ -85,14 +85,14 @@ export interface IBusiness {
   regulation?: string;
 }
 
-export interface IQuotas_Raflle {
+export interface IQuotas_Raffle {
   quota_raffle_id?: number;
   number?: string;
   created_at?: string;
   deleted_at?: string;
 }
 
-export interface IRaflles {
+export interface IRaffles {
   raffle_id?: number;
   image?: string;
   created_at?: string;
@@ -105,14 +105,14 @@ export interface IRaflles {
   deleted_at?: string;
 }
 
-export interface IParticipants_Ruflle {
+export interface IParticipants_Ruffle {
   participant_id?: number;
   users_user_id?: number;
   created_at?: string;
   quotas_raffle_quota_raffle_id?: number;
   raffles_raffle_id?: number;
   status?: string;
-  deleted_a?: string;
+  deleted_at?: string;
 }
 
 export default interface IWinner_Raffle {

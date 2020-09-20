@@ -5,7 +5,7 @@ export default class Participants_RuffleVO {
   private quotas_raffle_quota_raffle_id?: number;
   private raffles_raffle_id?: number;
   private status?: string;
-  private deleted_a?: string;
+  private deleted_at?: string;
 
   constructor(
     participant_id?: number,
@@ -14,7 +14,7 @@ export default class Participants_RuffleVO {
     quotas_raffle_quota_raffle_id?: number,
     raffles_raffle_id?: number,
     status?: string,
-    deleted_a?: string
+    deleted_at?: string
   ) {
     this.participant_id = participant_id;
     this.users_user_id = users_user_id;
@@ -22,7 +22,7 @@ export default class Participants_RuffleVO {
     this.quotas_raffle_quota_raffle_id = quotas_raffle_quota_raffle_id;
     this.raffles_raffle_id = raffles_raffle_id;
     this.status = status;
-    this.deleted_a = deleted_a;
+    this.deleted_at = deleted_at;
   }
 
   public getParticipant_id(): number | undefined {
@@ -75,11 +75,11 @@ export default class Participants_RuffleVO {
     this.status = status;
   }
 
-  public getDeleted_a(): string | undefined {
-    return this.deleted_a;
+  public getDeleted_at(): string | undefined {
+    return this.deleted_at;
   }
 
-  public setDeleted_a(deleted_a: string): void {
-    this.deleted_a = deleted_a;
+  public setDeleted_at(deleted_at: string| undefined ): void {
+    this.deleted_at = deleted_at;
   }
 }

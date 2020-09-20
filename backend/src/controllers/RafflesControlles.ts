@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import RafflesBO from "../models/bo/RafflesBO";
 import RafflesVO from "../models/vo/RafflesVO";
-import { IRaflles } from "../types";
+import { IRaffles } from "../types";
 
 export default {
   async indexOne(req: Request, res: Response): Promise<void> {
@@ -29,7 +29,7 @@ export default {
   },
   async create(req: Request, res: Response): Promise<void> {
     try {
-      const raffle: IRaflles = req.body;
+      const raffle: IRaffles = req.body;
       const raffleVO = new RafflesVO();
 
       raffleVO.setDate_Raffle(raffle.date_raffle);
@@ -49,7 +49,7 @@ export default {
   },
   async update(req: Request, res: Response): Promise<void> {
     try {
-      const raffle: IRaflles = req.body;
+      const raffle: IRaffles = req.body;
       const raffleVO = new RafflesVO();
 
       raffleVO.setRaffle_id(raffle.raffle_id);
@@ -70,7 +70,7 @@ export default {
   },
   async delete(req: Request, res: Response): Promise<void> {
     try {
-      const raffle: IRaflles = req.body;
+      const raffle: IRaffles = req.body;
       const raffleVO = new RafflesVO();
 
       raffleVO.setRaffle_id(raffle.raffle_id);
