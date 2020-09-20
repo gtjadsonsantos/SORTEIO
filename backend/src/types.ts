@@ -123,3 +123,8 @@ export default interface IWinner_Raffle {
   deleted_at?: number;
   created_at?: number;
 }
+ export interface IJWT {
+   usertype:{
+     
+   }
+ }
