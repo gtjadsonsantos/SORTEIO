@@ -1,6 +1,6 @@
-export default class Winners_RafllesVO {
+export default class Winners_RafflesVO {
     private winner_id?: number;
-    private participants_raflle_participant_id?: number;
+    private participants_raffle_participant_id?: number;
     private image?: number;
     private video?: number;
     private deleted_at?: number;
@@ -8,14 +8,14 @@ export default class Winners_RafllesVO {
   
     constructor(
       winner_id?: number,
-      participants_raflle_participant_id?: number,
+      participants_raffle_participant_id?: number,
       image?: number,
       video?: number,
       deleted_at?: number,
       created_at?: number
     ) {
       this.winner_id = winner_id;
-      this.participants_raflle_participant_id = participants_raflle_participant_id;
+      this.participants_raffle_participant_id = participants_raffle_participant_id;
       this.image = image;
       this.video = video;
       this.deleted_at = deleted_at;
@@ -30,14 +30,14 @@ export default class Winners_RafllesVO {
       this.winner_id = winner_id;
     }
   
-    public getParticipants_raflle_participant_id(): number | undefined {
-      return this.participants_raflle_participant_id;
+    public getParticipants_raffle_participant_id(): number | undefined {
+      return this.participants_raffle_participant_id;
     }
   
-    public setParticipants_raflle_participant_id(
-      participants_raflle_participant_id: number | undefined
+    public setParticipants_raffle_participant_id(
+      participants_raffle_participant_id: number | undefined
     ): void {
-      this.participants_raflle_participant_id = participants_raflle_participant_id;
+      this.participants_raffle_participant_id = participants_raffle_participant_id;
     }
   
     public getImage(): number | undefined {

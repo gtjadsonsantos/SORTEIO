@@ -11,6 +11,7 @@ import routeBusiness from "./routes/business";
 import routeRaflles from "./routes/raflles";
 import routeQuotaRaffles from "./routes/quotas_raffle";
 import routePartitipantsRaffle from "./routes/participants_raffles";
+import routeWinnersRaffles from "./routes/winners_raffles";
 import cors from "cors";
 
 const app = express();
@@ -30,6 +31,7 @@ app.use(routeBusiness);
 app.use(routeRaflles);
 app.use(routeQuotaRaffles);
 app.use(routePartitipantsRaffle);
+app.use(routeWinnersRaffles);
 
 app.listen(process.env.PORT || 3333, () => {
   console.log("Server Up");

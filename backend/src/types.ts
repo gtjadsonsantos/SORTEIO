@@ -117,7 +117,7 @@ export interface IParticipants_Ruffle {
 
 export default interface IWinner_Raffle {
   winner_id?: number;
-  participants_raflle_participant_id?: number;
+  participants_raffle_participant_id?: number;
   image?: number;
   video?: number;
   deleted_at?: number;
