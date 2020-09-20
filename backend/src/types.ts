@@ -84,3 +84,42 @@ export interface IBusiness {
   deleted_at?: string;
   regulation?: string;
 }
+
+export interface IQuotas_Raflle {
+  quota_raffle_id?: number;
+  number?: string;
+  created_at?: string;
+  deleted_at?: string;
+}
+
+export interface IRaflles {
+  raffle_id?: number;
+  image?: string;
+  created_at?: string;
+  date_raffle?: string;
+  description?: string;
+  value?: number;
+  title?: string;
+  subtitle?: string;
+  status?: string;
+  deleted_at?: string;
+}
+
+export interface IParticipants_Ruflle {
+  participant_id?: number;
+  users_user_id?: number;
+  created_at?: string;
+  quotas_raffle_quota_raffle_id?: number;
+  raffles_raffle_id?: number;
+  status?: string;
+  deleted_a?: string;
+}
+
+export default interface IWinner_Raffle {
+  winner_id?: number;
+  participants_raflle_participant_id?: number;
+  image?: number;
+  video?: number;
+  deleted_at?: number;
+  created_at?: number;
+}

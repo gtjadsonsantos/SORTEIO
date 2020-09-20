@@ -8,6 +8,7 @@ import routePartitipantsDraw from "./routes/participants_draw";
 import routeWinnersDraw from "./routes/winners_draws";
 import routeBankAccount from "./routes/banks_accounts";
 import routeBusiness from "./routes/business";
+import routeRaflles from './routes/raflles'
 import cors from "cors";
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(routePartitipantsDraw);
 app.use(routeWinnersDraw);
 app.use(routeBankAccount);
 app.use(routeBusiness);
+app.use(routeRaflles);
 
 app.listen(process.env.PORT || 3333, () => {
   console.log("Server Up");
