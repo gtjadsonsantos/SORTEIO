@@ -58,13 +58,9 @@ export default {
   async create(winner_DrawVO: Winners_DrawsVO): Promise<boolean> {
     try {
       const participant_drawVO = new Participants_DrawVO();
-      participant_drawVO.setParticipant_id(
-        winner_DrawVO.getParticipants_draw_participant_id()
-      );
+      participant_drawVO.setParticipant_id(winner_DrawVO.getParticipants_draw_participant_id());
 
-      const listParticipants = await ParticipantsDrawDAO.indexOne(
-        participant_drawVO
-      );
+      const listParticipants = await ParticipantsDrawDAO.indexOne(participant_drawVO);
 
       let responseDAO = false;
 

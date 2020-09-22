@@ -1,6 +1,5 @@
 import {Request,Response } from 'express'
 import ParticipantsDrawBO from '../models/bo/ParticipantsDrawBO'
-import ParticipantsDrawDAO from '../models/dao/ParticipantsDrawDAO'
 import Participants_DrawVO from '../models/vo/Participants_DrawVO'
 import { IParticipants_DrawVO } from '../types'
 

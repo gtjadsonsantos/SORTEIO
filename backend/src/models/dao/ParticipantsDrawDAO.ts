@@ -74,6 +74,7 @@ export default {
       const responseDraws: IDraw[] = await conn("draws")
         .select("*")
         .where("draw_id", "=", `${participant_DrawVO.getDraws_draw_id()}`)
+        .where("status","=","active")
         .where("deleted_at", null)
         .limit(1);
       const responseDrawQuotas: IDraw_QuotasVO[] = await conn("draw_quotas")
@@ -84,12 +85,23 @@ export default {
           `${participant_DrawVO.getDraw_quotas_draw_quota_id()}`
         )
         .where("deleted_at", null);
+
+      const responseParticipants:any[] = await conn("participants_draw")
+        .select("*")
+        .innerJoin("draws","participants_draw.draws_draw_id","draws.draw_id")
+        .where("draws.status","=","active")
+        .where("participants_draw.draw_quotas_draw_quota_id","=",`${participant_DrawVO.getDraw_quotas_draw_quota_id()}`)
+        .where("participants_draw.deleted_at", null)
+        
+
+
       let responseDAO = false;
 
       if (
         responseUsers.length >= 1 &&
         responseDraws.length >= 1 &&
-        responseDrawQuotas.length >= 1
+        responseDrawQuotas.length >= 1 &&
+        responseParticipants.length == 0
       ) {
         await conn("participants_draw").insert({
           draw_quotas_draw_quota_id: participant_DrawVO.getDraw_quotas_draw_quota_id(),
@@ -172,13 +184,11 @@ export default {
         .limit(1);
       const responseDrawQuotas: IDraw_QuotasVO[] = await conn("draw_quotas")
         .select("*")
-        .where(
-          "draw_quota_id",
-          "=",
-          `${participant_DrawVO.getDraw_quotas_draw_quota_id()}`
-        )
+        .where("draw_quota_id","=",`${participant_DrawVO.getDraw_quotas_draw_quota_id()}`)
         .where("deleted_at", null)
         .limit(1);
+        
+
       let responseDAO: boolean = false;
 
       if (

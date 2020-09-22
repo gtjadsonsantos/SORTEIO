@@ -32,16 +32,17 @@ export default {
       const participant: IParticipants_Ruffle = req.body;
       const participant_ruffleVO = new Participants_RuffleVO();
 
-      participant_ruffleVO.setQuotas_raffle_quota_raffle_id(
-        participant.quotas_raffle_quota_raffle_id
-      );
+
+
+      participant_ruffleVO.setQuotas_raffle_quota_raffle_id(participant.quotas_raffle_quota_raffle_id);
       participant_ruffleVO.setUsers_user_id(participant.users_user_id);
       participant_ruffleVO.setRaffles_raffle_id(participant.raffles_raffle_id);
       participant_ruffleVO.setStatus("resevation");
 
-      const response = await Participants_RafflesBO.create(
-        participant_ruffleVO
-      );
+      const response = await Participants_RafflesBO.create(participant_ruffleVO);
+
+
+
       res.json(response);
     } catch (error) {
       console.log(error);

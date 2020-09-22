@@ -5,7 +5,7 @@ import Quotas_RaffleVO from "../vo/Quotas_RaffleVO";
 export default {
   async indexOne(quota_raffleVO: Quotas_RaffleVO): Promise<Quotas_RaffleVO[]> {
     const listQuota_RaffleVO: Quotas_RaffleVO[] = [];
-    const listQuota_Raffle: IQuotas_Raffle[] = await conn("quotas_raffles")
+    const listQuota_Raffle: IQuotas_Raffle[] = await conn("quotas_raffle")
       .select("*")
       .where("quota_raffle_id", "=", `${quota_raffleVO.getQuota_raffle_id()}`)
       .where("deleted_at", null);
@@ -24,7 +24,7 @@ export default {
   },
   async indexAll(): Promise<Quotas_RaffleVO[]> {
     const listQuota_RaffleVO: Quotas_RaffleVO[] = [];
-    const listQuota_Raffle: IQuotas_Raffle[] = await conn("quotas_raffles")
+    const listQuota_Raffle: IQuotas_Raffle[] = await conn("quotas_raffle")
       .select("*")
       .where("deleted_at", null);
 
@@ -42,7 +42,7 @@ export default {
   },
   async create(quota_raffleVO: Quotas_RaffleVO): Promise<boolean> {
     try {
-      await conn("quotas_raffles").insert({
+      await conn("quotas_raffle").insert({
         number: quota_raffleVO.getNumber(),
       });
 
@@ -54,7 +54,7 @@ export default {
   },
   async update(quota_raffleVO: Quotas_RaffleVO): Promise<boolean> {
     try {
-      const response = await conn("quotas_raffles")
+      const response = await conn("quotas_raffle")
         .update({
           number: quota_raffleVO.getNumber(),
         })
@@ -69,7 +69,7 @@ export default {
   },
   async delete(quota_raffleVO: Quotas_RaffleVO): Promise<boolean> {
     try {
-      const response = await conn("quotas_raffles")
+      const response = await conn("quotas_raffle")
         .update({
           deleted_at: new Date(),
         })
