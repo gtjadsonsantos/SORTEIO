@@ -5,8 +5,10 @@ export async function up(knex: Knex): Promise<void> {
     table.increments("winner_id").notNullable();
 
     table.integer("participants_raffle_participant_id").notNullable();
-    table.foreign("participants_raffle_participant_id").references("participants_raffle.participant_id");
-    
+    table
+      .foreign("participants_raffle_participant_id")
+      .references("participants_raffle.participant_id");
+
     table.text("image").notNullable();
     table.text("video");
     table.timestamp("created_at").defaultTo(knex.fn.now());

@@ -1,4 +1,5 @@
 import conn from "../../database/conn";
+import updateAllResevations from "../../middlewares/updateAllResevationsDraw";
 import {
   IDraw,
   IDraw_QuotasVO,
@@ -204,5 +205,17 @@ export default {
       console.log(error);
       return false;
     }
+  },
+  async updateStatusResevation(): Promise<void> {
+    const result = await conn.raw(`
+  UPDATE participants_draw 
+  SET participants_draw.status = "free"
+  FROM participants_draw INNER JOIN draws on participants_draw.draws_draw_id = draws.draw_id
+  WHERE HOUR(TIMEDIFF(created_at, '2017/08/25 00:00:00')) >= 12 AND status ='resevation' AND draws.status = "active"
+  `);
+    console.log(result);
+    setInterval(() => {
+      this.updateStatusResevation();
+    }, 43200000);
   },
 };
