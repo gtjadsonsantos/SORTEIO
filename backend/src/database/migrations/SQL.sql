@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS winners_raffles (
   participants_raffle_participant_id INT NOT NULL,
   image TEXT NOT NULL,
   video TEXT NULL,
+    created_at TIMESTAMP NOT NULL,
   deleted_at TIMESTAMP NULL,
    FOREIGN KEY (participants_raffle_participant_id) REFERENCES participants_raffle (participant_id)
 );
@@ -134,5 +135,4 @@ CREATE TABLE IF NOT EXISTS business (
   phone VARCHAR(11) NOT NULL,
   deleted_at TIMESTAMP NULL,
   regulation TEXT NULL 
-
 );
