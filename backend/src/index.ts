@@ -1,5 +1,6 @@
 import express from "express";
 import ParticipantsDrawDAO from './models/dao/ParticipantsDrawDAO'
+import Participants_RafflesDAO from './models/dao/Participants_RafflesDAO'
 import routeUsers from "./routes/users";
 import routeLogin from "./routes/login";
 import routeDraw from "./routes/draws";
@@ -37,6 +38,7 @@ app.use(routePartitipantsRaffle);
 app.use(routeWinnersRaffles);
 
 ParticipantsDrawDAO.updateStatusResevation()
+Participants_RafflesDAO.updateStatusResevation()
 
 app.listen(process.env.PORT || 3333, () => {
   console.log("Server Up");

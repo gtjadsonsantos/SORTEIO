@@ -229,4 +229,19 @@ export default {
       return false;
     }
   },
+  async updateStatusResevation(): Promise<void> {
+   
+    await conn("participants_raffle")
+      .update({
+        status: "free",
+        deleted_at: new Date()
+      })
+      .whereRaw(
+        "HOUR(TIMEDIFF(created_at, now())) >= 12 AND status = 'resevation'"
+      );
+
+    setInterval(() => {
+      this.updateStatusResevation();
+    }, 43200000);
+  },
 };

@@ -207,13 +207,16 @@ export default {
     }
   },
   async updateStatusResevation(): Promise<void> {
-    const result = await conn.raw(`
-  UPDATE participants_draw 
-  SET participants_draw.status = "free"
-  FROM participants_draw INNER JOIN draws on participants_draw.draws_draw_id = draws.draw_id
-  WHERE HOUR(TIMEDIFF(created_at, '2017/08/25 00:00:00')) >= 12 AND status ='resevation' AND draws.status = "active"
-  `);
-    console.log(result);
+   
+    await conn("participants_draw")
+      .update({
+        status: "free",
+        deleted_at: new Date()
+      })
+      .whereRaw(
+        "HOUR(TIMEDIFF(created_at, now())) >= 12 AND status = 'resevation'"
+      );
+
     setInterval(() => {
       this.updateStatusResevation();
     }, 43200000);
