@@ -72,22 +72,28 @@ export default {
 
     return listUser.length > 0 ? true : false;
   },
-  async update(userVO: UserVO): Promise<void> {
-    await conn("users").update({
-      name: userVO.getName(),
-      cpf: userVO.getCpf(),
-      email: userVO.getEmail(),
-      phone: userVO.getPhone(),
-      password: userVO.getPassword(),
-      type: userVO.getType(),
-      address: userVO.getAddress(),
-    });
+  async update(userVO: UserVO): Promise<boolean> {
+    const response = await conn("users")
+      .update({
+        name: userVO.getName(),
+        cpf: userVO.getCpf(),
+        email: userVO.getEmail(),
+        phone: userVO.getPhone(),
+        password: userVO.getPassword(),
+        type: userVO.getType(),
+        address: userVO.getAddress(),
+      })
+      .where("password", "=", `${userVO.getPassword()}`)
+      .where("user_id","=",`${userVO.getUser_id()}`)
+
+    return response == 1 ? true : false;
   },
   async delete(userVO: UserVO): Promise<void> {
     await conn("users")
       .where("cpf", "=", `${userVO.getCpf()}`)
       .where("email", "=", `${userVO.getEmail()}`)
       .where("password", "=", `${userVO.getPassword()}`)
+      .where("user_id","=",`${userVO.getUser_id()}`)
       .update({
         deleted_at: new Date(),
       });
@@ -107,7 +113,7 @@ export default {
       user.setName(item.name);
       user.setCpf(item.cpf);
       user.setPhone(item.phone);
-      user.setPassword(item.password)
+      user.setPassword(item.password);
       user.setType(item.type);
       user.setEmail(item.email);
       user.setCreated_at(item.created_at);

@@ -42,36 +42,39 @@ export default {
     const castType: any = userVO.getCpf();
 
     if (cpf.isValid(castType)) {
-       const  findById = await UserDAO.indexOne(userVO)
+      const findById = await UserDAO.indexOne(userVO);
 
-       if (findById.length > 0 ){
-        await UserDAO.update(userVO);
-        response = "Sucesso na atualização das informações"
-        }else {
-            response = "Usuario não existe na base de dados"
+      if (findById.length > 0) {
+        if (await UserDAO.update(userVO)) {
+          response = "Sucesso na atualização das informações";
+        } else {
+          response = "Erro em atualizar os dados do usuario";
         }
+      } else {
+        response = "Usuario não existe na base de dados";
+      }
     } else {
       response = "cpf é inválido";
     }
-    return response
+    return response;
   },
-  async delete(userVO:UserVO): Promise<string> {
+  async delete(userVO: UserVO): Promise<string> {
     let response: string = "";
 
     const castType: any = userVO.getCpf();
 
     if (cpf.isValid(castType)) {
-       const  findById = await UserDAO.indexOne(userVO)
+      const findById = await UserDAO.indexOne(userVO);
 
-       if (findById.length > 0 ){
+      if (findById.length > 0) {
         await UserDAO.delete(userVO);
-            response = "Sucesso na exclusão do usuario"
-        }else {
-            response = "Falhou em excluir o usuario"
-        }
+        response = "Sucesso na exclusão do usuario";
+      } else {
+        response = "Falhou em excluir o usuario";
+      }
     } else {
       response = "cpf é inválido";
     }
-    return response
+    return response;
   },
 };
