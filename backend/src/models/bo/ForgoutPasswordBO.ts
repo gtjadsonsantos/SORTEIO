@@ -10,7 +10,10 @@ export default {
     const cpfValidate: any = userVO.getCpf();
 
     if (cpf.isValid(cpfValidate)) {
-      if (await sendEmail(responseDAO[0].getCpf())) {
+      if ((responseDAO.length == 0)) {
+        responseBO = "O cpf informado, não pertence a nenhum usuário";
+      } else {
+        await sendEmail(responseDAO[0]?.getCpf());
         responseBO = "Email enviado com sucesso, verifica seu email";
       }
     } else {
