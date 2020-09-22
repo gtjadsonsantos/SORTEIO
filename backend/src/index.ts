@@ -14,7 +14,7 @@ import routeRaflles from "./routes/raflles";
 import routeQuotaRaffles from "./routes/quotas_raffle";
 import routePartitipantsRaffle from "./routes/participants_raffles";
 import routeWinnersRaffles from "./routes/winners_raffles";
-
+import routeFourgoutPassword from './routes/forgout_password'
 
 import cors from "cors";
 
@@ -36,6 +36,7 @@ app.use(routeRaflles);
 app.use(routeQuotaRaffles);
 app.use(routePartitipantsRaffle);
 app.use(routeWinnersRaffles);
+app.use(routeFourgoutPassword);
 
 ParticipantsDrawDAO.updateStatusResevation()
 Participants_RafflesDAO.updateStatusResevation()

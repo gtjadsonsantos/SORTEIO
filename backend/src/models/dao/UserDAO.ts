@@ -92,4 +92,31 @@ export default {
         deleted_at: new Date(),
       });
   },
+  async indexOneByCpf(userVO: UserVO): Promise<UserVO[]> {
+    const listUserVO: UserVO[] = [];
+
+    const listUser: IUser[] = await conn("users")
+      .select("*")
+      .where("cpf", "=", `${userVO.getCpf()}`)
+      .where("deleted_at", null);
+
+    listUser.forEach((item) => {
+      const user = new UserVO();
+
+      user.setUser_id(item.user_id);
+      user.setName(item.name);
+      user.setCpf(item.cpf);
+      user.setPhone(item.phone);
+      user.setPassword(item.password)
+      user.setType(item.type);
+      user.setEmail(item.email);
+      user.setCreated_at(item.created_at);
+      user.setDeleted_at(item.deleted_at);
+      user.setAddress(item.address);
+
+      listUserVO.push(user);
+    });
+
+    return listUserVO;
+  },
 };

@@ -1,5 +1,5 @@
 export default {
-  production: {
+  development: {
     client: "sqlite3",
     connection: {
       filename: `${__dirname}/src/database/database.db`,
@@ -14,7 +14,26 @@ export default {
     },
     timezone: "UTC",
   },
-  development: {
+  local: {
+    client: "mysql",
+    connection: {
+      port: 3306,
+      host: "localhost",
+      database: "test",
+      user: "root",
+      password: "",
+    },
+    useNullAsDefault: false,
+    migrations: {
+      tableName: "knex_migrations",
+      directory: `${__dirname}/src/database/migrations`,
+    },
+    seeds: {
+      directory: `${__dirname}/src/database/seeds`,
+    },
+    timezone: "UTC",
+  },
+  production: {
     client: "mysql",
     connection: {
       port: process.env.DATABASE_PORT || 3306,
