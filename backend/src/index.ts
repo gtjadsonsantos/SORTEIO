@@ -41,6 +41,6 @@ app.use(routeFourgoutPassword);
 ParticipantsDrawDAO.updateStatusResevation()
 Participants_RafflesDAO.updateStatusResevation()
 
-app.listen(process.env.PORT || 3333, () => {
+app.listen(process.env.PORT || 3334, () => {
   console.log("Server Up");
 });
