@@ -16,7 +16,6 @@ export default {
 
 
       const response:any[]  = await conn.raw(`
-
         SELECT
         participants_raffle.participant_id,
         users.name,
@@ -32,15 +31,13 @@ export default {
                 raffles.raffle_id = participants_raffle.raffles_raffle_id
           WHERE
               participants_raffle.deleted_at IS NULL AND
-              participants_raffle.status = "sold" AND
+              participants_raffle.status = "${req.query.status}" AND
               raffles.status = "active" AND
               raffles.raffle_id = ${req.query.raffle_id}
           GROUP BY
-              users.cpf LIMIT ${rows}
-    
-      
+              users.cpf LIMIT ${rows}    
       `)
-
+  
       return response[0];
     } catch (error) {
       console.log(error);

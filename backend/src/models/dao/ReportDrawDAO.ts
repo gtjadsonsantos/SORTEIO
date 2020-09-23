@@ -31,7 +31,7 @@ export default {
                 draws.draw_id = participants_draw.draws_draw_id
           WHERE
               participants_draw.deleted_at IS NULL AND
-              participants_draw.status = "resevation" AND
+              participants_draw.status = "${req.query.status}" AND
               draws.status = "active" AND
               draws.draw_id = ${req.query.draw_id}
           GROUP BY
