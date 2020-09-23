@@ -109,12 +109,20 @@ export default {
         .where("quota_raffle_id","=",`${participant_ruffleVO.getQuotas_raffle_quota_raffle_id()}`)
         .where("deleted_at", null);
 
+        const responseParticipantsRaffles:any[] = await conn("participants_raffle")
+        .select("*")
+        .innerJoin("raffles","participants_raffle.raffles_raffle_id","raffles.raffle_id")
+        .where("raffles.status","=","active")
+        .where("participants_raffle.quotas_raffle_quota_raffle_id","=",`${participant_ruffleVO.getQuotas_raffle_quota_raffle_id()}`)
+        .where("participants_raffle.deleted_at", null)
+
       let responseDAO = false;  
 
       if (
         responseUsers.length >= 1 &&
         responseRuffles.length >= 1 &&
-        responseRafflesQuotas.length >= 1
+        responseRafflesQuotas.length >= 1 && 
+        responseParticipantsRaffles.length == 0
       ) {
         await conn("participants_raffle").insert({
           quotas_raffle_quota_raffle_id: participant_ruffleVO.getQuotas_raffle_quota_raffle_id(),
