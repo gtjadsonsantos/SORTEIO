@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import Participants_RafflesBO from "../models/bo/Participants_RafflesBO";
+import Participants_RafflesDAO from "../models/dao/Participants_RafflesDAO";
+import RafflesDAO from "../models/dao/RafflesDAO";
 import Participants_RuffleVO from "../models/vo/Participants_RuffleVO";
 import { IParticipants_Ruffle } from "../types";
 
@@ -17,6 +19,16 @@ export default {
       res.json(response);
     } catch (error) {
       console.log(error);
+    }
+  },
+  async indexAllJoinRafflesQuotasParticipants(req:Request,res:Response):Promise<void>{
+    try {
+
+     const response = await Participants_RafflesDAO.indexAllJoinRafflesQuotasParticipants(req,res)
+      res.json(response)
+
+    } catch (error) {
+      console.log(error)
     }
   },
   async indexAll(req: Request, res: Response): Promise<void> {

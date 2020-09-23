@@ -1,5 +1,6 @@
 import {Request,Response } from 'express'
 import ParticipantsDrawBO from '../models/bo/ParticipantsDrawBO'
+import ParticipantsDrawDAO from '../models/dao/ParticipantsDrawDAO'
 import Participants_DrawVO from '../models/vo/Participants_DrawVO'
 import { IParticipants_DrawVO } from '../types'
 
@@ -15,6 +16,17 @@ export default {
             const response = await ParticipantsDrawBO.indexOne(participant_DrawVO)
 
             res.json(response)
+        } catch (error) {
+            console.log(error)
+        }
+
+    },
+    async indexAllJoinDrawsQuotasParticipants(req:Request,res:Response):Promise<void> {
+        try {
+            
+           const response =  await ParticipantsDrawDAO.indexAllJoinDrawsQuotasParticipants(req,res)
+            res.json(response)
+            
         } catch (error) {
             console.log(error)
         }

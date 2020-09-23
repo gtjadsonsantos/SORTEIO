@@ -7,8 +7,10 @@ const routePartitipantsDraw= Router();
 
 routePartitipantsDraw.get("/participants_draw/:participant_id", PartitipantsDrawControllers.indexOne);
 routePartitipantsDraw.get("/participants_draws", PartitipantsDrawControllers.indexAll);
+routePartitipantsDraw.get("/join_participants_draws_quotas", PartitipantsDrawControllers.indexAllJoinDrawsQuotasParticipants);
 routePartitipantsDraw.post("/participant_draw",validateJWT, PartitipantsDrawControllers.create);
 routePartitipantsDraw.put("/participant_draw",validateUserType, PartitipantsDrawControllers.update);
 routePartitipantsDraw.delete("/participant_draw",validateUserType, PartitipantsDrawControllers.delete);
 
 export default routePartitipantsDraw;
+

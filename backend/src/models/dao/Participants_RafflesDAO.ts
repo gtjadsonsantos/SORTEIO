@@ -39,6 +39,30 @@ export default {
 
     return listParticipants_RuffleVO;
   },
+  async indexAllJoinRafflesQuotasParticipants(req:Request,res:Response):Promise<any>{
+    const response:any[] = await conn.raw(`
+    SELECT
+      raffles.raffle_id,
+      participants_raffle.participant_id,
+      quotas_raffle.quota_raffle_id,
+      users.name,
+      participants_raffle.status,
+      quotas_raffle.number,
+      raffles.value
+    FROM raffles 
+      INNER JOIN participants_raffle ON raffles.raffle_id = participants_raffle.raffles_raffle_id
+      RIGHT JOIN quotas_raffle ON quotas_raffle.quota_raffle_id  = participants_raffle.quotas_raffle_quota_raffle_id   
+      INNER JOIN users ON users.user_id = participants_raffle.users_user_id
+    WHERE 
+      raffles.raffle_id = ${req.query.raffle_id} and 
+      raffles.status = "active" and
+      raffles.deleted_at is null and
+      quotas_raffle.deleted_at is null and
+      participants_raffle.deleted_at is null
+    `)
+
+    return response
+  },
   async indexAll(): Promise<Participants_RuffleVO[]> {
     const listParticipants_RuffleVO: Participants_RuffleVO[] = [];
     const listParticipants_Ruffle: IParticipants_Ruffle[] = await conn(
@@ -178,13 +202,16 @@ export default {
     }
   },
   async updateStatusResevation(): Promise<void> {
-    //const result = await conn.raw(`UPDATE participants_draw SET status = "free" WHERE HOUR(TIMEDIFF(created_at, now())) >= 12 AND status ='resevation';`);
-    await conn("participants_draw")
-      .update({
-        status: "free",
-        deleted_at: new Date(),
-      })
-      .whereRaw("HOUR(TIMEDIFF(created_at, now())) >= 12 AND status = 'resevation'");
+    await conn.raw(`
+    UPDATE 
+      participants_raffle
+    SET
+      participants_raffle.deleted_at = now()
+    WHERE 
+	    participants_raffle.status = "resevation" and 
+      deleted_at is null and
+      HOUR(TIMEDIFF(created_at, now())) >= 12
+    `)
 
     setInterval(() => {
       this.updateStatusResevation();
