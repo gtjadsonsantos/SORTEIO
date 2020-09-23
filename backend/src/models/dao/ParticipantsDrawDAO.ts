@@ -133,13 +133,10 @@ export default {
         .limit(1);
       const responseDrawQuotas: IDraw_QuotasVO[] = await conn("draw_quotas")
         .select("*")
-        .where(
-          "draw_quota_id",
-          "=",
-          `${participant_DrawVO.getDraw_quotas_draw_quota_id()}`
-        )
+        .where("draw_quota_id","=",`${participant_DrawVO.getDraw_quotas_draw_quota_id()}`)
         .where("deleted_at", null)
         .limit(1);
+
       let response: boolean = false;
 
       if (

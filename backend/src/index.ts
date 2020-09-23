@@ -1,6 +1,6 @@
 import express from "express";
-import ParticipantsDrawDAO from './models/dao/ParticipantsDrawDAO'
-import Participants_RafflesDAO from './models/dao/Participants_RafflesDAO'
+import ParticipantsDrawDAO from "./models/dao/ParticipantsDrawDAO";
+import Participants_RafflesDAO from "./models/dao/Participants_RafflesDAO";
 import routeUsers from "./routes/users";
 import routeLogin from "./routes/login";
 import routeDraw from "./routes/draws";
@@ -14,7 +14,9 @@ import routeRaflles from "./routes/raflles";
 import routeQuotaRaffles from "./routes/quotas_raffle";
 import routePartitipantsRaffle from "./routes/participants_raffles";
 import routeWinnersRaffles from "./routes/winners_raffles";
-import routeFourgoutPassword from './routes/forgout_password'
+import routeFourgoutPassword from "./routes/forgout_password";
+import routeReportDraw from "./routes/resport_draw";
+import routeReportRaffles from "./routes/resport_raffles";
 
 import cors from "cors";
 
@@ -37,9 +39,11 @@ app.use(routeQuotaRaffles);
 app.use(routePartitipantsRaffle);
 app.use(routeWinnersRaffles);
 app.use(routeFourgoutPassword);
+app.use(routeReportDraw);
+app.use(routeReportRaffles);
 
-ParticipantsDrawDAO.updateStatusResevation()
-Participants_RafflesDAO.updateStatusResevation()
+ParticipantsDrawDAO.updateStatusResevation();
+Participants_RafflesDAO.updateStatusResevation();
 
 app.listen(process.env.PORT || 3334, () => {
   console.log("Server Up");

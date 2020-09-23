@@ -124,11 +124,7 @@ export default interface IWinner_Raffle {
   created_at?: number;
 }
 export interface IReportDraws {
-  participant_id?: number;
-  draw_quotas_draw_quota_id?: number;
-  users_user_id?: number;
-  draws_draw_id?: number;
   rows?: number;
-  statusParticipant?: string;
-  statusDraw?: string;
+  draw_id?: number;
+  
 }
