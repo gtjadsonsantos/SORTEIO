@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        html,body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+           
+        }
+        .header {
+            background-color: rgb(13, 13, 103);   
+            height: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header h3 {
+            font-family: "Roboto",sans-serif; 
+            color: aliceblue;  
+            font-size: 2em;
+        }
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 60%;
+            margin-top: 30px;
+            justify-content: space-between;
+        }
+        .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 10%;
+            margin-top: 30px;
+            justify-content: space-around;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h3>Pilotando Motos</h3>
+    </header>
+    <main class="main">
+        <p >Olá, {usuario}</p>
+
+        </p>Segue sua senha: {senha}</p>
+    </main>
+    <footer class="footer">
+        <a href="http://pilotandomotos.com.br">http://pilotandomotos.com.br</a></p>
+        <p><strong>contato:</strong> XXXX +55 00 0000-0000</p>
+    </footer>
+</body>
+</html>
