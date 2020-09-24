@@ -54,6 +54,16 @@ export default {
 
     return listDrawVO;
   },
+  async indexAllJoinDrawsImages():Promise<any>{
+   const response =   await conn.raw(`
+   SELECT 
+   *
+   FROM draws 
+     INNER JOIN images ON images.draws_draw_id = draws.draw_id
+   `)
+
+   return response
+  },
   async create(drawVO: DrawVO): Promise<boolean> {
     try {
       await conn("draws").insert({

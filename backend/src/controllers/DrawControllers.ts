@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import DrawBO from "../models/bo/DrawBO";
+import DrawDAO from "../models/dao/DrawDAO";
 import DrawVO from "../models/vo/DrawVO";
 import { IDraw } from "../types";
 
@@ -19,6 +20,18 @@ export default {
         } catch (error) {
             console.log(error)
         }   
+    },
+    async indexAllJoinDrawsImages(req: Request, res: Response):Promise<void>{
+
+        try {
+          
+            const listDrawVO =  await DrawDAO.indexAllJoinDrawsImages()
+ 
+            res.json(listDrawVO)
+             
+         } catch (error) {
+             console.log(error)
+         }  
     },
     async indexAll(req: Request, res: Response): Promise<void> {
 
