@@ -111,6 +111,7 @@ export default {
         .select("*")
         .innerJoin("draws","participants_draw.draws_draw_id","draws.draw_id")
         .where("draws.status","=","active")
+        .where("participants_draw.draws_draw_id","=",`${participant_DrawVO.getDraws_draw_id()}`)
         .where("participants_draw.draw_quotas_draw_quota_id","=",`${participant_DrawVO.getDraw_quotas_draw_quota_id()}`)
         .where("participants_draw.deleted_at", null)
         

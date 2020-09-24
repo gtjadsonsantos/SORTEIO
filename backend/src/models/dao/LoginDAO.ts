@@ -8,10 +8,9 @@ export default {
     
         const listUser: IUser[] = await conn("users")
           .select("*")
-          .orWhere("cpf","=",`${userVO.getCpf()}`)
-          .orWhere("email","=",`${userVO.getEmail()}`)
-          .andWhere("password", "=", `${userVO.getPassword()}`)
-          .andWhere("deleted_at", null)
+          .where("password", "=", `${userVO.getPassword()}`)
+          .where("email","=",`${userVO.getEmail()}`)
+          .where("deleted_at", null)
           .limit(1)
     
         listUser.forEach((item) => {

@@ -1,6 +1,10 @@
 import UserVO from "../vo/UserVO";
+import {Request} from 'express'
 import conn from "../../database/conn";
 import { IUser } from "../../types";
+import jwt from 'jsonwebtoken'
+import config from '../../config'
+
 export default {
   async indexOne(userVO: UserVO): Promise<UserVO[]> {
     const listUserVO: UserVO[] = [];
@@ -72,8 +76,16 @@ export default {
 
     return listUser.length > 0 ? true : false;
   },
-  async update(userVO: UserVO): Promise<boolean> {
-    const response = await conn("users")
+  async update(userVO: UserVO,req:Request): Promise<boolean> {
+
+    const token: any = req.headers.authorization?.split(" ")[1];
+    const decode:any = jwt.verify(token, config.hashjwt);
+    const { dataUser } = decode;
+    let response:boolean = false;
+
+    if(dataUser[0].cpf == userVO.getCpf()){
+
+      const responseDatabase = await conn("users")
       .update({
         name: userVO.getName(),
         cpf: userVO.getCpf(),
@@ -85,8 +97,11 @@ export default {
       })
       .where("password", "=", `${userVO.getPassword()}`)
       .where("user_id","=",`${userVO.getUser_id()}`)
-
-    return response == 1 ? true : false;
+      
+      response = responseDatabase == 1?true:false 
+    }
+    
+    return response;
   },
   async delete(userVO: UserVO): Promise<void> {
     await conn("users")

@@ -113,6 +113,7 @@ export default {
         .select("*")
         .innerJoin("raffles","participants_raffle.raffles_raffle_id","raffles.raffle_id")
         .where("raffles.status","=","active")
+        .where("participants_raffle.raffles_raffle_id","=",`${participant_ruffleVO.getRaffles_raffle_id()}`)
         .where("participants_raffle.quotas_raffle_quota_raffle_id","=",`${participant_ruffleVO.getQuotas_raffle_quota_raffle_id()}`)
         .where("participants_raffle.deleted_at", null)
 

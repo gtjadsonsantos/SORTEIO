@@ -1,4 +1,5 @@
 import UserDAO from "../dao/UserDAO";
+import{Request} from "express"
 import UserVO from "../vo/UserVO";
 import { cpf } from "cpf-cnpj-validator";
 
@@ -36,7 +37,7 @@ export default {
 
     return response;
   },
-  async update(userVO: UserVO): Promise<string> {
+  async update(userVO: UserVO,req:Request): Promise<string> {
     let response: string = "";
 
     const castType: any = userVO.getCpf();
@@ -45,7 +46,7 @@ export default {
       const findById = await UserDAO.indexOne(userVO);
 
       if (findById.length > 0) {
-        if (await UserDAO.update(userVO)) {
+        if (await UserDAO.update(userVO,req)) {
           response = "Sucesso na atualização das informações";
         } else {
           response = "Erro em atualizar os dados do usuario";

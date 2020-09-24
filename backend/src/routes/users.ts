@@ -8,7 +8,7 @@ routeUsers.get("/user/:user_id",validateUserType, UserControllers.indexOne);
 routeUsers.get("/users",validateUserType, UserControllers.indexAll);
 routeUsers.post("/user", UserControllers.create);
 routeUsers.put("/user",valdadeJWT, UserControllers.update);
-routeUsers.delete("/user",valdadeJWT, UserControllers.delete);
+routeUsers.delete("/user",validateUserType, UserControllers.delete);
 
 
 export default routeUsers;

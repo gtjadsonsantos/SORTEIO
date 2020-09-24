@@ -60,7 +60,7 @@ export default {
       userVO.setAddress(user.address);
       userVO.setType("comum");
 
-      const response = await UserBO.update(userVO);
+      const response = await UserBO.update(userVO,req);
 
       res.json(response);
     } catch (error) {
