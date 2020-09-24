@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Winner_DrawBO from "../models/bo/Winner_DrawBO";
+import Winner_DrawDAO from "../models/dao/Winner_DrawDAO";
 import Winners_DrawsVO from "../models/vo/Winners_DrawsVO";
 import { IWinner_Draw } from "../types";
 
@@ -16,6 +17,14 @@ export default {
       res.json(response);
     } catch (error) {
       console.log(error);
+    }
+  },
+  async indexAllJoinWinnersParticipantsUsersQuotasDraw(req:Request,res:Response){
+    try {
+        const response = await Winner_DrawDAO.indexAllJoinWinnersParticipantsUsersQuotasDraw()
+        res.json(response)
+    } catch (error) {
+      console.log(error)
     }
   },
   async indexAll(req: Request, res: Response): Promise<void> {

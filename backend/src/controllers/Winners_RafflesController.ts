@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Winner_RaffleBO from "../models/bo/Winner_RaffleBO";
 import Winners_RafflesVO from "../models/vo/Winners_RafflesVO";
+import Winner_RaffleDAO from "../models/dao/Winner_RaffleDAO"
 import IWinner_Raffle from "../types";
 
 export default {
@@ -16,6 +17,16 @@ export default {
     } catch (error) {
       console.log(error);
     }
+  },
+  async indexAllJoinWinnersParticipantsUsersQuotasRaffles(req:Request,res:Response){
+    try {
+
+      const response = await Winner_RaffleDAO.indexAllJoinWinnersParticipantsUsersQuotasRaffles()
+      res.json(response)
+    } catch (error) {
+      console.log(error)
+    }
+
   },
   async indexAll(req: Request, res: Response): Promise<void> {
     try {

@@ -17,7 +17,7 @@ export default {
     }
 
     return responseBO;
-  },
+  },  
   async indexAll(): Promise<Winners_RafflesVO[]> {
     const responseDAO: Winners_RafflesVO[] = await Winner_RaffleDAO.indexAll();
 

@@ -29,6 +29,33 @@ export default {
 
     return listWinners_RafflesVO;
   },
+  async indexAllJoinWinnersParticipantsUsersQuotasRaffles(){
+    
+    const response =  await conn.raw(`
+    SELECT 
+    winners_raffles.winner_id,
+    winners_raffles.participants_raffle_participant_id,
+    winners_raffles.image,
+    winners_raffles.video,
+    users.name,
+    users.address,
+    raffles.date_raffle,
+    raffles.title,
+    GROUP_CONCAT( quotas_raffle.number) as contas
+    FROM winners_raffles 
+      INNER JOIN participants_raffle ON participants_raffle.participant_id = winners_raffles.participants_raffle_participant_id
+        INNER JOIN quotas_raffle ON participants_raffle.quotas_raffle_quota_raffle_id = quotas_raffle.quota_raffle_id
+        INNER JOIN users ON users.user_id = participants_raffle.users_user_id 
+        INNER JOIN raffles ON raffles.raffle_id = participants_raffle.raffles_raffle_id
+    WHERE  
+       participants_raffle.deleted_at IS NULL AND
+        participants_raffle.status = "closed"
+    GROUP BY
+        winners_raffles.winner_id
+    `)
+
+    return response
+  },
   async indexAll() {
     const listWinners_RafflesVO: Winners_RafflesVO[] = [];
     const listWinners_Raffles: IWinner_Raffle[] = await conn("winners_raffles")

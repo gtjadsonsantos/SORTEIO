@@ -31,6 +31,34 @@ export default {
 
     return listWinners_DrawsVO;
   },
+  async indexAllJoinWinnersParticipantsUsersQuotasDraw(){
+    const response =  await conn.raw(`
+    
+    SELECT 
+    winners_draws.winner_id,
+    winners_draws.participants_draw_participant_id,
+    winners_draws.image,
+    winners_draws.video,
+    users.name,
+    users.address,
+    draws.date_draw,
+    draws.title,
+    GROUP_CONCAT( draw_quotas.number) as contas
+    FROM winners_draws 
+      INNER JOIN participants_draw ON participants_draw.participant_id = winners_draws.participants_draw_participant_id
+        INNER JOIN draw_quotas ON participants_draw.draw_quotas_draw_quota_id = draw_quotas.draw_quota_id
+        INNER JOIN users ON users.user_id = participants_draw.users_user_id 
+        INNER JOIN draws ON draws.draw_id = participants_draw.draws_draw_id
+    WHERE  
+       participants_draw.deleted_at IS NULL AND
+        participants_draw.status = "closed"
+    GROUP BY
+        winners_draws.winner_id
+    `)
+
+    return response
+
+  },
   async indexAll(): Promise<Winners_DrawsVO[]> {
     const listWinners_DrawsVO: Winners_DrawsVO[] = [];
 
