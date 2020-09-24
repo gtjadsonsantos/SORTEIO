@@ -1,4 +1,5 @@
 import express from "express";
+import path from 'path'
 import ParticipantsDrawDAO from "./models/dao/ParticipantsDrawDAO";
 import Participants_RafflesDAO from "./models/dao/Participants_RafflesDAO";
 import routeUsers from "./routes/users";
@@ -24,6 +25,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+app.use(express.static(path.join("public")));
 
 app.use(routeUsers);
 app.use(routeLogin);
