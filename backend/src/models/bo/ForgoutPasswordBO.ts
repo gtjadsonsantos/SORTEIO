@@ -14,10 +14,10 @@ export default {
         responseBO = "O cpf informado, não pertence a nenhum usuário";
       } else {
         await sendEmail(responseDAO[0]?.getPassword(),responseDAO[0]?.getEmail());
-        responseBO = "Email enviado com sucesso, verifica seu email";
+        responseBO = "Email enviado com sucesso, verifique seu email";
       }
     } else {
-      responseBO = "Informe um cpf invalído";
+      responseBO = "O cpf informado é inválido";
     }
 
     return responseBO;

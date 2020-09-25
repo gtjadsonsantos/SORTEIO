@@ -19,7 +19,7 @@ export default {
                 token: jwt.sign(payload,config.hashjwt,{expiresIn: "1h"}) 
             }
         }else {
-            response = "username,cpf ou a senha estão incorretos"
+            response = "email ou a senha estão incorretos"
         }
 
     return response

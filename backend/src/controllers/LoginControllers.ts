@@ -7,7 +7,7 @@ export default {
   async create(req: Request, res: Response):Promise<void>  {
     try {
       const { password, username }: ILogin = req.body;
-
+      
       const userVO = new UserVO();
 
       userVO.setCpf(username);
