@@ -1,9 +1,11 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import FileBase64 from 'react-file-base64';
 import TextField from '@material-ui/core/TextField';
 import Alert from "@material-ui/lab/Alert";
 import api from '../../../services/api'
 import { Button, FormControl, Input, InputAdornment, InputLabel, MenuItem, Select } from '@material-ui/core';
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,6 +48,11 @@ export default function Create() {
     setSubtitle(event.target.value as string);
   };
 
+  const handlChangeImage = (file:any ) => {
+    setImage(file.base64)
+    console.log(file)
+  }
+
   const handleChangeTitle = (event: React.ChangeEvent<{ value: unknown }>) => {
     setTitle(event.target.value as string);
   };
@@ -74,9 +81,9 @@ export default function Create() {
     }
 
     const {data } = await api.post("/raffle",payload)
-    if (data === "Falhou em crair a rifa"){
+    if (data === "Falhou em criar a rifa"){
         setResponse(<Alert severity="error">{data}</Alert>);
-    }else if (data === "Sucesso em criar a rifa") {
+    }else if (data === "Sucesso em criar rifa") {
         setResponse(<Alert severity="success">{data}</Alert>);
     }
 }
@@ -106,6 +113,11 @@ export default function Create() {
       <FormControl fullWidth className={classes.margin}>
       <InputLabel htmlFor="standard-adornment-amount">Valor</InputLabel>
         <Input id="standard-adornment-amount" value={value} required={true} onChange={handleChangeValue} startAdornment={<InputAdornment position="start">$</InputAdornment>} />
+      </FormControl>
+      <FormControl fullWidth className={classes.margin} >
+      <FileBase64
+        multiple={ false }
+        onDone={handlChangeImage} />
       </FormControl>
       <FormControl className={classes.margin}>
         <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>

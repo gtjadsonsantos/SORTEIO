@@ -96,7 +96,7 @@ export default {
         try {
             const draw:IDraw = req.body
             const drawVO = new DrawVO()
-
+            
             drawVO.setDraw_id(draw.draw_id)
             drawVO.setDeleted_at(draw.deleted_at)
             

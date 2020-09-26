@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS participants_draw (
 
 CREATE TABLE IF NOT EXISTS images (
   image_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  name TEXT NOT NULL,
+  name LONGTEXT NOT NULL,
   data_image TEXT NOT NULL,
   created_at TIMESTAMP NOT NULL,
   deleted_at TIMESTAMP NULL,
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS images (
 CREATE TABLE IF NOT EXISTS winners_draws (
   winner_id INT NOT NULL  PRIMARY KEY AUTO_INCREMENT,
   participants_draw_participant_id INT NOT NULL,
-  image TEXT NOT NULL,
+  image LONGTEXT NOT NULL,
   video TEXT NULL,
   deleted_at TIMESTAMP NULL,
   created_at TIMESTAMP NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS winners_draws (
 
 CREATE TABLE IF NOT EXISTS raffles (
   raffle_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
-  image TEXT NOT NULL,
+  image LONGTEXT NOT NULL,
   created_at TIMESTAMP NOT NULL,
   date_raffle TIMESTAMP NOT NULL,
   description TEXT NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS participants_raffle (
 CREATE TABLE IF NOT EXISTS winners_raffles (
   winner_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   participants_raffle_participant_id INT NOT NULL,
-  image TEXT NOT NULL,
+  image LONGTEXT NOT NULL,
   video TEXT NULL,
     created_at TIMESTAMP NOT NULL,
   deleted_at TIMESTAMP NULL,
