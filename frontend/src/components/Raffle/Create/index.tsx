@@ -33,7 +33,7 @@ export default function Create() {
   const [status, setStatus] = React.useState<string>('');
   const [description, setDescription] = React.useState<string>('');
   const [subtitle, setSubtitle] = React.useState<string>('');
-
+  const [image,setImage] = React.useState<string>("")
   const [value,setValue] = React.useState<number>(0.0)
   const [date,setDate] = React.useState<string>("2017-05-24T10:30")
   const [statusOpen, setStatusOpen] = React.useState(false);
@@ -67,15 +67,16 @@ export default function Create() {
         title,
         subtitle,
         status,
+        image,
         value,
         description,
-        date_draw: date
+        date_raffle: date
     }
 
-    const {data } = await api.post("/draw",payload)
-    if (data === "Falhou em crair o sorteio"){
+    const {data } = await api.post("/raffle",payload)
+    if (data === "Falhou em crair a rifa"){
         setResponse(<Alert severity="error">{data}</Alert>);
-    }else if (data === "Sucesso em criar o sorteio") {
+    }else if (data === "Sucesso em criar a rifa") {
         setResponse(<Alert severity="success">{data}</Alert>);
     }
 }

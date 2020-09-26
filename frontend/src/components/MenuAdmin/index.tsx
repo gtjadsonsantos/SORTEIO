@@ -1,17 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import PersonIcon from '@material-ui/icons/Person';
 import LensIcon from '@material-ui/icons/Lens';
@@ -25,7 +20,16 @@ import {Action } from '../../store/screen'
 
 
 
+import DrawList from '../Draw/List'
 import DrawCreate from '../Draw/Create'
+import DrawUpdate from '../Draw/Update'
+import DrawDelete from '../Draw/Delete'
+
+
+import RaffleList from '../Raffle/List'
+import RaffleCreate from '../Raffle/Create'
+import RaffleUpdate from '../Raffle/Update'
+import RaffleDelete from '../Raffle/Delete'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -99,7 +103,35 @@ export default function MenuAdmin() {
     dispatch<Action>({ type:"set", state: DrawCreate })
 
   }
+  function handlePageDrawUpdate() {
+    dispatch<Action>({ type:"set", state: DrawUpdate })
 
+  }
+  function handlePageDrawDelete() {
+    dispatch<Action>({ type:"set", state: DrawDelete })
+
+  }
+  function handlePageDrawList() {
+    dispatch<Action>({ type:"set", state: DrawList })
+
+  }
+
+  function handlePageRaffleCreate() {
+    dispatch<Action>({ type:"set", state: RaffleCreate })
+
+  }
+  function handlePageRaffleUpdate() {
+    dispatch<Action>({ type:"set", state: RaffleUpdate })
+
+  }
+  function handlePageRaffleDelete() {
+    dispatch<Action>({ type:"set", state: RaffleDelete })
+
+  }
+  function handlePageRaffleList() {
+    dispatch<Action>({ type:"set", state: RaffleList })
+
+  }
   return (
     <List component="nav" aria-labelledby="nested-list-subheader" className={classes.root} >
       <ListItem button onClick={handleClickDraws}>
@@ -109,7 +141,7 @@ export default function MenuAdmin() {
       <ListItemText primary="Sorteios" />{" "}{drawsOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={drawsOpen} timeout="auto" unmountOnExit>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageDrawList} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Listar Sorteios" />
@@ -122,13 +154,13 @@ export default function MenuAdmin() {
           <ListItem button className={classes.nested}>
             <ListItemIcon>
             </ListItemIcon>
-            <ListItemText primary="Atualizar Sorteio" />
+            <ListItemText primary="Atualizar Sorteio" onClick={handlePageDrawUpdate} />
           </ListItem>
 
           <ListItem button className={classes.nested}>
             <ListItemIcon>
             </ListItemIcon>
-            <ListItemText primary="Deletar Sorteio" />
+            <ListItemText primary="Deletar Sorteio" onClick={handlePageDrawDelete} />
           </ListItem>
 
       </Collapse>
@@ -140,22 +172,22 @@ export default function MenuAdmin() {
       <ListItemText primary="Rifas" />{" "}{rafflesOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={rafflesOpen} timeout="auto" unmountOnExit>
-      <ListItem button className={classes.nested}>
+      <ListItem button className={classes.nested} onClick={handlePageRaffleList} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Listar Rifas" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageRaffleCreate}  >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Cadastrar Rifa" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageRaffleUpdate}  >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Atualizar Rifa" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageRaffleDelete}  >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Deletar Rifa" />
