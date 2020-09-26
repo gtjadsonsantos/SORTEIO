@@ -6,11 +6,10 @@ async function validateJWT(req: Request, res: Response, next: NextFunction) {
   try {
     const token: any = req.headers.authorization?.split(" ")[1];
   
-
     const decode:any = jwt.verify(token, config.hashjwt);
 
     const { usertype } = decode;
-
+  
     if (usertype == "comum") {
       next();
     } else {

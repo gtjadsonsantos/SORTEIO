@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
+import {useSelector} from 'react-redux'
 import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,6 +20,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Sidebar  from "../../components/Sidebar";
+import {IScreenState} from '../../types'
 
 function Copyright() {
   return (
@@ -117,6 +119,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const CurrentScreen  = useSelector<IScreenState,IScreenState["screen"]>((state)=> state.screen)
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -178,6 +182,7 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        <CurrentScreen/>
       </main>
     </div>
   );

@@ -20,6 +20,13 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import BusinessIcon from '@material-ui/icons/Business';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import DescriptionIcon from '@material-ui/icons/Description';
+import { useDispatch } from "react-redux";
+import {Action } from '../../store/screen'
+
+
+
+import DrawCreate from '../Draw/Create'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +51,7 @@ export default function MenuAdmin() {
   const [images,setImages] =  React.useState(false);
   const [users,setUsers] =  React.useState(false);
   const [banks,setBanks] =  React.useState(false);
+  const dispatch = useDispatch();
 
   const handleClickDraws = () => {
     setDrawsOpen(!drawsOpen);
@@ -86,6 +94,12 @@ export default function MenuAdmin() {
   const handleClickBanks = () => {
     setBanks(!banks);
   };
+
+  function handlePageDrawCreate() {
+    dispatch<Action>({ type:"set", state: DrawCreate })
+
+  }
+
   return (
     <List component="nav" aria-labelledby="nested-list-subheader" className={classes.root} >
       <ListItem button onClick={handleClickDraws}>
@@ -100,7 +114,7 @@ export default function MenuAdmin() {
             </ListItemIcon>
             <ListItemText primary="Listar Sorteios" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageDrawCreate} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Cadastrar Sorteio" />
