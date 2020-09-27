@@ -1,188 +1,86 @@
-import React,{useEffect} from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Alert from "@material-ui/lab/Alert";
-import api from '../../../services/api'
-import {IDraw } from '../../../types'
-import { Button, FormControl, Input, InputAdornment, InputLabel, MenuItem, Select } from '@material-ui/core';
+import React, { useEffect } from "react";
+import api from "../../../services/api";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import ReactMarkdown from "react-markdown";
+import Typography from "@material-ui/core/Typography";
+import { IRaffles } from "../../../types";
+import {Container} from './styles'
+import Timer from "../../../global/Timer";
 
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+    margin: 0
+  },
+});
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    margin: {
-      margin: theme.spacing(2),
-    },
-    withoutLabel: {
-      marginTop: theme.spacing(3),
-    },
-    textField: {
-      width: '25ch',
-    },
-    button: {
-        margin: theme.spacing(1),
-      },
-  }),
-)
-export default function Create() {
+export default function List() {
   const classes = useStyles();
 
-  const [draw_id,setDraw_id] = React.useState<number>()
-  const [draws,setDraws] = React.useState<IDraw[]>([])
-  const [title,setTitle] = React.useState<string|undefined>("")
-  const [status, setStatus] = React.useState<string|undefined>('');
-  const [description, setDescription] = React.useState<string|undefined>('');
-  const [subtitle, setSubtitle] = React.useState<string|undefined>('');
-  const [value,setValue] = React.useState<number|undefined>(0.0)
-  const [date,setDate] = React.useState<string|undefined>("")
-  const [statusOpen, setStatusOpen] = React.useState(false);
-  const [draw_idOpen, setDraw_idOpen] = React.useState(false);
+  const [raffles, setRaffles] = React.useState<IRaffles[]>([]);
 
-  const [response,setResponse] = React.useState<JSX.Element>()
-
-  const handleChangeStatus = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setStatus(event.target.value as string);
-  };
-
-  const handleChangeDraw = (id:number|undefined,index:number) => {
-    setDraw_id(id);
-    setTitle(draws[index].title)
-    setDescription(draws[index].description)
-    setSubtitle(draws[index].subtitle)
-    setValue(draws[index].value)
-    setDate(draws[index].date_draw)
-    console.log(draws[index].date_draw)
-    setStatus(draws[index].status)
-  };
-
-  const handleChangeSubtitle = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSubtitle(event.target.value as string);
-  };
-
-  const handleChangeTitle = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setTitle(event.target.value as string);
-  };
-
-  const handleChangeDate = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setDate(event.target.value as string);
-  };
-
-  const handleChangeValue = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setValue(event.target.value as number);
-  };
-
-  const handleChangeDescription = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setDescription(event.target.value as string);
-  };
-
-  useEffect(()=>{
+  useEffect(() => {
     async function getDraws() {
-        const {data} = await api.get("/draws")
+      const { data } = await api.get("/raffles");
 
-        setDraws(data)
+      setRaffles(data);
     }
-    getDraws()
-  },[])
+    getDraws();
+  }, []);
 
-  async function sendApi() {
-    const payload = {
-        draw_id,
-        title,
-        subtitle,
-        status,
-        value,
-        description,
-        date_draw: date
-    }
+  function handleTimerDate(raffle: IRaffles) {
+    const date = new Date(`${raffle.date_raffle}`)
+    return Timer(new Date(date.getUTCFullYear(),date.getUTCMonth(),date.getDate(),date.getUTCHours(),date.getUTCMinutes(),date.getUTCSeconds()));
+  }
 
-    const {data } = await api.put("/draw",payload)
-    if (data === "Falhou em atualizar o sorteio"){
-        setResponse(<Alert severity="error">{data}</Alert>);
-    }else if (data === "Sucesso em atualizar o sorteio") {
-        setResponse(<Alert severity="success">{data}</Alert>);
-    }
-}
-  
-  const handleCloseStatus = () => {
-    setStatusOpen(false);
-  };
-
-  const handleOpenStatus = () => {
-    setStatusOpen(true);
-  };
-
-  const handleCloseDraw_id = () => {
-    setDraw_idOpen(false);
-  };
-
-  const handleOpenDraw_id= () => {
-    setDraw_idOpen(true);
-  };
 
   return (
-    <form className={classes.root} noValidate={false} onSubmit={event => event.preventDefault()} autoComplete="off">
-        <FormControl className={classes.margin}>
-        <InputLabel id="demo-controlled-open-select-label">Sorteio</InputLabel>
-        <Select
-          style={{width: "200px"}}
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          open={draw_idOpen}
-          onClose={handleCloseDraw_id}
-          onOpen={handleOpenDraw_id}
-          value={draw_id}
-          required={true}
-        >
-        {
-            draws.map((draw,index) => (
-                <MenuItem key={draw.draw_id} value={draw.draw_id} onClick={()=> handleChangeDraw(draw.draw_id,index) } >{draw.title}</MenuItem>
-
-            ))
-        }
-        </Select>
-      </FormControl>
-      <FormControl fullWidth className={classes.margin}>
-        <TextField required={true}  id="outlined-basic" label="Titulo" value={title} onChange={handleChangeTitle} />
-      </FormControl>
-      <FormControl fullWidth className={classes.margin}>
-        <TextField required={true} onChange={handleChangeSubtitle}  value={subtitle} id="outlined-basic" label="Subtitulo" />
-      </FormControl>
-      <FormControl fullWidth className={classes.margin}>
-       <TextField id="datetime-local" required={true} label="Data do Sorteio" type="datetime-local" value={date} onChange={handleChangeDate}  className={classes.textField} InputLabelProps={{ shrink: true}} />
-      </FormControl>
-      <FormControl fullWidth className={classes.margin}>
-        <TextField id="standard-multiline-static" required={true} onChange={handleChangeDescription} label="Descrição" multiline  value={description} />
-      </FormControl>
-      <FormControl fullWidth className={classes.margin}>
-      <InputLabel htmlFor="standard-adornment-amount">Valor</InputLabel>
-        <Input id="standard-adornment-amount" value={value} required={true} onChange={handleChangeValue} startAdornment={<InputAdornment position="start">$</InputAdornment>} />
-      </FormControl>
-      <FormControl className={classes.margin}>
-        <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
-        <Select
-          style={{width: "200px"}}
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          open={statusOpen}
-          onClose={handleCloseStatus}
-          onOpen={handleOpenStatus}
-          value={status}
-          onChange={handleChangeStatus}
-          required={true}
-        >
-          <MenuItem value="active">Ativo</MenuItem>
-          <MenuItem value="closed">Fechado</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl fullWidth className={classes.margin}>
-        <Button variant="contained" color="primary" type="submit" onClick={sendApi} style={{width:"200px"}}  className={classes.button} >
-            Atualizar
-        </Button>
-      </FormControl>
-      {response}
-    </form>
+    <Container >
+      {raffles.length > 0
+        ? raffles.map((raffle) => (
+            <Card className={classes.root}>
+              <CardActionArea>
+                <CardMedia component="img" alt={raffle.title} height="180" image={raffle.image} title={raffle.title} />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h6">
+                    {raffle.title}
+                  </Typography>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {raffle.subtitle}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p" >
+                    <ReactMarkdown  source={raffle.description} escapeHtml={true} />
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p" >
+                    R$ {raffle.value}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p" >
+                    Data da rifa: dias: {handleTimerDate(raffle).days} horas:{" "} {handleTimerDate(raffle).hours} minutos:{" "} {handleTimerDate(raffle).minutes}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "5.1em",
+                      backgroundColor: `${
+                        raffle.status == "active" ? "green" : "red"
+                      }`,
+                    }}
+                  />
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))
+        : ""}
+    </Container>
   );
 }

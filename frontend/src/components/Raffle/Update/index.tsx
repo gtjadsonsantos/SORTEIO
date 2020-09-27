@@ -1,10 +1,11 @@
 import React,{useEffect} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import FileBase64 from 'react-file-base64';
 import TextField from '@material-ui/core/TextField';
 import Alert from "@material-ui/lab/Alert";
 import api from '../../../services/api'
-import {IDraw } from '../../../types'
 import { Button, FormControl, Input, InputAdornment, InputLabel, MenuItem, Select } from '@material-ui/core';
+import {IRaffles} from '../../../types'
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,37 +31,45 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Create() {
   const classes = useStyles();
 
-  const [draw_id,setDraw_id] = React.useState<number>()
-  const [draws,setDraws] = React.useState<IDraw[]>([])
+  const [raffle_id,setRaffle_id] = React.useState<number>()
+  const [raffles,setRaffles] = React.useState<IRaffles[]>([])
   const [title,setTitle] = React.useState<string|undefined>("")
   const [status, setStatus] = React.useState<string|undefined>('');
   const [description, setDescription] = React.useState<string|undefined>('');
   const [subtitle, setSubtitle] = React.useState<string|undefined>('');
+  const [image,setImage] = React.useState<string|undefined>("")
   const [value,setValue] = React.useState<number|undefined>(0.0)
-  const [date,setDate] = React.useState<string|undefined>("")
+  const [date,setDate] = React.useState<string|undefined>("2017-05-24T10:30")
   const [statusOpen, setStatusOpen] = React.useState(false);
-  const [draw_idOpen, setDraw_idOpen] = React.useState(false);
-
   const [response,setResponse] = React.useState<JSX.Element>()
+  const [raffle_idOpen, setRaffle_idOpen] = React.useState(false);
+
+
+  const handleChangeDraw = (id:number|undefined,index:number) => {
+    setRaffle_id(id);
+    setTitle(raffles[index].title)
+    setDescription(raffles[index].description)
+    setSubtitle(raffles[index].subtitle)
+    setImage(raffles[index].image)
+    setValue(raffles[index].value)
+    setDate(raffles[index].date_raffle)
+    setStatus(raffles[index].status)
+  };
+
 
   const handleChangeStatus = (event: React.ChangeEvent<{ value: unknown }>) => {
     setStatus(event.target.value as string);
   };
-
-  const handleChangeDraw = (id:number|undefined,index:number) => {
-    setDraw_id(id);
-    setTitle(draws[index].title)
-    setDescription(draws[index].description)
-    setSubtitle(draws[index].subtitle)
-    setValue(draws[index].value)
-    setDate(draws[index].date_draw)
-    console.log(draws[index].date_draw)
-    setStatus(draws[index].status)
-  };
-
   const handleChangeSubtitle = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSubtitle(event.target.value as string);
   };
+
+
+
+  const handlChangeImage = (file:any ) => {
+    setImage(file.base64)
+    console.log(file)
+  }
 
   const handleChangeTitle = (event: React.ChangeEvent<{ value: unknown }>) => {
     setTitle(event.target.value as string);
@@ -78,30 +87,22 @@ export default function Create() {
     setDescription(event.target.value as string);
   };
 
-  useEffect(()=>{
-    async function getDraws() {
-        const {data} = await api.get("/draws")
-
-        setDraws(data)
-    }
-    getDraws()
-  },[])
-
   async function sendApi() {
     const payload = {
-        draw_id,
         title,
         subtitle,
         status,
+        image,
         value,
         description,
-        date_draw: date
+        date_raffle: date,
+        raffle_id
     }
 
-    const {data } = await api.put("/draw",payload)
-    if (data === "Falhou em atualizar o sorteio"){
+    const {data } = await api.put("/raffle",payload)
+    if (data === "Falhou em atualizar a rifa"){
         setResponse(<Alert severity="error">{data}</Alert>);
-    }else if (data === "Sucesso em atualizar o sorteio") {
+    }else if (data === "Sucesso em atualizar a rifa") {
         setResponse(<Alert severity="success">{data}</Alert>);
     }
 }
@@ -114,31 +115,40 @@ export default function Create() {
     setStatusOpen(true);
   };
 
-  const handleCloseDraw_id = () => {
-    setDraw_idOpen(false);
+  const handleCloseRaffle_id = () => {
+    setRaffle_idOpen(false);
   };
 
-  const handleOpenDraw_id= () => {
-    setDraw_idOpen(true);
+  const handleOpenRaffle_id = () => {
+    setRaffle_idOpen(true);
   };
+
+  useEffect(()=>{
+    async function getDraws() {
+        const {data} = await api.get("/raffles")
+
+        setRaffles(data)
+    }
+    getDraws()
+  },[])
 
   return (
     <form className={classes.root} noValidate={false} onSubmit={event => event.preventDefault()} autoComplete="off">
         <FormControl className={classes.margin}>
-        <InputLabel id="demo-controlled-open-select-label">Sorteio</InputLabel>
+        <InputLabel id="demo-controlled-open-select-label">Rifas</InputLabel>
         <Select
           style={{width: "200px"}}
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
-          open={draw_idOpen}
-          onClose={handleCloseDraw_id}
-          onOpen={handleOpenDraw_id}
-          value={draw_id}
+          open={raffle_idOpen}
+          onClose={handleCloseRaffle_id}
+          onOpen={handleOpenRaffle_id}
+          value={raffle_id}
           required={true}
         >
         {
-            draws.map((draw,index) => (
-                <MenuItem key={draw.draw_id} value={draw.draw_id} onClick={()=> handleChangeDraw(draw.draw_id,index) } >{draw.title}</MenuItem>
+            raffles.map((raffle,index) => (
+                <MenuItem key={raffle.raffle_id} value={raffle.raffle_id} onClick={()=> handleChangeDraw(raffle.raffle_id,index) } >{raffle.title}</MenuItem>
 
             ))
         }
@@ -159,6 +169,11 @@ export default function Create() {
       <FormControl fullWidth className={classes.margin}>
       <InputLabel htmlFor="standard-adornment-amount">Valor</InputLabel>
         <Input id="standard-adornment-amount" value={value} required={true} onChange={handleChangeValue} startAdornment={<InputAdornment position="start">$</InputAdornment>} />
+      </FormControl>
+      <FormControl fullWidth className={classes.margin} >
+      <FileBase64
+        multiple={ false }
+        onDone={handlChangeImage} />
       </FormControl>
       <FormControl className={classes.margin}>
         <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>

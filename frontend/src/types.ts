@@ -101,7 +101,7 @@ export interface IUser {
     raffle_id?: number;
     image?: string;
     created_at?: string;
-    date_raffle?: string;
+    date_raffle?: string|any;
     description?: string;
     value?: number;
     title?: string;

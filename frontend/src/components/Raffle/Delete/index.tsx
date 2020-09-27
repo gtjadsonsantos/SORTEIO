@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
-import api, { URL } from "../../../services/api";
-import { IDraw } from "../../../types";
+import api,{URL} from "../../../services/api";
 import {
   Button,
   FormControl,
@@ -10,6 +9,7 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
+import { IRaffles } from "../../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,54 +34,52 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Create() {
   const classes = useStyles();
 
-  const [draw_id, setDraw_id] = React.useState<number>();
-  const [draws, setDraws] = React.useState<IDraw[]>([]);
-  const [draw_idOpen, setDraw_idOpen] = React.useState(false);
+  const [raffle_id, setRaffle_id] = React.useState<number>();
+  const [raffles, setRaffles] = React.useState<IRaffles[]>([]);
 
   const [response, setResponse] = React.useState<JSX.Element>();
+  const [raffle_idOpen, setRaffle_idOpen] = React.useState(false);
 
   const handleChangeDraw = (id: number | undefined, index: number) => {
-    setDraw_id(id);
+    setRaffle_id(id);
   };
 
-  useEffect(() => {
-    async function getDraws() {
-      const { data } = await api.get("/draws");
-
-      setDraws(data);
-    }
-    getDraws();
-  }, []);
-
   async function sendApi() {
-
-    const response = await fetch(URL + "/draw", {
+    const response = await fetch(URL + "/raffle", {
       body: JSON.stringify({
-        draw_id:draw_id
+        raffle_id: raffle_id,
       }),
       headers: {
-       "content-type": "application/json",
+        "content-type": "application/json",
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
       method: "DELETE",
     });
     const data = await response.json();
-    console.log(data);
 
-    // if (data === "Falhou em deletar o sorteio"){
-    //     setResponse(<Alert severity="error">{data}</Alert>);
-    // }else if (data === "Sucesso em deletar o sorteio") {
-    //     setResponse(<Alert severity="success">{data}</Alert>);
-    // }
+    if (data === "Falhou em deletar a rifa") {
+      setResponse(<Alert severity="error">{data}</Alert>);
+    } else if (data === "Sucesso em deletar a rifa") {
+      setResponse(<Alert severity="success">{data}</Alert>);
+    }
   }
 
-  const handleCloseDraw_id = () => {
-    setDraw_idOpen(false);
+  const handleCloseRaffle_id = () => {
+    setRaffle_idOpen(false);
   };
 
-  const handleOpenDraw_id = () => {
-    setDraw_idOpen(true);
+  const handleOpenRaffle_id = () => {
+    setRaffle_idOpen(true);
   };
+
+  useEffect(() => {
+    async function getDraws() {
+      const { data } = await api.get("/raffles");
+
+      setRaffles(data);
+    }
+    getDraws();
+  }, []);
 
   return (
     <form
@@ -91,28 +89,29 @@ export default function Create() {
       autoComplete="off"
     >
       <FormControl className={classes.margin}>
-        <InputLabel id="demo-controlled-open-select-label">Sorteio</InputLabel>
+        <InputLabel id="demo-controlled-open-select-label">Rifas</InputLabel>
         <Select
           style={{ width: "200px" }}
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
-          open={draw_idOpen}
-          onClose={handleCloseDraw_id}
-          onOpen={handleOpenDraw_id}
-          value={draw_id}
+          open={raffle_idOpen}
+          onClose={handleCloseRaffle_id}
+          onOpen={handleOpenRaffle_id}
+          value={raffle_id}
           required={true}
         >
-          {draws.map((draw, index) => (
+          {raffles.map((raffle, index) => (
             <MenuItem
-              key={draw.draw_id}
-              value={draw.draw_id}
-              onClick={() => handleChangeDraw(draw.draw_id, index)}
+              key={raffle.raffle_id}
+              value={raffle.raffle_id}
+              onClick={() => handleChangeDraw(raffle.raffle_id, index)}
             >
-              {draw.title}
+              {raffle.title}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
+
       <FormControl fullWidth className={classes.margin}>
         <Button
           variant="contained"
