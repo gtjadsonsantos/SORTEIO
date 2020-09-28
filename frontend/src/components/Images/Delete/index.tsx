@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import FileBase64 from "react-file-base64";
 import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
-import api from "../../../services/api";
+import api,{URL} from "../../../services/api";
 import {
   Button,
   FormControl,
@@ -35,17 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function Create() {
   const classes = useStyles();
-
-  const [name, setName] = React.useState<string | undefined>("");
   const [draws, setDraws] = React.useState<IDraw[]>([]);
   const [images, setImages] = React.useState<IImage[]>([]);
-
-  const [draws_draw_id, setDraws_Draw_Id] = React.useState<
-    number | undefined
-  >();
+  const [draws_draw_id, setDraws_Draw_Id] = React.useState<number | undefined>();
   const [image_id, setImage_Id] = React.useState<number>();
-
-  const [data_image, setData_Image] = React.useState<string | undefined>("");
   const [response, setResponse] = React.useState<JSX.Element>();
   const [draw_idOpen, setDraw_idOpen] = React.useState(false);
   const [image_idOpen, setImage_idOpen] = React.useState(false);
@@ -73,32 +66,30 @@ export default function Create() {
   };
   const handleChangeImage = (id: number | undefined, index: number) => {
     setImage_Id(id);
-    setName(images[index].name);
-    setData_Image(images[index].data_image);
   };
 
-  const handlChangeDataImage = (file: any) => {
-    setData_Image(file.base64);
-  };
 
-  const handleChangeName = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setName(event.target.value as string);
-  };
 
   async function sendApi() {
-    const payload = {
-      name,
-      draws_draw_id,
-      data_image,
-      image_id,
-    };
 
-    const { data } = await api.put("/image", payload);
-    if (data === "Falhou em atualizar imagem para o sorteio") {
-      setResponse(<Alert severity="error">{data}</Alert>);
-    } else if (data === "Sucesso em atualizar a imagem") {
-      setResponse(<Alert severity="success">{data}</Alert>);
-    }
+    const response = await fetch(URL + "/image", {
+      body: JSON.stringify({
+        image_id
+      }),
+      headers: {
+       "content-type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+      method: "DELETE",
+    });
+    const data = await response.json();
+
+     if (data === "Falhou em deletar a imagem"){
+         setResponse(<Alert severity="error">{data}</Alert>);
+     }else if (data === "Sucesso em deletar a imagem") {
+         setResponse(<Alert severity="success">{data}</Alert>);
+     }
+
   }
 
   const handleCloseDraw_id = () => {
@@ -174,18 +165,7 @@ export default function Create() {
         </Select>
       </FormControl>
 
-      <FormControl fullWidth className={classes.margin}>
-        <TextField
-          required={true}
-          onChange={handleChangeName}
-          value={name}
-          id="outlined-basic"
-          label="Nome"
-        />
-      </FormControl>
-      <FormControl fullWidth className={classes.margin}>
-        <FileBase64 multiple={false} onDone={handlChangeDataImage} />
-      </FormControl>
+
       <FormControl fullWidth className={classes.margin}>
         <Button
           variant="contained"
@@ -195,7 +175,7 @@ export default function Create() {
           style={{ width: "200px" }}
           className={classes.button}
         >
-          Atualizar
+          Deletar
         </Button>
       </FormControl>
       {response}

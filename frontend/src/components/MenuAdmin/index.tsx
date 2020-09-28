@@ -31,8 +31,10 @@ import RaffleCreate from '../Raffle/Create'
 import RaffleUpdate from '../Raffle/Update'
 import RaffleDelete from '../Raffle/Delete'
 
+import ImageList from '../Images/List'
 import ImageCreate from '../Images/Create'
 import ImageUpdate from '../Images/Update'
+import ImageDelete from '../Images/Delete'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -142,6 +144,14 @@ export default function MenuAdmin() {
   }
   function handlePageImageUpdate() {
     dispatch<Action>({ type:"set", state: ImageUpdate })
+
+  }
+  function handlePageImageDelete() {
+    dispatch<Action>({ type:"set", state: ImageDelete })
+
+  }
+  function handlePageImageList() {
+    dispatch<Action>({ type:"set", state: ImageList })
 
   }
   return (
@@ -272,7 +282,7 @@ export default function MenuAdmin() {
       <ListItemText primary="Imagens" />{" "}{images ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={images} timeout="auto" unmountOnExit>
-      <ListItem button className={classes.nested}  >
+      <ListItem button className={classes.nested}  onClick={handlePageImageList} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Listar Imagens" />
@@ -287,7 +297,7 @@ export default function MenuAdmin() {
             </ListItemIcon>
             <ListItemText primary="Atualizar Imagem" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageImageDelete} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Deletar Imagem" />
