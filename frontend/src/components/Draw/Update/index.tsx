@@ -54,7 +54,6 @@ export default function Create() {
     setSubtitle(draws[index].subtitle)
     setValue(draws[index].value)
     setDate(draws[index].date_draw)
-    console.log(draws[index].date_draw)
     setStatus(draws[index].status)
   };
 

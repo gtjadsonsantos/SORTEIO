@@ -31,6 +31,9 @@ import RaffleCreate from '../Raffle/Create'
 import RaffleUpdate from '../Raffle/Update'
 import RaffleDelete from '../Raffle/Delete'
 
+import ImageCreate from '../Images/Create'
+import ImageUpdate from '../Images/Update'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,6 +58,7 @@ export default function MenuAdmin() {
   const [images,setImages] =  React.useState(false);
   const [users,setUsers] =  React.useState(false);
   const [banks,setBanks] =  React.useState(false);
+
   const dispatch = useDispatch();
 
   const handleClickDraws = () => {
@@ -130,6 +134,14 @@ export default function MenuAdmin() {
   }
   function handlePageRaffleList() {
     dispatch<Action>({ type:"set", state: RaffleList })
+
+  }
+  function handlePageImageCreate() {
+    dispatch<Action>({ type:"set", state: ImageCreate })
+
+  }
+  function handlePageImageUpdate() {
+    dispatch<Action>({ type:"set", state: ImageUpdate })
 
   }
   return (
@@ -260,17 +272,17 @@ export default function MenuAdmin() {
       <ListItemText primary="Imagens" />{" "}{images ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={images} timeout="auto" unmountOnExit>
-      <ListItem button className={classes.nested}>
+      <ListItem button className={classes.nested}  >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Listar Imagens" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageImageCreate} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Cadastrar Imagem" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageImageUpdate} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Atualizar Imagem" />
