@@ -36,6 +36,7 @@ import ImageCreate from '../Images/Create'
 import ImageUpdate from '../Images/Update'
 import ImageDelete from '../Images/Delete'
 
+import QuotasDrawList from "../Quotas_Draw/List"
 import QuotasDrawCreate from "../Quotas_Draw/Create"
 import QuotasDrawUpdate from "../Quotas_Draw/Update"
 import QuotasDrawDelete from "../Quotas_Draw/Delete"
@@ -170,6 +171,10 @@ export default function MenuAdmin() {
     dispatch<Action>({ type:"set", state: QuotasDrawDelete })
 
   }
+  function handlePageQuotasDrawList() {
+    dispatch<Action>({ type:"set", state: QuotasDrawList })
+
+  }
   
   return (
     <List component="nav" aria-labelledby="nested-list-subheader" className={classes.root} >
@@ -269,7 +274,7 @@ export default function MenuAdmin() {
       <ListItemText primary="Cotas de Sorteios" />{" "}{quotasDraws ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={quotasDraws} timeout="auto" unmountOnExit>
-      <ListItem button className={classes.nested}>
+      <ListItem button className={classes.nested} onClick={handlePageQuotasDrawList} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Listar Cotas" />
