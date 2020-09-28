@@ -36,6 +36,8 @@ import ImageCreate from '../Images/Create'
 import ImageUpdate from '../Images/Update'
 import ImageDelete from '../Images/Delete'
 
+import QuotasDrawCreate from "../Quotas_Draw/Create"
+import QuotasDrawUpdate from "../Quotas_Draw/Update"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -154,6 +156,15 @@ export default function MenuAdmin() {
     dispatch<Action>({ type:"set", state: ImageList })
 
   }
+  function handlePageQuotasDrawCreate() {
+    dispatch<Action>({ type:"set", state: QuotasDrawCreate })
+
+  }
+  function handlePageQuotasDrawUpdate() {
+    dispatch<Action>({ type:"set", state: QuotasDrawUpdate })
+
+  }
+  
   return (
     <List component="nav" aria-labelledby="nested-list-subheader" className={classes.root} >
       <ListItem button onClick={handleClickDraws}>
@@ -257,12 +268,12 @@ export default function MenuAdmin() {
             </ListItemIcon>
             <ListItemText primary="Listar Cotas" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageQuotasDrawCreate} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Cadastrar Cota" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageQuotasDrawUpdate}>
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Atualizar Cota" />
