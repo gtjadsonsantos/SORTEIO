@@ -42,8 +42,10 @@ import QuotasDrawUpdate from "../Quotas_Draw/Update"
 import QuotasDrawDelete from "../Quotas_Draw/Delete"
 
 
+import Quotas_RaffleList from "../Quotas_Raffle/List"
 import Quotas_RaffleCreate from "../Quotas_Raffle/Create"
 import Quotas_RaffleUpdate from "../Quotas_Raffle/Update"
+import Quotas_RaffleDelete from "../Quotas_Raffle/Delete"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -188,6 +190,18 @@ export default function MenuAdmin() {
 
   }
 
+
+  function handlePageQuotas_RaffleDelete() {
+    dispatch<Action>({ type:"set", state: Quotas_RaffleDelete })
+
+  }
+
+  function handlePageQuotas_RaffleList() {
+    dispatch<Action>({ type:"set", state: Quotas_RaffleList })
+
+  }
+  
+  
   
   return (
     <List component="nav" aria-labelledby="nested-list-subheader" className={classes.root} >
@@ -346,7 +360,7 @@ export default function MenuAdmin() {
       <ListItemText primary="Cotas de Rifas" />{" "}{quotasRaffles ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={quotasRaffles} timeout="auto" unmountOnExit>
-      <ListItem button className={classes.nested}>
+      <ListItem button className={classes.nested} onClick={handlePageQuotas_RaffleList} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Listar Cotas" />
@@ -361,7 +375,7 @@ export default function MenuAdmin() {
             </ListItemIcon>
             <ListItemText primary="Atualizar Cota" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handlePageQuotas_RaffleDelete} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Deletar Cota" />
