@@ -134,3 +134,9 @@ export interface IUser {
     
   }
   
+
+  export interface ISocial {
+    facebook?:string
+    whatsapp?:string
+    instagram?:string
+  }

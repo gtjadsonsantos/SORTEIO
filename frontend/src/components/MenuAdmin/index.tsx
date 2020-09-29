@@ -47,6 +47,12 @@ import Quotas_RaffleCreate from "../Quotas_Raffle/Create"
 import Quotas_RaffleUpdate from "../Quotas_Raffle/Update"
 import Quotas_RaffleDelete from "../Quotas_Raffle/Delete"
 
+
+import BusinessList from "../Business/List"
+import BusinessCreate from "../Business/Create"
+import BusinessUpdate from "../Business/Update"
+import BusinessDelete from "../Business/Delete"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -199,6 +205,29 @@ export default function MenuAdmin() {
   function handlePageQuotas_RaffleList() {
     dispatch<Action>({ type:"set", state: Quotas_RaffleList })
 
+  }
+  
+  function handleBusinessCreate () {
+    dispatch<Action>({ type:"set", state: BusinessCreate })
+
+  
+  }
+  
+  function handleBusinessUpdate(){
+    dispatch<Action>({ type:"set", state: BusinessUpdate })
+
+    
+  }
+  function handleBusinessDelete(){
+    dispatch<Action>({ type:"set", state: BusinessDelete })
+
+    
+  }
+
+  function handleBusinessList(){
+    dispatch<Action>({ type:"set", state: BusinessList })
+
+    
   }
   
   
@@ -449,22 +478,22 @@ export default function MenuAdmin() {
       <ListItemText primary="Negócio" />{" "}{business ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={business} timeout="auto" unmountOnExit>
-      <ListItem button className={classes.nested}>
+      <ListItem button className={classes.nested} onClick={handleBusinessList}>
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Listar Informações" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handleBusinessCreate}  >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Cadastrar Informações" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handleBusinessUpdate}>
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Atualizar Informações" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handleBusinessDelete} >
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Deletar Informações" />
