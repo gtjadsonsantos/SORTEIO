@@ -53,6 +53,10 @@ import BusinessCreate from "../Business/Create"
 import BusinessUpdate from "../Business/Update"
 import BusinessDelete from "../Business/Delete"
 
+
+import BanksAccountCreate from "../BanksAccount/Create"
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -226,6 +230,11 @@ export default function MenuAdmin() {
 
   function handleBusinessList(){
     dispatch<Action>({ type:"set", state: BusinessList })
+
+    
+  }
+  function handleBanksAccountCreate(){
+    dispatch<Action>({ type:"set", state: BanksAccountCreate })
 
     
   }
@@ -512,7 +521,7 @@ export default function MenuAdmin() {
             </ListItemIcon>
             <ListItemText primary="Listar Contas" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handleBanksAccountCreate}>
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Cadastrar Conta" />
