@@ -76,6 +76,8 @@ export default function MenuAdmin() {
   const [rafflesOpen, setRafflesOpen] = React.useState(false);
   const [winnersDraw,setWinnersDraw] =  React.useState(false);
   const [winnersRaffle,setWinnersRaffle] =  React.useState(false);
+  const [participantsDraw,setParticipantsDraw] =  React.useState(false);
+  const [participantsRaffle,setParticipantsRaffle] =  React.useState(false);
   const [reports,setReports] =  React.useState(false);
   const [quotasDraws,setQuotasDraws] =  React.useState(false);
   const [quotasRaffles,setQuotasRaffles] =  React.useState(false);
@@ -85,6 +87,14 @@ export default function MenuAdmin() {
   const [banks,setBanks] =  React.useState(false);
 
   const dispatch = useDispatch();
+
+  const handleClickParticipantsDraw= () => {
+    setParticipantsDraw(!participantsDraw);
+  };
+
+  const handleClickParticipantsRaffle= () => {
+    setParticipantsRaffle(!participantsRaffle);
+  };
 
   const handleClickDraws = () => {
     setDrawsOpen(!drawsOpen);
@@ -313,6 +323,36 @@ export default function MenuAdmin() {
             <ListItemText primary="Deletar Rifa" />
           </ListItem>
       </Collapse>
+
+
+      <ListItem button onClick={handleClickParticipantsDraw}>
+         <ListItemIcon>
+              <PersonIcon/>
+          </ListItemIcon>
+      <ListItemText primary="P de Sorteios" />{" "}{participantsDraw ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={participantsDraw} timeout="auto" unmountOnExit>
+      <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="Listar Participantes" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="Cadastrar Participantes" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="Atualizar Participantes" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="Deletar Participantes" />
+          </ListItem>
+      </Collapse>
       
       <ListItem button onClick={handleClickWinnersDrawRaffles}>
          <ListItemIcon>
@@ -428,6 +468,39 @@ export default function MenuAdmin() {
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Deletar Cota" />
+          </ListItem>
+      </Collapse>
+
+
+
+
+
+      <ListItem button onClick={handleClickParticipantsDraw}>
+         <ListItemIcon>
+              <PersonIcon/>
+          </ListItemIcon>
+      <ListItemText primary="P de Rifas" />{" "}{participantsRaffle ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={participantsRaffle} timeout="auto" unmountOnExit>
+      <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="Listar Participantes" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="Cadastrar Participantes" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="Atualizar Participantes" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="Deletar Participantes" />
           </ListItem>
       </Collapse>
 
