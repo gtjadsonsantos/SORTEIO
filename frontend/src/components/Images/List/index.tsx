@@ -61,6 +61,9 @@ export default function Create() {
                   <Typography gutterBottom variant="h5" component="h6">
                     {images.name}
                   </Typography>
+                  <Typography gutterBottom variant="h5" component="h6">
+                    {images.name}
+                  </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>

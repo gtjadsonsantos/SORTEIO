@@ -54,7 +54,10 @@ import BusinessUpdate from "../Business/Update"
 import BusinessDelete from "../Business/Delete"
 
 
+import BanksAccountList from "../BanksAccount/List"
 import BanksAccountCreate from "../BanksAccount/Create"
+import BanksAccountUpdate from "../BanksAccount/Update"
+import BanksAccountDelete from "../BanksAccount/Delete"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -234,12 +237,20 @@ export default function MenuAdmin() {
     
   }
   function handleBanksAccountCreate(){
-    dispatch<Action>({ type:"set", state: BanksAccountCreate })
+    dispatch<Action>({ type:"set", state: BanksAccountCreate })    
+  }
+  function handleBanksAccountUpdate(){
+    dispatch<Action>({ type:"set", state: BanksAccountUpdate })    
+  }
 
-    
+  function handleBanksAccountDelete(){
+    dispatch<Action>({ type:"set", state: BanksAccountDelete })    
+  }
+  function handleBanksAccountList(){
+    dispatch<Action>({ type:"set", state: BanksAccountList })    
   }
   
-  
+
   
   return (
     <List component="nav" aria-labelledby="nested-list-subheader" className={classes.root} >
@@ -516,7 +527,7 @@ export default function MenuAdmin() {
       <ListItemText primary="Contas Bancárias" />{" "}{banks ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={banks} timeout="auto" unmountOnExit>
-      <ListItem button className={classes.nested}>
+      <ListItem button className={classes.nested} onClick={handleBanksAccountList}>
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Listar Contas" />
@@ -526,12 +537,12 @@ export default function MenuAdmin() {
             </ListItemIcon>
             <ListItemText primary="Cadastrar Conta" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handleBanksAccountUpdate}>
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Atualizar Conta" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={handleBanksAccountDelete}>
             <ListItemIcon>
             </ListItemIcon>
             <ListItemText primary="Deletar Conta" />
