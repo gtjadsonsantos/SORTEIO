@@ -20,6 +20,5 @@ export default function updateAllResevations(dateEnd: Date) {
     minutes: Math.round((difference / 1000 / 60) % 60),
     seconds: Math.round((difference / 1000) % 60),
   };
-  console.log(timeLeft)
   return timeLeft;
 }

@@ -57,6 +57,8 @@ export interface IUser {
     status?: string;
     deleted_at?: string;
   }
+
+  
   
   export interface IWinner_Draw {
     winner_id?: number;
@@ -119,6 +121,20 @@ export interface IUser {
     status?: string;
     deleted_at?: string;
   }
+  
+export interface IParticipants_Draw {
+  
+  
+    draw_id?: number,
+    participant_id?: number,
+    draw_quota_id?: number,
+    name?: string,
+    status?:string,
+    number?: string,
+    value?: number,
+  
+
+}
   
   export default interface IWinner_Raffle {
     winner_id?: number;
