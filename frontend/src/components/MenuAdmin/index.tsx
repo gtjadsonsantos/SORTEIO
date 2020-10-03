@@ -61,6 +61,10 @@ import ParticipantsDrawCreate from "../ParticipantsDraws/Create";
 import ParticipantsDrawUpdate from "../ParticipantsDraws/Update";
 import ParticipantsDrawDelete from "../ParticipantsDraws/Delete";
 
+
+import WinnerDrawCreate from '../WinnerDraw/Create'
+import WinnerDrawUpdate from '../WinnerDraw/Update'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -254,6 +258,18 @@ export default function MenuAdmin() {
   function handleParticipantsDrawDelete() {
     dispatch<Action>({ type: "set", state: ParticipantsDrawDelete });
   }
+  function handleWinnerDrawCreate() {
+    dispatch<Action>({ type: "set", state: WinnerDrawCreate });
+  }
+
+  function handleWinnerDrawUpdate() {
+    dispatch<Action>({ type: "set", state: WinnerDrawUpdate });
+  }
+
+
+  
+
+  
 
   return (
     <List
@@ -390,11 +406,11 @@ export default function MenuAdmin() {
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Listar Ganhadores" />
         </ListItem>
-        <ListItem button className={classes.nested}>
+        <ListItem button className={classes.nested} onClick={handleWinnerDrawCreate}>
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Cadastrar Ganhador" />
         </ListItem>
-        <ListItem button className={classes.nested}>
+        <ListItem button className={classes.nested} onClick={handleWinnerDrawUpdate}>
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Atualizar Ganhador" />
         </ListItem>

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
+import FileBase64 from "react-file-base64";
 import api from "../../../services/api";
-import { IDraw, IParticipants_Draw, IUser } from "../../../types";
+import { IDraw, IParticipants_Draw, IWinner_Draw } from "../../../types";
 import {
   Button,
   FormControl,
@@ -36,30 +37,29 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function Update() {
   const classes = useStyles();
-
-  const [draw_id, setDraw_id] = React.useState<number | undefined>(1);
-  const [draws, setDraws] = React.useState<IDraw[]>([]);
+  const [draws, setDraws] = useState<IDraw[]>([]);
+  const [draw_id, setDraw_Id] = useState<number | undefined>(1);
   const [participants, setParticipants] = useState<IParticipants_Draw[]>([]);
-  const [participant_id, setParticipan_id] = useState<number | undefined>();
-  const [draw_quotas_draw_quota_id, setDraw_Quotas_Draw_Quota_Id] = useState<
-number | undefined
-  >();
-  const [users_user_id, setUsers_User_Id] = useState<number | undefined>();
-  const [users, setUsers] = useState<IUser[]>([]);
+  const [participant_id, setParticiapant_id] = useState<number | undefined>();
+  const [winnerDraw_id, setWinner_id] = useState<number | undefined>();
+  const [winnerDraw, setWinnerDraws] = useState<IWinner_Draw[]>([]);
+  const [image, setImage] = useState<string>();
+  const [video, setVideo] = useState<string>();
+  const [response, setResponse] = React.useState<JSX.Element>();
   const [draw_idOpen, setDraw_idOpen] = React.useState(false);
   const [participant_idOpen, setParticipant_idOpen] = useState(false);
-  const [statusOpen, setStatusOpen] = useState(false);
-  const [status, setStatus] = useState<string>();
-  const [response, setResponse] = React.useState<JSX.Element>();
+  const [winnerDraw_idOpen, setWinnerDraw_idOpen] = useState(false);
 
   const handleChangeDraw = (id: number | undefined, index: number) => {
-    setDraw_id(id);
+    setDraw_Id(id);
   };
+
   const handleChangeParticipant = (id: number | undefined, index: number) => {
-    setParticipan_id(id);
-    setUsers_User_Id(participants[index].users_user_id);
-    
-    setDraw_Quotas_Draw_Quota_Id(participants[index].draw_quota_id);
+    setParticiapant_id(id);
+  };
+
+  const handleChangeWinnerDraw = (id: number | undefined, index: number) => {
+    setWinner_id(id);
   };
 
   useEffect(() => {
@@ -71,19 +71,13 @@ number | undefined
     getDraws();
   }, []);
   useEffect(() => {
-    async function getUsers() {
-      const { data } = await api.get<IParticipants_Draw[]>(
-        "/participants_draws"
-      );
+    async function getWinnerDraws() {
+      const { data } = await api.get("/winners_draws");
 
-      setUsers_User_Id(
-        data.find(
-          (participant) => participant.participant_id === participant_id
-        )?.users_user_id
-      );
+      setWinnerDraws(data);
     }
-    getUsers();
-  }, [participant_id]);
+    getWinnerDraws();
+  }, []);
 
   useEffect(() => {
     async function getParticipants() {
@@ -95,6 +89,10 @@ number | undefined
     }
     getParticipants();
   }, [draw_id]);
+
+  const handlChangeDataImage = (file: any) => {
+    setImage(file.base64);
+  };
 
   const handleCloseDraw_id = () => {
     setDraw_idOpen(false);
@@ -112,34 +110,29 @@ number | undefined
     setParticipant_idOpen(true);
   };
 
-  const handleCloseStatus = () => {
-    setStatusOpen(false);
+  const handleCloseWinnerDraw_id = () => {
+    setWinnerDraw_idOpen(false);
   };
 
-  const handleOpenStatus = () => {
-    setStatusOpen(true);
+  const handleOpenWinnerDraw_id = () => {
+    setWinnerDraw_idOpen(true);
   };
 
   async function sendApi() {
     const payload = {
-      participant_id,
-      draw_quotas_draw_quota_id,
-      users_user_id,
-      draws_draw_id: draw_id,
-      status,
+      image: image,
+      video: video,
+      winner_id:winnerDraw_id,
+      participants_draw_participant_id: participant_id,
     };
+    const { data } = await api.put("/winner_draw", payload);
 
-    const {data } = await api.put("/participant_draw",payload)
-
-    if (data === "Sucesso em atualizar o participante") {
-      setResponse(<Alert severity="success"  >{data}</Alert>)
-    }else if (data === "Falhou em atualizar o participante") {
-      setResponse(<Alert severity="error" >{data}</Alert>)
+    if (data === "Sucesso em atualizar o ganhador") {
+      setResponse(<Alert severity="success">{data}</Alert>);
+    } else if (data === "Falhou em atualizar o ganhador") {
+      setResponse(<Alert severity="error">{data}</Alert>);
     }
-
-    console.log(data)
   }
-
   return (
     <form
       className={classes.root}
@@ -193,7 +186,11 @@ number | undefined
                   handleChangeParticipant(participant.participant_id, index)
                 }
               >
-                {`${participant.number}-${participant.status === "sold"?"Pago":""}${participant.status === "resevation"?"Reservado":""}${participant.status === "free"?"Livre":""}`}
+                {`${participant.number}-${
+                  participant.status === "sold" ? "Pago" : ""
+                }${participant.status === "resevation" ? "Reservado" : ""}${
+                  participant.status === "free" ? "Livre" : ""
+                }`}
               </MenuItem>
             ) : (
               <div key={Math.random() * 9999} style={{ display: "none" }}></div>
@@ -201,30 +198,51 @@ number | undefined
           )}
         </Select>
       </FormControl>
-
       <FormControl className={classes.margin}>
-        <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
+        <InputLabel id="demo-controlled-open-select-label">
+          Ganhadores
+        </InputLabel>
         <Select
           style={{ width: "200px" }}
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
-          open={statusOpen}
-          onClose={handleCloseStatus}
-          onOpen={handleOpenStatus}
-          value={status}
+          open={winnerDraw_idOpen}
+          onClose={handleCloseWinnerDraw_id}
+          onOpen={handleOpenWinnerDraw_id}
+          value={winnerDraw_id}
           required={true}
         >
-          <MenuItem key={1} value="sold" onClick={() => setStatus("sold")}>
-            Pago
-          </MenuItem>
-          <MenuItem
-            key={2}
-            value="resevation"
-            onClick={() => setStatus("resevation")}
-          >
-            Reservado
-          </MenuItem>
+          {winnerDraw.map((winner, index) =>
+            winner.participants_draw_participant_id === participant_id ? (
+              <MenuItem
+                key={Math.random() * 9999}
+                value={winnerDraw_id}
+                onClick={() =>
+                  handleChangeWinnerDraw(
+                    winner.winner_id,
+                    index
+                  )
+                }
+              >
+                {`ID GANHADOR: ${winner.winner_id}- ID PARTICIPANTE ${winner.participants_draw_participant_id}`}
+              </MenuItem>
+            ) : (
+              <div key={Math.random() * 9999} style={{ display: "none" }}></div>
+            )
+          )}
         </Select>
+      </FormControl>
+      <FormControl fullWidth className={classes.margin}>
+        <FileBase64 multiple={false} onDone={handlChangeDataImage} />
+      </FormControl>
+      <FormControl fullWidth className={classes.margin}>
+        <TextField
+          required={true}
+          onChange={(element) => setVideo(element.target.value)}
+          value={video}
+          id="outlined-basic"
+          label="Youtube(URL)"
+        />
       </FormControl>
       <FormControl fullWidth className={classes.margin}>
         <Button
