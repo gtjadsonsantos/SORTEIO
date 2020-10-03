@@ -43,7 +43,7 @@ export default {
     users.address,
     draws.date_draw,
     draws.title,
-    GROUP_CONCAT( draw_quotas.number) as contas
+    GROUP_CONCAT( draw_quotas.number) as cotas
     FROM winners_draws 
       INNER JOIN participants_draw ON participants_draw.participant_id = winners_draws.participants_draw_participant_id
         INNER JOIN draw_quotas ON participants_draw.draw_quotas_draw_quota_id = draw_quotas.draw_quota_id
@@ -51,7 +51,9 @@ export default {
         INNER JOIN draws ON draws.draw_id = participants_draw.draws_draw_id
     WHERE  
        participants_draw.deleted_at IS NULL AND
-        participants_draw.status = "closed"
+       participants_draw.status = "sold" AND 
+       participants_draw.deleted_at is null and 
+       winners_draws.deleted_at is null
     GROUP BY
         winners_draws.winner_id
     `)
@@ -117,9 +119,8 @@ export default {
       const listParticipants = await ParticipantsDrawDAO.indexOne(
         participant_drawVO
       );
-
       let responseDAO = false;
-
+        console.log(winner_DrawVO)
       if (listParticipants.length >= 1) {
        const response =  await conn("winners_draws")
           .update({
@@ -128,7 +129,6 @@ export default {
             video: winner_DrawVO.getVideo(),
           })
           .where("winner_id", "=", `${winner_DrawVO.getWinner_id()}`);
-
 
         responseDAO = response == 1? true:false;
       }
