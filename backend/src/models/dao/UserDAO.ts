@@ -95,7 +95,6 @@ export default {
         type: userVO.getType(),
         address: userVO.getAddress(),
       })
-      .where("password", "=", `${userVO.getPassword()}`)
       .where("user_id","=",`${userVO.getUser_id()}`)
       
       response = responseDatabase == 1?true:false 

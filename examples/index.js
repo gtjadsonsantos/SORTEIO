@@ -96,11 +96,8 @@ const localNumber = [
 const render = localNumber.map((localItem) => {
   let response;
 
-  serverNumber.map((serverItem) => {
-    response =
-      serverItem.number == localItem.number
-        ? { ...serverItem }
-        : {
+  serverNumber.map((serverItem) => { 
+    response = serverItem.number == localItem.number? { ...serverItem } : {
             status: "free",
             number: localItem.number,
             draw_quota_id: localItem.draw_quota_id,

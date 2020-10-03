@@ -128,6 +128,7 @@ export interface IParticipants_Draw {
     draw_id?: number,
     participant_id?: number,
     draw_quota_id?: number,
+    users_user_id?:number,
     name?: string,
     status?:string,
     number?: string,

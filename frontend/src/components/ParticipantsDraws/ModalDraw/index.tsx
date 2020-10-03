@@ -33,6 +33,7 @@ import {
   ButtonQuota,
   ContainerConfirmation,
   ButtonConfirmation,
+  ContainerRowInfo,
 } from "./styles";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
@@ -50,6 +51,9 @@ export default function MoadalDraw() {
   const [showTime, setShowTime] = useState<string>();
   const [quotasSelected, setQuotasSelected] = useState<string[]>([]);
   const [seconds, setSeconds] = useState(0);
+  const [free, setFree] = useState(true);
+  const [resevation, setResevation] = useState(true);
+  const [sold, setSold] = useState(true);
 
   useEffect(() => {
     async function getDraw_Quotas() {
@@ -66,6 +70,7 @@ export default function MoadalDraw() {
           "draw_id"
         )}`
       );
+
       setParticipants(data[0]);
     }
     getParticipants();
@@ -75,16 +80,40 @@ export default function MoadalDraw() {
     const dateResult = TimerCounter(dateNew);
     const interval = setInterval(() => {
       setSeconds((seconds) => seconds + 1);
-
+      console.log(dateResult)
       if (
         Math.sign(dateResult.days) === -1 &&
         Math.sign(dateResult.hours) === -1 &&
         Math.sign(dateResult.minutes) === -1
       ) {
         setShowTime(`Encerrado`);
+      } else if (
+        Math.sign(dateResult.days) === -1 &&
+        Math.sign(dateResult.hours) === 0 &&
+        Math.sign(dateResult.minutes) === -1
+      ) {
+        setShowTime(`Encerrado`);
+      } else if (
+        Math.sign(dateResult.days) === -1 &&
+        Math.sign(dateResult.hours) === -1 &&
+        Math.sign(dateResult.minutes) === 0
+      ) {
+        setShowTime(`Encerrado`);
+      } else if (
+        Math.sign(dateResult.days) === 0 &&
+        Math.sign(dateResult.hours) === -1 &&
+        Math.sign(dateResult.minutes) === -1
+      ) {
+        setShowTime(`Encerrado`);
+      }else if (
+        Math.sign(dateResult.days) === 0 &&
+        Math.sign(dateResult.hours) === 0 &&
+        Math.sign(dateResult.minutes) === -1
+      ) {
+        setShowTime(`Encerrado`);
       } else {
         setShowTime(
-          `Encerrae em  Dias: ${dateResult.days} Horas: ${dateResult.hours} Minutos: ${dateResult.minutes}`
+          `Encerra em  Dias: ${dateResult.days} Horas: ${dateResult.hours} Minutos: ${dateResult.minutes}`
         );
       }
     }, 1000);
@@ -137,20 +166,31 @@ export default function MoadalDraw() {
       const render = quotasDraw.map((quota_draw) => {
         let response;
 
-        participants.map((participant_item) => {
-          response =
-            participant_item.draw_quota_id == quota_draw.draw_quota_id
-              ? { ...participant_item }
-              : {
-                  status: "free",
-                  number: quota_draw.number,
-                  draw_quota_id: quota_draw.draw_quota_id,
-                  draw_id,
-                };
-        });
-
+        if (participants.length === 0) {
+          response = {
+            status: "free",
+            number: quota_draw.number,
+            draw_quota_id: quota_draw.draw_quota_id,
+            draw_id,
+          };
+        } else {
+          participants.map((participant_item) => {
+            if (participant_item.draw_quota_id === quota_draw.draw_quota_id) {
+              response = { ...participant_item };
+            }
+          });
+        }
+        if (response === undefined) {
+          response = {
+            status: "free",
+            number: quota_draw.number,
+            draw_quota_id: quota_draw.draw_quota_id,
+            draw_id,
+          };
+        }
         return response;
       });
+
       setQuotasVerifyDraw(render);
     }
     renderQuotas();
@@ -191,8 +231,38 @@ export default function MoadalDraw() {
       });
     }
   }
-  
 
+  const handeHandleQuotasFree = () => {
+    const display = free === true ? "block" : "none";
+    const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(
+      ".gray"
+    );
+    buttons.forEach((element) => {
+      element.style.display = display;
+    });
+    setFree(!free);
+  };
+
+  const handeHandleQuotasResevation = () => {
+    const display = resevation === true ? "block" : "none";
+    const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(
+      ".blue"
+    );
+    buttons.forEach((element) => {
+      element.style.display = display;
+    });
+    setResevation(!resevation);
+  };
+  const handeHandleQuotasGreen = () => {
+    const display = sold === true ? "block" : "none";
+    const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(
+      ".green"
+    );
+    buttons.forEach((element) => {
+      element.style.display = display;
+    });
+    setSold(!sold);
+  };
   return (
     <Container>
       <Header>
@@ -234,7 +304,7 @@ export default function MoadalDraw() {
           </Timer>
         </ContainerColumn>
       </ContainerRow>
-      <ContainerRow style={{ justifyContent: "center" }}>
+      <ContainerRowInfo style={{ justifyContent: "center" }}>
         <CardProcess>
           <CardImg src={`${URL}/passo-1.png`} />
           <Subtitle>Escolha uma Rifa</Subtitle>
@@ -246,24 +316,24 @@ export default function MoadalDraw() {
           <CardImg src={`${URL}/passo-2.png`} />
           <Subtitle>Selecione os números</Subtitle>
           <p style={{ width: "60%" }}>
-            Muito fácil participar. Comece escolhendo uma Rifa ativa.
+            Escolha quantos quiser! Quanto mais, mais chances de ganhar.
           </p>
         </CardProcess>
         <CardProcess>
           <CardImg src={`${URL}/passo-3.png`} />
           <Subtitle>Faça o pagamento</Subtitle>
           <p style={{ width: "60%" }}>
-            Muito fácil participar. Comece escolhendo uma Rifa ativa.
+            Escolha uma das formas de pagamento disponíveis.
           </p>
         </CardProcess>
         <CardProcess>
           <CardImg src={`${URL}/passo-4.png`} />
           <Subtitle>Aguarde o sorteio</Subtitle>
           <p style={{ width: "60%" }}>
-            Muito fácil participar. Comece escolhendo uma Rifa ativa.
+            Agora é aguardar o sorteio pela Loteria Federal e boa sorte!
           </p>
         </CardProcess>
-      </ContainerRow>
+      </ContainerRowInfo>
       <ContainerQuotas>
         <QuotasHeader>
           <h1>Cotas</h1>
@@ -271,24 +341,30 @@ export default function MoadalDraw() {
         </QuotasHeader>
         <ContainerButtonsFilter>
           <div>
-            <ButtonsFilter color={"gray"}>Livre</ButtonsFilter>
-            <ButtonsFilter color={"blue"}>Reservados</ButtonsFilter>
-            <ButtonsFilter color={"green"}>Pagos</ButtonsFilter>
+            <ButtonsFilter color={"gray"} onClick={handeHandleQuotasFree}>
+              Livre
+            </ButtonsFilter>
+            <ButtonsFilter color={"blue"} onClick={handeHandleQuotasResevation}>
+              Reservados
+            </ButtonsFilter>
+            <ButtonsFilter color={"green"} onClick={handeHandleQuotasGreen}>
+              Pagos
+            </ButtonsFilter>
           </div>
         </ContainerButtonsFilter>
         <ContinerQuotasShow>
           {quotasVerifyDraw.map((quota) => {
             let colorValue = "green";
-            if (quota?.status == "resevation") {
+            if (quota?.status === "resevation") {
               colorValue = "blue";
-            } else if (quota?.status == "sold") {
+            } else if (quota?.status === "sold") {
               colorValue = "green";
-            } else if (quota?.status == "free") {
+            } else if (quota?.status === "free") {
               colorValue = "gray";
             }
             return (
               <ButtonQuota
-                className={quota?.colorValue}
+                className={colorValue}
                 onClick={() =>
                   handleSetQuotasSelected(quota?.number, quota?.status)
                 }

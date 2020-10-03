@@ -57,7 +57,9 @@ import UsersCreate from "../Users/Create";
 import UsersUpdate from "../Users/Update";
 import UsersDelete from "../Users/Delete";
 
-import ParticipantsDrawCreate from "../ParticipantsDraws/Create"
+import ParticipantsDrawCreate from "../ParticipantsDraws/Create";
+import ParticipantsDrawUpdate from "../ParticipantsDraws/Update";
+import ParticipantsDrawDelete from "../ParticipantsDraws/Delete";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -245,7 +247,14 @@ export default function MenuAdmin() {
     dispatch<Action>({ type: "set", state: ParticipantsDrawCreate });
   }
 
-  
+  function handleParticipantsDrawUpdate() {
+    dispatch<Action>({ type: "set", state: ParticipantsDrawUpdate });
+  }
+
+  function handleParticipantsDrawDelete() {
+    dispatch<Action>({ type: "set", state: ParticipantsDrawDelete });
+  }
+
   return (
     <List
       component="nav"
@@ -343,19 +352,27 @@ export default function MenuAdmin() {
         {participantsDraw ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={participantsDraw} timeout="auto" unmountOnExit>
-        <ListItem button className={classes.nested}>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Listar Participantes" />
-        </ListItem>
-        <ListItem button className={classes.nested} onClick={handleParticipantsDrawCreate}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleParticipantsDrawCreate}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Cadastrar Participantes" />
         </ListItem>
-        <ListItem button className={classes.nested}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleParticipantsDrawUpdate}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Atualizar Participantes" />
         </ListItem>
-        <ListItem button className={classes.nested}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleParticipantsDrawDelete}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Deletar Participantes" />
         </ListItem>

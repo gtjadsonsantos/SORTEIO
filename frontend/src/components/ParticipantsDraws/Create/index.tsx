@@ -131,7 +131,7 @@ export default function Create() {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="medium" color="primary" onClick={()=> handleModalDraw(draw.draw_id)}>
+                <Button size="medium" color="primary" style={{display:`${draw.status === "active"?"block":"none" }`}} onClick={()=> handleModalDraw(draw.draw_id)}>
                   Participar
                 </Button>
               </CardActions>

@@ -1,5 +1,5 @@
 import DrawCreate from '../../components/Draw/Create'
-import ModalDraw from '../../components/ParticipantsDraws/ModalDraw'
+import ModalDraw from '../../components/ParticipantsDraws/Update'
 
 export type Action = {
   type: "set";

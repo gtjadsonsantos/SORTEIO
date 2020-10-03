@@ -24,6 +24,22 @@ export const ContainerRow = styled.div`
   margin-top: 90px;
   height: 700px;
   align-items: center;
+
+  @media only screen and (min-width: 500px) {
+      flex-direction: column;
+  }
+`;
+
+export const ContainerRowInfo = styled.div`
+  display: flex;
+  margin-top: 90px;
+  height: 700px;
+  align-items: center;
+  @media only screen and (min-width: 500px) {
+    flex-wrap: wrap;     
+  }
+
+
 `;
 export const ContainerSlider = styled.div`
   max-width: 720px;
@@ -48,6 +64,11 @@ export const ContainerInfoRow = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
+
+  @media only screen and (min-width: 500px) {
+   justify-content: space-evenly;
+   width: 80%;
+  }
 `;
 
 export const ValorTitle = styled.h3`
@@ -94,7 +115,7 @@ export const Description = styled.div`
   font-size: 15px;
   height: 100%;
   max-height: 450px;
-  width: 80%;
+  width: 50%;
 `;
 
 export const Timer = styled.div`
@@ -116,6 +137,10 @@ export const CardProcess = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media only screen and (min-width: 500px) {
+    height: 310px;
+    width: 260px;
+  }
 `;
 export const CardImg = styled.img`
   width: 240px;
@@ -126,11 +151,15 @@ export const ContainerQuotas = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 80px;
+  @media only screen and (min-width: 500px) {
+    margin-top: 250px;
+  }
+
 `;
 export const QuotasHeader = styled.div`
   width: 100%;
   font-family: Roboto, sans-serif;
-  padding-left: 160px;
+  padding-left: 10%;
 `;
 export const ContainerButtonsFilter = styled.div`
   width: 100%;
