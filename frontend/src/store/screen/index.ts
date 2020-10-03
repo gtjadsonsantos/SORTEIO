@@ -1,5 +1,5 @@
 
-import ModalDraw from '../../components/WinnerDraw/Delete'
+import ModalDraw from '../../components/WinnerDraw/List'
 
 export type Action = {
   type: "set";

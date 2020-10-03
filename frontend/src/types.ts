@@ -63,10 +63,10 @@ export interface IUser {
   export interface IWinner_Draw {
     winner_id?: number;
     participants_draw_participant_id?: number;
-    image?: number;
-    video?: number;
-    deleted_at?: number;
-    created_at?: number;
+    image?: string;
+    video?: string;
+    deleted_at?: string;
+    created_at?: string;
   }
   
   export interface IBank_Account {
@@ -156,4 +156,18 @@ export interface IParticipants_Draw {
     facebook?:string
     whatsapp?:string
     instagram?:string
+  }
+
+  export interface Ijoin_winners_participants_users_quotas_draw {
+    
+      "winner_id"?:number,
+      "participants_draw_participant_id"?: number,
+      "image"?: string,
+      "video"?:string,
+      "name"?:string,
+      "address"?:string,
+      "date_draw"?:string,
+      "title"?:string,
+      "cotas"?:string
+    
   }

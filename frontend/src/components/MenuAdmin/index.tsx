@@ -61,9 +61,10 @@ import ParticipantsDrawCreate from "../ParticipantsDraws/Create";
 import ParticipantsDrawUpdate from "../ParticipantsDraws/Update";
 import ParticipantsDrawDelete from "../ParticipantsDraws/Delete";
 
-
+import WinnerDrawList from '../WinnerDraw/List'
 import WinnerDrawCreate from '../WinnerDraw/Create'
 import WinnerDrawUpdate from '../WinnerDraw/Update'
+import WinnerDrawDelete from '../WinnerDraw/Delete'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -267,8 +268,15 @@ export default function MenuAdmin() {
   }
 
 
+  function handleWinnerDrawDelete() {
+    dispatch<Action>({ type: "set", state: WinnerDrawDelete });
+  }
   
-
+  function handleWinnerDrawList() {
+    dispatch<Action>({ type: "set", state: WinnerDrawList });
+  }
+  
+  
   
 
   return (
@@ -402,7 +410,7 @@ export default function MenuAdmin() {
         {winnersDraw ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={winnersDraw} timeout="auto" unmountOnExit>
-        <ListItem button className={classes.nested}>
+        <ListItem button className={classes.nested} onClick={handleWinnerDrawList}>
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Listar Ganhadores" />
         </ListItem>
@@ -416,7 +424,7 @@ export default function MenuAdmin() {
         </ListItem>
         <ListItem button className={classes.nested}>
           <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Deletar Ganhador" />
+          <ListItemText primary="Deletar Ganhador" onClick={handleWinnerDrawDelete} />
         </ListItem>
       </Collapse>
 
