@@ -41,7 +41,7 @@ export default {
     users.address,
     raffles.date_raffle,
     raffles.title,
-    GROUP_CONCAT( quotas_raffle.number) as contas
+    GROUP_CONCAT( quotas_raffle.number) as cotas
     FROM winners_raffles 
       INNER JOIN participants_raffle ON participants_raffle.participant_id = winners_raffles.participants_raffle_participant_id
         INNER JOIN quotas_raffle ON participants_raffle.quotas_raffle_quota_raffle_id = quotas_raffle.quota_raffle_id
@@ -49,7 +49,8 @@ export default {
         INNER JOIN raffles ON raffles.raffle_id = participants_raffle.raffles_raffle_id
     WHERE  
        participants_raffle.deleted_at IS NULL AND
-        participants_raffle.status = "closed"
+        participants_raffle.status = "sold" AND 
+        winners_raffles.deleted_at is null
     GROUP BY
         winners_raffles.winner_id
     `)

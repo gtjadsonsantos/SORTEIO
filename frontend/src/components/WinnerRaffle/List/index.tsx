@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Ijoin_winners_participants_users_quotas_draw } from "../../../types";
-import ReactPlayer from 'react-player'
+import { Ijoin_raffles_participants_users_quotas_raffles } from "../../../types";
+import ReactPlayer from "react-player";
 
 import { Container } from "./styles";
 import api from "../../../services/api";
@@ -25,8 +23,8 @@ const useStyles = makeStyles({
 
 export default function MediaCard() {
   const classes = useStyles();
-  const [winnerDraws, setWinnerDraws] = useState<
-    Ijoin_winners_participants_users_quotas_draw[]
+  const [winnerRaffles, setWinnerRaffles] = useState<
+    Ijoin_raffles_participants_users_quotas_raffles[]
   >([]);
 
   useEffect(() => {
@@ -35,7 +33,7 @@ export default function MediaCard() {
         "/join_winners_participants_users_quotas_draw"
       );
 
-      setWinnerDraws(data[0]);
+      setWinnerRaffles(data[0]);
     }
 
     getWinnerDraws();
@@ -43,8 +41,8 @@ export default function MediaCard() {
 
   return (
     <Container>
-      {winnerDraws.length > 0
-        ? winnerDraws.map((winner) => (
+      {winnerRaffles.length > 0
+        ? winnerRaffles.map((winner) => (
             <Card className={classes.root}>
               <CardActionArea>
                 <CardMedia
@@ -54,7 +52,7 @@ export default function MediaCard() {
                   title={winner.name}
                 />
                 <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h5" component="h2">
                     {winner.name}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="h3">
@@ -63,12 +61,17 @@ export default function MediaCard() {
                   <Typography
                     variant="body2"
                     color="textSecondary"
-            
                     component="p"
                   >
                     #{winner.cotas}
                   </Typography>
-                  <ReactPlayer style={{diplay: `${winner.video? "block":"none" }`}} url={winner.video} width={360} height={250} controls={true} />
+                  <ReactPlayer
+                    style={{ diplay: `${winner.video ? "block" : "none"}` }}
+                    url={winner.video}
+                    width={360}
+                    height={250}
+                    controls={true}
+                  />
                 </CardContent>
               </CardActionArea>
             </Card>

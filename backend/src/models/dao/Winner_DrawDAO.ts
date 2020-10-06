@@ -52,7 +52,6 @@ export default {
     WHERE  
        participants_draw.deleted_at IS NULL AND
        participants_draw.status = "sold" AND 
-       participants_draw.deleted_at is null and 
        winners_draws.deleted_at is null
     GROUP BY
         winners_draws.winner_id

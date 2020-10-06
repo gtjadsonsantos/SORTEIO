@@ -18,7 +18,11 @@ export default {
       "participants_raffle"
     )
       .select("*")
-      .where("participant_id","=",`${participant_ruffleVO.getParticipant_id()}`)
+      .where(
+        "participant_id",
+        "=",
+        `${participant_ruffleVO.getParticipant_id()}`
+      )
       .where("deleted_at", null);
 
     listParticipants_Ruffle.forEach((item) => {
@@ -39,8 +43,11 @@ export default {
 
     return listParticipants_RuffleVO;
   },
-  async indexAllJoinRafflesQuotasParticipants(req:Request,res:Response):Promise<any>{
-    const response:any[] = await conn.raw(`
+  async indexAllJoinRafflesQuotasParticipants(
+    req: Request,
+    res: Response
+  ): Promise<any> {
+    const response: any[] = await conn.raw(`
     SELECT
       raffles.raffle_id,
       participants_raffle.participant_id,
@@ -59,9 +66,9 @@ export default {
       raffles.deleted_at is null and
       quotas_raffle.deleted_at is null and
       participants_raffle.deleted_at is null
-    `)
+    `);
 
-    return response
+    return response;
   },
   async indexAll(): Promise<Participants_RuffleVO[]> {
     const listParticipants_RuffleVO: Participants_RuffleVO[] = [];
@@ -91,38 +98,68 @@ export default {
   },
   async create(participant_ruffleVO: Participants_RuffleVO): Promise<boolean> {
     try {
-      const responseUsers: IParticipants_DrawVO[] = await conn("participants_draw")
+      const responseUsers: IParticipants_DrawVO[] = await conn(
+        "participants_draw"
+      )
         .select("*")
-        .where("users_user_id","=",`${participant_ruffleVO.getUsers_user_id()}`)
+        .where(
+          "users_user_id",
+          "=",
+          `${participant_ruffleVO.getUsers_user_id()}`
+        )
         .where("status", "=", "sold")
         .where("deleted_at", null)
         .limit(1);
 
       const responseRuffles: IRaffles[] = await conn("raffles")
         .select("*")
-        .where("raffle_id","=",`${participant_ruffleVO.getRaffles_raffle_id()}`)
+        .where(
+          "raffle_id",
+          "=",
+          `${participant_ruffleVO.getRaffles_raffle_id()}`
+        )
         .where("status", "=", "active")
         .where("deleted_at", null)
         .limit(1);
-      const responseRafflesQuotas: IQuotas_Raffle[] = await conn("quotas_raffle")
+      const responseRafflesQuotas: IQuotas_Raffle[] = await conn(
+        "quotas_raffle"
+      )
         .select("*")
-        .where("quota_raffle_id","=",`${participant_ruffleVO.getQuotas_raffle_quota_raffle_id()}`)
+        .where(
+          "quota_raffle_id",
+          "=",
+          `${participant_ruffleVO.getQuotas_raffle_quota_raffle_id()}`
+        )
         .where("deleted_at", null);
 
-        const responseParticipantsRaffles:any[] = await conn("participants_raffle")
+      const responseParticipantsRaffles: any[] = await conn(
+        "participants_raffle"
+      )
         .select("*")
-        .innerJoin("raffles","participants_raffle.raffles_raffle_id","raffles.raffle_id")
-        .where("raffles.status","=","active")
-        .where("participants_raffle.raffles_raffle_id","=",`${participant_ruffleVO.getRaffles_raffle_id()}`)
-        .where("participants_raffle.quotas_raffle_quota_raffle_id","=",`${participant_ruffleVO.getQuotas_raffle_quota_raffle_id()}`)
-        .where("participants_raffle.deleted_at", null)
+        .innerJoin(
+          "raffles",
+          "participants_raffle.raffles_raffle_id",
+          "raffles.raffle_id"
+        )
+        .where("raffles.status", "=", "active")
+        .where(
+          "participants_raffle.raffles_raffle_id",
+          "=",
+          `${participant_ruffleVO.getRaffles_raffle_id()}`
+        )
+        .where(
+          "participants_raffle.quotas_raffle_quota_raffle_id",
+          "=",
+          `${participant_ruffleVO.getQuotas_raffle_quota_raffle_id()}`
+        )
+        .where("participants_raffle.deleted_at", null);
 
-      let responseDAO = false;  
+      let responseDAO = false;
 
       if (
         responseUsers.length >= 1 &&
         responseRuffles.length >= 1 &&
-        responseRafflesQuotas.length >= 1 && 
+        responseRafflesQuotas.length >= 1 &&
         responseParticipantsRaffles.length == 0
       ) {
         await conn("participants_raffle").insert({
@@ -143,22 +180,38 @@ export default {
   },
   async update(participant_ruffleVO: Participants_RuffleVO): Promise<boolean> {
     try {
-    const responseUsers: IParticipants_DrawVO[] = await conn("participants_draw")
+      const responseUsers: IParticipants_DrawVO[] = await conn(
+        "participants_draw"
+      )
         .select("*")
-        .where("users_user_id","=",`${participant_ruffleVO.getUsers_user_id()}`)
+        .where(
+          "users_user_id",
+          "=",
+          `${participant_ruffleVO.getUsers_user_id()}`
+        )
         .where("status", "=", "sold")
         .where("deleted_at", null)
         .limit(1);
 
       const responseRuffles: IRaffles[] = await conn("raffles")
         .select("*")
-        .where("raffle_id","=",`${participant_ruffleVO.getRaffles_raffle_id()}`)
+        .where(
+          "raffle_id",
+          "=",
+          `${participant_ruffleVO.getRaffles_raffle_id()}`
+        )
         .where("status", "=", "active")
         .where("deleted_at", null)
         .limit(1);
-      const responseRafflesQuotas: IQuotas_Raffle[] = await conn("quotas_raffle")
+      const responseRafflesQuotas: IQuotas_Raffle[] = await conn(
+        "quotas_raffle"
+      )
         .select("*")
-        .where("quota_raffle_id","=",`${participant_ruffleVO.getQuotas_raffle_quota_raffle_id()}`)
+        .where(
+          "quota_raffle_id",
+          "=",
+          `${participant_ruffleVO.getQuotas_raffle_quota_raffle_id()}`
+        )
         .where("deleted_at", null);
 
       let responseDAO = false;
@@ -193,16 +246,18 @@ export default {
   },
   async delete(participant_ruffleVO: Participants_RuffleVO): Promise<boolean> {
     try {
-
       let responseDAO = false;
 
-        const response = await conn("participants_raffle")
-          .update({deleted_at: new Date()})
-          .where("participant_id","=",`${participant_ruffleVO.getParticipant_id()}`)
-          .where("deleted_at", null);
+      const response = await conn("participants_raffle")
+        .update({ deleted_at: new Date() })
+        .where(
+          "participant_id",
+          "=",
+          `${participant_ruffleVO.getParticipant_id()}`
+        )
+        .where("deleted_at", null);
 
-        responseDAO = response == 1 ? true : false;
-      
+      responseDAO = response == 1 ? true : false;
 
       return responseDAO;
     } catch (error) {
@@ -220,7 +275,7 @@ export default {
 	    participants_raffle.status = "resevation" and 
       deleted_at is null and
       HOUR(TIMEDIFF(created_at, now())) >= 12
-    `)
+    `);
 
     setInterval(() => {
       this.updateStatusResevation();

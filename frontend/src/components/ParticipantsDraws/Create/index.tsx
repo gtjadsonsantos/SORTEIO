@@ -76,12 +76,12 @@ export default function Create() {
                     {images.map((image, index) =>
                       image.draws_draw_id == draw.draw_id ? (
                         <Slide index={index} style={{ height: "400px" }}>
-                          <CardMedia
-                            component="img"
+                          <img
+                            style={{objectFit:"scale-down"}}
                             alt={image.name}
                             height="300px"
                             width="300px"
-                            image={image.data_image}
+                            src={image.data_image}
                             title={image.name}
                           />
                         </Slide>

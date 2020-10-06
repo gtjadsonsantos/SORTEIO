@@ -70,6 +70,11 @@ import ParticipantsRaffleCreate from "../ParticipantsRaffles/Create";
 import ParticipantsRaffleUpdate from "../ParticipantsRaffles/Upate";
 import ParticipantsRaffleDelete from "../ParticipantsRaffles/Delete";
 
+import WinnerRaffleList from "../WinnerRaffle/List";
+import WinnerRaffleCreate from "../WinnerRaffle/Create";
+import WinnerRaffleUpdate from "../WinnerRaffle/Update";
+import WinnerRaffleDelete from "../WinnerRaffle/Delete";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -289,6 +294,19 @@ export default function MenuAdmin() {
 
   function handleParticipantsRaffleDelete() {
     dispatch<Action>({ type: "set", state: ParticipantsRaffleDelete });
+  }
+
+  function handleWinnerRaffleList() {
+    dispatch<Action>({ type: "set", state: WinnerRaffleList });
+  }
+  function handleWinnerRaffleCreate() {
+    dispatch<Action>({ type: "set", state: WinnerRaffleCreate });
+  }
+  function handleWinnerRaffleUpdate() {
+    dispatch<Action>({ type: "set", state: WinnerRaffleUpdate });
+  }
+  function handleWinnerRaffleDelete() {
+    dispatch<Action>({ type: "set", state: WinnerRaffleDelete });
   }
 
   return (
@@ -621,19 +639,35 @@ export default function MenuAdmin() {
         {winnersRaffle ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={winnersRaffle} timeout="auto" unmountOnExit>
-        <ListItem button className={classes.nested}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleWinnerRaffleList}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Listar Ganhadores" />
         </ListItem>
-        <ListItem button className={classes.nested}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleWinnerRaffleCreate}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Cadastrar Ganhador" />
         </ListItem>
-        <ListItem button className={classes.nested}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleWinnerRaffleUpdate}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Atualizar Ganhador" />
         </ListItem>
-        <ListItem button className={classes.nested}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleWinnerRaffleDelete}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Deletar Ganhador" />
         </ListItem>

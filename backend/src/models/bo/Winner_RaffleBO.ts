@@ -30,7 +30,7 @@ export default {
     if (responseDAO) {
       responseBO = "Sucesso em criar ganhador";
     } else {
-      responseBO = "Falhou em criar o ganhador ";
+      responseBO = "Falhou em criar o ganhador";
     }
 
     return responseBO;
@@ -42,7 +42,7 @@ export default {
     if (responseDAO) {
       responseBO = "Sucesso em atualizar ganhador";
     } else {
-      responseBO = "Falhou em atualizar o ganhador ";
+      responseBO = "Falhou em atualizar o ganhador";
     }
 
     return responseBO;
@@ -54,7 +54,7 @@ export default {
     if (responseDAO) {
       responseBO = "Sucesso em deletar ganhador";
     } else {
-      responseBO = "Falhou em deletar o ganhador ";
+      responseBO = "Falhou em deletar o ganhador";
     }
 
     return responseBO;

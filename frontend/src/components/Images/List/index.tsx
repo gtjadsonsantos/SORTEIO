@@ -50,11 +50,11 @@ export default function Create() {
         ? images.map((images) => (
             <Card className={classes.root}>
               <CardActionArea>
-                <CardMedia
-                  component="img"
+                <img
+                  style={{objectFit: "scale-down"}}
                   alt={images.name}
                   height="400"
-                  image={images.data_image}
+                  src={images.data_image}
                   title={images.name}
                 />
                 <CardContent>

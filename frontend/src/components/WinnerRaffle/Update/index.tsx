@@ -3,8 +3,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import FileBase64 from "react-file-base64";
-import api, { URL } from "../../../services/api";
-import { IDraw, IParticipants_Draw, IWinner_Draw } from "../../../types";
+import api from "../../../services/api";
+import { IRaffles, IParticipants_Ruffle,IWinner_Raffle } from "../../../types";
 import {
   Button,
   FormControl,
@@ -35,21 +35,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-export default function Delete() {
+export default function Update() {
   const classes = useStyles();
-  const [draws, setDraws] = useState<IDraw[]>([]);
-  const [draw_id, setDraw_Id] = useState<number | undefined>(1);
-  const [participants, setParticipants] = useState<IParticipants_Draw[]>([]);
+  const [raffles, setRaffles] = useState<IRaffles[]>([]);
+  const [raffle_id, setRaffle_Id] = useState<number | undefined>(1);
+  const [participants, setParticipants] = useState<IParticipants_Ruffle[]>([]);
   const [participant_id, setParticiapant_id] = useState<number | undefined>();
-  const [winnerDraw_id, setWinner_id] = useState<number | undefined>();
-  const [winnerDraw, setWinnerDraws] = useState<IWinner_Draw[]>([]);
+  const [winnerRaffle_id, setWinnerRaffle_id] = useState<number | undefined>();
+  const [winnerRaffle, setWinnerRaffle] = useState<IWinner_Raffle[]>([]);
+  const [image, setImage] = useState<string>();
+  const [video, setVideo] = useState<string>();
   const [response, setResponse] = React.useState<JSX.Element>();
-  const [draw_idOpen, setDraw_idOpen] = React.useState(false);
+  const [raffle_idOpen, setRaffle_idOpen] = React.useState(false);
   const [participant_idOpen, setParticipant_idOpen] = useState(false);
-  const [winnerDraw_idOpen, setWinnerDraw_idOpen] = useState(false);
+  const [winnerRaffle_idOpen, setWinnerRaffle_idOpen] = useState(false);
 
-  const handleChangeDraw = (id: number | undefined, index: number) => {
-    setDraw_Id(id);
+  const handleChangeRaffle = (id: number | undefined, index: number) => {
+    setRaffle_Id(id);
   };
 
   const handleChangeParticipant = (id: number | undefined, index: number) => {
@@ -57,43 +59,47 @@ export default function Delete() {
   };
 
   const handleChangeWinnerDraw = (id: number | undefined, index: number) => {
-    setWinner_id(id);
+    setWinnerRaffle_id(id);
   };
 
   useEffect(() => {
     async function getDraws() {
-      const { data } = await api.get("/draws");
+      const { data } = await api.get("/raffles");
 
-      setDraws(data);
+      setRaffles(data);
     }
     getDraws();
   }, []);
   useEffect(() => {
-    async function getWinnerDraws() {
-      const { data } = await api.get("/winners_draws");
+    async function getWinnerRaffles() {
+      const { data } = await api.get("/winners_raffles");
 
-      setWinnerDraws(data);
+      setWinnerRaffle(data);
     }
-    getWinnerDraws();
+    getWinnerRaffles();
   }, []);
 
   useEffect(() => {
     async function getParticipants() {
       const { data } = await api.get(
-        `/join_participants_draws_quotas?draw_id=${draw_id}`
+        `/join_participants_raffles_quotas?raffle_id=${raffle_id}`
       );
 
       setParticipants(data[0]);
     }
     getParticipants();
-  }, [draw_id]);
+  }, [raffle_id]);
 
-  const handleCloseDraw_id = () => {
-    setDraw_idOpen(false);
+  const handlChangeDataImage = (file: any) => {
+    setImage(file.base64);
   };
 
-  const handleOpenDraw_id = () => {
-    setDraw_idOpen(true);
+  const handleCloseRaffle_id = () => {
+    setRaffle_idOpen(false);
+  };
+
+  const handleOpenRaffle_id = () => {
+    setRaffle_idOpen(true);
   };
 
   const handleCloseParticipant_id = () => {
@@ -104,35 +110,29 @@ export default function Delete() {
     setParticipant_idOpen(true);
   };
 
-  const handleCloseWinnerDraw_id = () => {
-    setWinnerDraw_idOpen(false);
+  const handleCloseWinnerRaffle_id = () => {
+    setWinnerRaffle_idOpen(false);
   };
 
-  const handleOpenWinnerDraw_id = () => {
-    setWinnerDraw_idOpen(true);
+  const handleOpenWinnerRaffle_id = () => {
+    setWinnerRaffle_idOpen(true);
   };
 
   async function sendApi() {
-    const response = await fetch(URL + "/winner_draw", {
-      body: JSON.stringify({
-        winner_id: winnerDraw_id,
-        
-      }),
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      },
-      method: "DELETE",
-    });
-    const data = await response.json();
+    const payload = {
+      image: image,
+      video: video,
+      winner_id:winnerRaffle_id,
+      participants_raffle_participant_id: participant_id,
+    };
+    const { data } = await api.put("/winner_raffle", payload);
 
-    if (data === "Falhou em deletar o ganhador") {
-      setResponse(<Alert severity="error">{data}</Alert>);
-    } else if (data === "Sucesso em deletar o ganhador") {
+    if (data === "Sucesso em atualizar ganhador") {
       setResponse(<Alert severity="success">{data}</Alert>);
+    } else if (data === "Falhou em atualizar o ganhador") {
+      setResponse(<Alert severity="error">{data}</Alert>);
     }
   }
-
   return (
     <form
       className={classes.root}
@@ -141,24 +141,24 @@ export default function Delete() {
       autoComplete="off"
     >
       <FormControl className={classes.margin}>
-        <InputLabel id="demo-controlled-open-select-label">Sorteio</InputLabel>
+        <InputLabel id="demo-controlled-open-select-label">Rifas</InputLabel>
         <Select
           style={{ width: "200px" }}
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
-          open={draw_idOpen}
-          onClose={handleCloseDraw_id}
-          onOpen={handleOpenDraw_id}
-          value={draw_id}
+          open={raffle_idOpen}
+          onClose={handleCloseRaffle_id}
+          onOpen={handleOpenRaffle_id}
+          value={raffle_id}
           required={true}
         >
-          {draws.map((draw, index) => (
+          {raffles.map((raffle, index) => (
             <MenuItem
-              key={draw.draw_id}
-              value={draw.draw_id}
-              onClick={() => handleChangeDraw(draw.draw_id, index)}
+              key={raffle.raffle_id}
+              value={raffle.raffle_id}
+              onClick={() => handleChangeRaffle(raffle.raffle_id, index)}
             >
-              {draw.title}
+              {raffle.title}
             </MenuItem>
           ))}
         </Select>
@@ -178,7 +178,7 @@ export default function Delete() {
           required={true}
         >
           {participants.map((participant, index) =>
-            participant.draw_id === draw_id ? (
+            participant.raffle_id === raffle_id ? (
               <MenuItem
                 key={Math.random() * 9999}
                 value={participant.participant_id}
@@ -206,20 +206,25 @@ export default function Delete() {
           style={{ width: "200px" }}
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
-          open={winnerDraw_idOpen}
-          onClose={handleCloseWinnerDraw_id}
-          onOpen={handleOpenWinnerDraw_id}
-          value={winnerDraw_id}
+          open={winnerRaffle_idOpen}
+          onClose={handleCloseWinnerRaffle_id}
+          onOpen={handleOpenWinnerRaffle_id}
+          value={winnerRaffle_id}
           required={true}
         >
-          {winnerDraw.map((winner, index) =>
-            winner.participants_draw_participant_id === participant_id ? (
+          {winnerRaffle.map((winner, index) =>
+            winner.participants_raffle_participant_id === participant_id ? (
               <MenuItem
                 key={Math.random() * 9999}
-                value={winnerDraw_id}
-                onClick={() => handleChangeWinnerDraw(winner.winner_id, index)}
+                value={winnerRaffle_id}
+                onClick={() =>
+                  handleChangeWinnerDraw(
+                    winner.winner_id,
+                    index
+                  )
+                }
               >
-                {`ID GANHADOR: ${winner.winner_id}- ID PARTICIPANTE ${winner.participants_draw_participant_id}`}
+                {`ID GANHADOR: ${winner.winner_id}- ID PARTICIPANTE ${winner.participants_raffle_participant_id}`}
               </MenuItem>
             ) : (
               <div key={Math.random() * 9999} style={{ display: "none" }}></div>
@@ -227,7 +232,18 @@ export default function Delete() {
           )}
         </Select>
       </FormControl>
-
+      <FormControl fullWidth className={classes.margin}>
+        <FileBase64 multiple={false} onDone={handlChangeDataImage} />
+      </FormControl>
+      <FormControl fullWidth className={classes.margin}>
+        <TextField
+          required={true}
+          onChange={(element) => setVideo(element.target.value)}
+          value={video}
+          id="outlined-basic"
+          label="Youtube(URL)"
+        />
+      </FormControl>
       <FormControl fullWidth className={classes.margin}>
         <Button
           variant="contained"
@@ -237,7 +253,7 @@ export default function Delete() {
           style={{ width: "200px" }}
           className={classes.button}
         >
-          Deletar
+          Atualizar
         </Button>
       </FormControl>
       {response}
