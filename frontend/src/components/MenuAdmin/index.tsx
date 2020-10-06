@@ -61,10 +61,14 @@ import ParticipantsDrawCreate from "../ParticipantsDraws/Create";
 import ParticipantsDrawUpdate from "../ParticipantsDraws/Update";
 import ParticipantsDrawDelete from "../ParticipantsDraws/Delete";
 
-import WinnerDrawList from '../WinnerDraw/List'
-import WinnerDrawCreate from '../WinnerDraw/Create'
-import WinnerDrawUpdate from '../WinnerDraw/Update'
-import WinnerDrawDelete from '../WinnerDraw/Delete'
+import WinnerDrawList from "../WinnerDraw/List";
+import WinnerDrawCreate from "../WinnerDraw/Create";
+import WinnerDrawUpdate from "../WinnerDraw/Update";
+import WinnerDrawDelete from "../WinnerDraw/Delete";
+
+import ParticipantsRaffleCreate from "../ParticipantsRaffles/Create";
+import ParticipantsRaffleUpdate from "../ParticipantsRaffles/Upate";
+import ParticipantsRaffleDelete from "../ParticipantsRaffles/Delete";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -267,17 +271,25 @@ export default function MenuAdmin() {
     dispatch<Action>({ type: "set", state: WinnerDrawUpdate });
   }
 
-
   function handleWinnerDrawDelete() {
     dispatch<Action>({ type: "set", state: WinnerDrawDelete });
   }
-  
+
   function handleWinnerDrawList() {
     dispatch<Action>({ type: "set", state: WinnerDrawList });
   }
-  
-  
-  
+
+  function handleParticipantsRaffleCreate() {
+    dispatch<Action>({ type: "set", state: ParticipantsRaffleCreate });
+  }
+
+  function handleParticipantsRaffleUpdate() {
+    dispatch<Action>({ type: "set", state: ParticipantsRaffleUpdate });
+  }
+
+  function handleParticipantsRaffleDelete() {
+    dispatch<Action>({ type: "set", state: ParticipantsRaffleDelete });
+  }
 
   return (
     <List
@@ -410,21 +422,36 @@ export default function MenuAdmin() {
         {winnersDraw ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={winnersDraw} timeout="auto" unmountOnExit>
-        <ListItem button className={classes.nested} onClick={handleWinnerDrawList}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleWinnerDrawList}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Listar Ganhadores" />
         </ListItem>
-        <ListItem button className={classes.nested} onClick={handleWinnerDrawCreate}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleWinnerDrawCreate}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Cadastrar Ganhador" />
         </ListItem>
-        <ListItem button className={classes.nested} onClick={handleWinnerDrawUpdate}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleWinnerDrawUpdate}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Atualizar Ganhador" />
         </ListItem>
         <ListItem button className={classes.nested}>
           <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Deletar Ganhador" onClick={handleWinnerDrawDelete} />
+          <ListItemText
+            primary="Deletar Ganhador"
+            onClick={handleWinnerDrawDelete}
+          />
         </ListItem>
       </Collapse>
 
@@ -554,7 +581,7 @@ export default function MenuAdmin() {
         </ListItem>
       </Collapse>
 
-      <ListItem button onClick={handleClickParticipantsDraw}>
+      <ListItem button onClick={handleClickParticipantsRaffle}>
         <ListItemIcon>
           <PersonIcon />
         </ListItemIcon>
@@ -562,21 +589,27 @@ export default function MenuAdmin() {
         {participantsRaffle ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={participantsRaffle} timeout="auto" unmountOnExit>
-        <ListItem button className={classes.nested}>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Listar Participantes" />
-        </ListItem>
-        <ListItem button className={classes.nested}>
+        <ListItem
+          button
+          className={classes.nested}
+          onClick={handleParticipantsRaffleCreate}
+        >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Cadastrar Participantes" />
         </ListItem>
         <ListItem button className={classes.nested}>
           <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Atualizar Participantes" />
+          <ListItemText
+            primary="Atualizar Participantes"
+            onClick={handleParticipantsRaffleUpdate}
+          />
         </ListItem>
         <ListItem button className={classes.nested}>
           <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Deletar Participantes" />
+          <ListItemText
+            primary="Deletar Participantes"
+            onClick={handleParticipantsRaffleDelete}
+          />
         </ListItem>
       </Collapse>
 

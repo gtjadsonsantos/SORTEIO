@@ -117,9 +117,12 @@ export interface IUser {
     users_user_id?: number;
     created_at?: string;
     quotas_raffle_quota_raffle_id?: number;
+    quota_raffle_id?:number;
+    raffle_id?:number;
     raffles_raffle_id?: number;
     status?: string;
     deleted_at?: string;
+    number?:string
   }
   
 export interface IParticipants_Draw {
