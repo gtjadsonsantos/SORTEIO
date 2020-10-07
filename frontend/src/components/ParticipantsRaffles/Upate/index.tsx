@@ -40,7 +40,6 @@ export default function Update() {
   const [participant_id, setParticipan_id] = useState<number | undefined>();
   const [quotas_raffle_quota_raffle_id,setRaffle_Quotas_Raffle_Quota_Id] = useState<number | undefined>();
   const [users_user_id, setUsers_User_Id] = useState<number | undefined>();
-  const [users, setUsers] = useState<IUser[]>([]);
   const [raffle_idOpen, setRaffle_idOpen] = React.useState(false);
   const [participant_idOpen, setParticipant_idOpen] = useState(false);
   const [statusOpen, setStatusOpen] = useState(false);

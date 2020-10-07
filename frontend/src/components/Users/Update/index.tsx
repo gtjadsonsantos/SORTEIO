@@ -1,18 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import FileBase64 from "react-file-base64";
+
 import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import api from "../../../services/api";
-import {
-  Button,
-  FormControl,
-  Input,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@material-ui/core";
+import { Button, FormControl } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,16 +58,15 @@ export default function Update() {
     } else if (data === "Usuario não existe na base de dados") {
       setResponse(<Alert severity="error">{data}</Alert>);
     } else if (data === "cpf é inválido") {
-        setResponse(<Alert severity="error">{data}</Alert>);
-      }
+      setResponse(<Alert severity="error">{data}</Alert>);
+    }
   }
 
-  useEffect(()=>{
-      const sessionData:any = sessionStorage.getItem("data")
-      const data = JSON.parse(sessionData)
-      setUser_Id(data.user_id)
-
-  },[])
+  useEffect(() => {
+    const sessionData: any = sessionStorage.getItem("data");
+    const data = JSON.parse(sessionData);
+    setUser_Id(data.user_id);
+  }, []);
   return (
     <form
       className={classes.root}

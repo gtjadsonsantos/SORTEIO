@@ -8,8 +8,6 @@ import { IDraw, IParticipants_Draw, IWinner_Draw } from "../../../types";
 import {
   Button,
   FormControl,
-  Input,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -122,7 +120,7 @@ export default function Update() {
     const payload = {
       image: image,
       video: video,
-      winner_id:winnerDraw_id,
+      winner_id: winnerDraw_id,
       participants_draw_participant_id: participant_id,
     };
     const { data } = await api.put("/winner_draw", payload);
@@ -217,12 +215,7 @@ export default function Update() {
               <MenuItem
                 key={Math.random() * 9999}
                 value={winnerDraw_id}
-                onClick={() =>
-                  handleChangeWinnerDraw(
-                    winner.winner_id,
-                    index
-                  )
-                }
+                onClick={() => handleChangeWinnerDraw(winner.winner_id, index)}
               >
                 {`ID GANHADOR: ${winner.winner_id}- ID PARTICIPANTE ${winner.participants_draw_participant_id}`}
               </MenuItem>

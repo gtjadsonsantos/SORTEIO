@@ -11,7 +11,6 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   Typography,
 } from "@material-ui/core";
 import {
@@ -74,7 +73,7 @@ export default function Create() {
                 >
                   <Slider>
                     {images.map((image, index) =>
-                      image.draws_draw_id == draw.draw_id ? (
+                      image.draws_draw_id === draw.draw_id ? (
                         <Slide index={index} style={{ height: "400px" }}>
                           <img
                             style={{objectFit:"scale-down"}}
@@ -124,7 +123,7 @@ export default function Create() {
                       height: "20px",
                       borderRadius: "5.1em",
                       backgroundColor: `${
-                        draw.status == "active" ? "green" : "red"
+                        draw.status === "active" ? "green" : "red"
                       }`,
                     }}
                   />

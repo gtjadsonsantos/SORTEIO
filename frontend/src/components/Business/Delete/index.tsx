@@ -9,7 +9,7 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
-import { IBusiness, ISocial } from "../../../types";
+import { IBusiness } from "../../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

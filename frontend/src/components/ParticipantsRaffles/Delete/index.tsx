@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import api, { URL } from "../../../services/api";
-import { IRaffles, IParticipants_Ruffle, IUser } from "../../../types";
+import { IRaffles, IParticipants_Ruffle } from "../../../types";
 import {
   Button,
   FormControl,
-  Input,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -56,9 +53,7 @@ export default function Update() {
   const handleChangeParticipant = (id: number | undefined, index: number) => {
     setParticipan_id(id);
     setUsers_User_Id(participants[index].users_user_id);
-    setRaffle_Quotas_Raffle_Quota_Id(
-      participants[index].quota_raffle_id
-    );
+    setRaffle_Quotas_Raffle_Quota_Id(participants[index].quota_raffle_id);
   };
 
   useEffect(() => {

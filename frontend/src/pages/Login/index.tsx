@@ -15,7 +15,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import api from "../../services/api";
-import History from '../../global/History'
 
 function Copyright() {
   return (

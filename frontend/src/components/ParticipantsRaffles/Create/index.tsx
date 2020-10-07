@@ -107,7 +107,7 @@ export default function Create() {
                       height: "20px",
                       borderRadius: "5.1em",
                       backgroundColor: `${
-                        raffle.status == "active" ? "green" : "red"
+                        raffle.status === "active" ? "green" : "red"
                       }`,
                     }}
                   />

@@ -158,6 +158,7 @@ export interface Ijoin_winners_participants_users_quotas_draw {
   image?: string;
   video?: string;
   name?: string;
+  number?:string
   address?: string;
   date_draw?: string;
   title?: string;
@@ -169,6 +170,7 @@ export interface Ijoin_raffles_participants_users_quotas_raffles {
   participants_raffle_participant_id?: number;
   image?: string;
   video?: string;
+  number?:string
   name?: string;
   address?: string;
   date_raffle?: string;

@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
-import api, { URL } from "../../../services/api";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@material-ui/core";
-import { IBusiness, ISocial } from "../../../types";
+
+import api from "../../../services/api";
+import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
+import { IBusiness } from "../../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +29,6 @@ export default function Create() {
   const classes = useStyles();
   const [business, setBusiness] = useState<IBusiness[]>([]);
   const [business_id, setBusiness_Id] = useState<number | undefined>();
-  const [response, setResponse] = React.useState<JSX.Element>();
   const [business_idOpen, setBusiness_idOpen] = useState<boolean>(false);
 
   const handleChangeBusiness = (id: number | undefined, index: number) => {

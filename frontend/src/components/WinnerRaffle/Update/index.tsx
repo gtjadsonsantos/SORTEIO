@@ -4,12 +4,10 @@ import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import FileBase64 from "react-file-base64";
 import api from "../../../services/api";
-import { IRaffles, IParticipants_Ruffle,IWinner_Raffle } from "../../../types";
+import { IRaffles, IParticipants_Ruffle, IWinner_Raffle } from "../../../types";
 import {
   Button,
   FormControl,
-  Input,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -122,7 +120,7 @@ export default function Update() {
     const payload = {
       image: image,
       video: video,
-      winner_id:winnerRaffle_id,
+      winner_id: winnerRaffle_id,
       participants_raffle_participant_id: participant_id,
     };
     const { data } = await api.put("/winner_raffle", payload);
@@ -217,12 +215,7 @@ export default function Update() {
               <MenuItem
                 key={Math.random() * 9999}
                 value={winnerRaffle_id}
-                onClick={() =>
-                  handleChangeWinnerDraw(
-                    winner.winner_id,
-                    index
-                  )
-                }
+                onClick={() => handleChangeWinnerDraw(winner.winner_id, index)}
               >
                 {`ID GANHADOR: ${winner.winner_id}- ID PARTICIPANTE ${winner.participants_raffle_participant_id}`}
               </MenuItem>

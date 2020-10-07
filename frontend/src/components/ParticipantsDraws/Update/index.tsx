@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import api from "../../../services/api";
 import { IDraw, IParticipants_Draw, IUser } from "../../../types";
 import {
   Button,
   FormControl,
-  Input,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -42,10 +39,9 @@ export default function Update() {
   const [participants, setParticipants] = useState<IParticipants_Draw[]>([]);
   const [participant_id, setParticipan_id] = useState<number | undefined>();
   const [draw_quotas_draw_quota_id, setDraw_Quotas_Draw_Quota_Id] = useState<
-number | undefined
+    number | undefined
   >();
   const [users_user_id, setUsers_User_Id] = useState<number | undefined>();
-  const [users, setUsers] = useState<IUser[]>([]);
   const [draw_idOpen, setDraw_idOpen] = React.useState(false);
   const [participant_idOpen, setParticipant_idOpen] = useState(false);
   const [statusOpen, setStatusOpen] = useState(false);
@@ -58,7 +54,7 @@ number | undefined
   const handleChangeParticipant = (id: number | undefined, index: number) => {
     setParticipan_id(id);
     setUsers_User_Id(participants[index].users_user_id);
-    
+
     setDraw_Quotas_Draw_Quota_Id(participants[index].draw_quota_id);
   };
 
@@ -129,15 +125,15 @@ number | undefined
       status,
     };
 
-    const {data } = await api.put("/participant_draw",payload)
+    const { data } = await api.put("/participant_draw", payload);
 
     if (data === "Sucesso em atualizar o participante") {
-      setResponse(<Alert severity="success"  >{data}</Alert>)
-    }else if (data === "Falhou em atualizar o participante") {
-      setResponse(<Alert severity="error" >{data}</Alert>)
+      setResponse(<Alert severity="success">{data}</Alert>);
+    } else if (data === "Falhou em atualizar o participante") {
+      setResponse(<Alert severity="error">{data}</Alert>);
     }
 
-    console.log(data)
+    console.log(data);
   }
 
   return (
@@ -193,7 +189,11 @@ number | undefined
                   handleChangeParticipant(participant.participant_id, index)
                 }
               >
-                {`${participant.number}-${participant.status === "sold"?"Pago":""}${participant.status === "resevation"?"Reservado":""}${participant.status === "free"?"Livre":""}`}
+                {`${participant.number}-${
+                  participant.status === "sold" ? "Pago" : ""
+                }${participant.status === "resevation" ? "Reservado" : ""}${
+                  participant.status === "free" ? "Livre" : ""
+                }`}
               </MenuItem>
             ) : (
               <div key={Math.random() * 9999} style={{ display: "none" }}></div>

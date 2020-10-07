@@ -75,6 +75,9 @@ import WinnerRaffleCreate from "../WinnerRaffle/Create";
 import WinnerRaffleUpdate from "../WinnerRaffle/Update";
 import WinnerRaffleDelete from "../WinnerRaffle/Delete";
 
+import ReportsDraw from "../Reports/Draws"
+import ReportsRaffle from "../Reports/Raffles"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -307,6 +310,12 @@ export default function MenuAdmin() {
   }
   function handleWinnerRaffleDelete() {
     dispatch<Action>({ type: "set", state: WinnerRaffleDelete });
+  }
+  function handleReportsDraw() {
+    dispatch<Action>({ type: "set", state: ReportsDraw });
+  }
+  function handleReportsRaffle() {
+    dispatch<Action>({ type: "set", state: ReportsRaffle });
   }
 
   return (
@@ -789,11 +798,11 @@ export default function MenuAdmin() {
         {reports ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={reports} timeout="auto" unmountOnExit>
-        <ListItem button className={classes.nested}>
+        <ListItem button className={classes.nested} onClick={handleReportsDraw} >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Sorteios" />
         </ListItem>
-        <ListItem button className={classes.nested}>
+        <ListItem button className={classes.nested} onClick={handleReportsRaffle}>
           <ListItemIcon></ListItemIcon>
           <ListItemText primary="Rifas" />
         </ListItem>
