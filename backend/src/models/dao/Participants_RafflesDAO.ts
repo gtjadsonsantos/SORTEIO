@@ -51,6 +51,7 @@ export default {
     SELECT
       raffles.raffle_id,
       participants_raffle.participant_id,
+      participants_raffle.created_at,
       quotas_raffle.quota_raffle_id,
       users.name,
       participants_raffle.status,
@@ -266,19 +267,20 @@ export default {
     }
   },
   async updateStatusResevation(): Promise<void> {
-    await conn.raw(`
-    UPDATE 
-      participants_raffle
-    SET
-      participants_raffle.deleted_at = now()
-    WHERE 
-	    participants_raffle.status = "resevation" and 
-      deleted_at is null and
-      HOUR(TIMEDIFF(created_at, now())) >= 12
-    `);
-
-    setInterval(() => {
-      this.updateStatusResevation();
-    }, 43200000);
-  },
+    // O CLIENTE DISSE QUE ESSA FUNCIONALIDADE NÃO É INTERESSANTE
+    //await conn.raw(`
+    //UPDATE 
+    //  participants_raffle
+    //SET
+    //  participants_raffle.deleted_at = now()
+    //WHERE 
+	  //  participants_raffle.status = "resevation" and 
+    //  deleted_at is null and
+    //  HOUR(TIMEDIFF(created_at, now())) >= 12
+    //`);
+//
+    //setInterval(() => {
+    //  this.updateStatusResevation();
+    //}, 43200000);
+    },
 };

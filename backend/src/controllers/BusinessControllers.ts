@@ -35,6 +35,7 @@ export default {
       businessVO.setPhone(business.phone);
       businessVO.setRegulation(business.regulation);
       businessVO.setSocial(business.social);
+      businessVO.setBanner(business.banner)
 
       const response = await BusinessBO.create(businessVO);
       res.json(response);
@@ -54,6 +55,7 @@ export default {
       businessVO.setPhone(business.phone);
       businessVO.setRegulation(business.regulation);
       businessVO.setSocial(business.social);
+      businessVO.setBanner(business.banner)
 
       const response = await BusinessBO.update(businessVO);
       res.json(response);

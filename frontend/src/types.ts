@@ -87,6 +87,7 @@ export interface IBusiness {
   phone?: string;
   deleted_at?: string;
   regulation?: string;
+  banner?:string
 }
 
 export interface IQuotas_Raffle {
@@ -127,6 +128,7 @@ export interface IParticipants_Draw {
   participant_id?: number;
   draw_quota_id?: number;
   users_user_id?: number;
+  created_at?:string;
   name?: string;
   status?: string;
   number?: string;

@@ -83,6 +83,7 @@ export interface IBusiness {
   phone?: string;
   deleted_at?: string;
   regulation?: string;
+  banner?:string
 }
 
 export interface IQuotas_Raffle {

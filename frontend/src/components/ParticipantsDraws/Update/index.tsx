@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import api from "../../../services/api";
 import { IDraw, IParticipants_Draw, IUser } from "../../../types";
+import Timer from '../../../global/Timer'
 import {
   Button,
   FormControl,
@@ -189,11 +190,7 @@ export default function Update() {
                   handleChangeParticipant(participant.participant_id, index)
                 }
               >
-                {`${participant.number}-${
-                  participant.status === "sold" ? "Pago" : ""
-                }${participant.status === "resevation" ? "Reservado" : ""}${
-                  participant.status === "free" ? "Livre" : ""
-                }`}
+                {`${participant.number}-${participant.status === "sold" ? "Pago" : ""}${participant.status === "resevation" ? "Reservado" : ""}${participant.status === "free" ? "Livre" : ""}- Horas: ${Timer(new Date(`${participant.created_at}`))?.hours}`}
               </MenuItem>
             ) : (
               <div key={Math.random() * 9999} style={{ display: "none" }}></div>

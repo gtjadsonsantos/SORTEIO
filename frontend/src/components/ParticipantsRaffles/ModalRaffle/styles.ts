@@ -25,9 +25,6 @@ export const ContainerRow = styled.div`
   height: 700px;
   align-items: center;
 
-  @media only screen and (min-width: 500px) {
-      flex-direction: column;
-  }
 `;
 
 export const ContainerRowInfo = styled.div`
@@ -42,14 +39,21 @@ export const ContainerRowInfo = styled.div`
 
 `;
 export const ContainerSlider = styled.div`
-  max-width: 720px;
   width: 100%;
-  height: 660px;
+  height: 100%;
+  object-fit: cover;
   overflow-x: scroll;
   display: flex;
   ::-webkit-scrollbar {
     width: 10px;
   }
+`;
+
+export const ImageSlider = styled.img`
+  object-fit: scale-down;
+  width: 100%;
+  height: 100%;
+  display: block;
 `;
 
 export const ContainerColumn = styled.div`

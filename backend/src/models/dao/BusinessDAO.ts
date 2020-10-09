@@ -20,6 +20,8 @@ export default {
       business.setPhone(item.phone);
       business.setRegulation(item.regulation);
       business.setSocial(item.social);
+      business.setBanner(item.banner)
+
 
       listBusinessVO.push(business);
     });
@@ -43,6 +45,7 @@ export default {
       business.setPhone(item.phone);
       business.setRegulation(item.regulation);
       business.setSocial(item.social);
+      business.setBanner(item.banner)
 
       listBusinessVO.push(business);
     });
@@ -59,6 +62,7 @@ export default {
         social: businessVO.getSocial(),
         phone: businessVO.getPhone(),
         regulation: businessVO.getRegulation(),
+        banner: businessVO.getBanner()
       });
 
       return true;
@@ -77,6 +81,8 @@ export default {
           social: businessVO.getSocial(),
           phone: businessVO.getPhone(),
           regulation: businessVO.getRegulation(),
+          banner: businessVO.getBanner()
+
         })
         .where("business_id", "=", `${businessVO.getBusiness_id()}`)
         .where("deleted_at",null)

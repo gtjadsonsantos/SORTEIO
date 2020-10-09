@@ -78,8 +78,8 @@ export default function Create() {
                           <img
                             style={{objectFit:"scale-down"}}
                             alt={image.name}
-                            height="300px"
-                            width="300px"
+                            height="100%"
+                            width="100%"
                             src={image.data_image}
                             title={image.name}
                           />

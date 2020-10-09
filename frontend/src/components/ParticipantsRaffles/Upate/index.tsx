@@ -11,6 +11,8 @@ import {
   Select,
 } from "@material-ui/core";
 
+import Timer from '../../../global/Timer'
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -176,11 +178,11 @@ export default function Update() {
                   handleChangeParticipant(participant.participant_id, index)
                 }
               >
-                {`${participant.number}-${
-                  participant.status === "sold" ? "Pago" : ""
-                }${participant.status === "resevation" ? "Reservado" : ""}${
-                  participant.status === "free" ? "Livre" : ""
-                }`}
+                {
+                `${participant.number}-${participant.status === "sold" ? "Pago" : ""}
+                ${participant.status === "resevation" ? "Reservado" : ""}${participant.status === "free" ? "Livre" : ""}
+                - Horas: ${Timer(new Date(`${participant.created_at}`))?.hours}
+                `}
               </MenuItem>
             ) : (
               <div key={Math.random() * 9999} style={{ display: "none" }}></div>

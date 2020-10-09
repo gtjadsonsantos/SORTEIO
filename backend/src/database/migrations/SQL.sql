@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS participants_draw (
 CREATE TABLE IF NOT EXISTS images (
   image_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name LONGTEXT NOT NULL,
-  data_image TEXT NOT NULL,
+  data_image LONGTEXT NOT NULL,
   created_at TIMESTAMP NOT NULL,
   deleted_at TIMESTAMP NULL,
   draws_draw_id INT NOT NULL,
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS banks_accounts (
   agency VARCHAR(255) NOT NULL,
   number_account VARCHAR(255) NOT NULL,
   created_at TIMESTAMP NOT NULL,
-  image TEXT NOT NULL,
+  image LONGTEXT  NOT NULL,
   cpf VARCHAR(11) NULL,
   cnpj VARCHAR(14) NULL,
   deleted_at TIMESTAMP NULL
@@ -130,16 +130,16 @@ CREATE TABLE IF NOT EXISTS business (
   business_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   cnpj VARCHAR(14) NOT NULL,
   fantasy_name VARCHAR(255) NOT NULL,
-  logo TEXT NOT NULL,
+  logo LONGTEXT NOT NULL,
   social TEXT NOT NULL,
   phone VARCHAR(11) NOT NULL,
   deleted_at TIMESTAMP NULL,
+  banner LONGTEXT,
   regulation TEXT NULL 
 );
 
 
-INSERT INTO (cpf,email,phone,password,created_at,type,name,address) 
-values ("00000000000","pilitandopremios@pilitandopremios.com.br","48000000000","f4932tjip2n34kgkjwi4jgijasv",now(),"admin","Anderson","Florianópolis");
+INSERT INTO users (cpf,email,phone,password,created_at,type,name,address) values ("00000000000","pilitandopremios@pilitandopremios.com.br","48000000000","f4932tjip2n34kgkjwi4jgijasv",now(),"admin","Anderson","Florianópolis");
 
 
 INSERT INTO draw_quotas(number, created_at) VALUES ("000",now());

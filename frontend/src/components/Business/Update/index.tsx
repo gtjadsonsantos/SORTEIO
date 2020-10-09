@@ -36,10 +36,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Create() {
   const classes = useStyles();
   const [business, setBusiness] = useState<IBusiness[]>([]);
-  const [business_id, setBusiness_Id] = useState<number | undefined>();
+  const [business_id, setBusiness_Id] = useState<number | undefined>(0);
   const [cnpj, setCnpj] = useState<string | undefined>();
   const [fantasy_name, setFantasyName] = useState<string | undefined>();
   const [logo, setLogo] = useState<string | undefined>();
+  const [banner,setBanner] = useState<string|undefined>()
   const [phone, setPhone] = useState<string | undefined>();
   const [regulation, setRegulation] = useState<string | undefined>();
   const [facebook, setFacebook] = useState<string | undefined>();
@@ -51,6 +52,9 @@ export default function Create() {
   const handlChangeLogo = (file: any) => {
     setLogo(file.base64);
   };
+  const handlChangeBanner = (file: any) => {
+    setBanner(file.base64);
+  };
 
   const handleChangeBusiness = (id: number | undefined, index: number) => {
     setBusiness_Id(id);
@@ -59,6 +63,7 @@ export default function Create() {
     setPhone(business[index].phone);
     setRegulation(business[index].regulation);
     setLogo(business[index].logo);
+    setBanner(business[index].banner)
 
     const socials: ISocial = JSON.parse(`${business[index].social}`);
 
@@ -88,9 +93,10 @@ export default function Create() {
       cnpj,
       fantasy_name,
       logo,
+      banner,
       phone,
       regulation,
-      social: `{"facebook":"${facebook}","whatsapp":"${whatsapp}","instagram":"${instagram}"}`,
+      social:  `${facebook},${whatsapp},${instagram}`
     };
 
     const { data } = await api.put("/business", payload);
@@ -156,6 +162,10 @@ export default function Create() {
       <FormControl fullWidth className={classes.margin}>
         <InputLabel id="demo-controlled-open-select-label">Logo</InputLabel>
         <FileBase64 multiple={false} onDone={handlChangeLogo} />
+      </FormControl>
+      <FormControl fullWidth className={classes.margin}>
+        <InputLabel id="demo-controlled-open-select-label">Banner</InputLabel>
+        <FileBase64 multiple={false} onDone={handlChangeBanner} />
       </FormControl>
       <FormControl fullWidth className={classes.margin}>
         <TextField

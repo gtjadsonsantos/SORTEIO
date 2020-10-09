@@ -34,6 +34,7 @@ import {
   ContainerConfirmation,
   ButtonConfirmation,
   ContainerRowInfo,
+  ImageSlider
 } from "./styles";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
@@ -119,7 +120,7 @@ export default function MoadalRaffle() {
         setShowTime(`Encerrado`);
       } else {
         setShowTime(
-          `Encerra em  Dias: ${dateResult.days} Horas: ${dateResult.hours} Minutos: ${dateResult.minutes}`
+          `Dias: ${dateResult.days} Horas: ${dateResult.hours} Minutos: ${dateResult.minutes}`
         );
       }
     }, 1000);
@@ -279,9 +280,8 @@ export default function MoadalRaffle() {
       </Header>
       <ContainerRow>
         <ContainerSlider>
-          <img
+          <ImageSlider
             src={raffle?.image}
-            style={{ width: "100%", height: "90%", objectFit: "scale-down" }}
           />
         </ContainerSlider>
         <ContainerColumn>

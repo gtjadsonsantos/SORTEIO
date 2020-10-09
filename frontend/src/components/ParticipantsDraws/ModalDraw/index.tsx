@@ -34,6 +34,7 @@ import {
   ContainerConfirmation,
   ButtonConfirmation,
   ContainerRowInfo,
+  ImageSlider
 } from "./styles";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
@@ -113,7 +114,7 @@ export default function MoadalDraw() {
         setShowTime(`Encerrado`);
       } else {
         setShowTime(
-          `Encerra em  Dias: ${dateResult.days} Horas: ${dateResult.hours} Minutos: ${dateResult.minutes}`
+          `Dias: ${dateResult.days} Horas: ${dateResult.hours} Minutos: ${dateResult.minutes}`
         );
       }
     }, 1000);
@@ -273,9 +274,8 @@ export default function MoadalDraw() {
         <ContainerSlider>
           {images.map((image, index) =>
             image.draws_draw_id == draw_id ? (
-              <img
+              <ImageSlider
                 src={image.data_image}
-                style={{ width: "100%", height: "90%" }}
               />
             ) : (
               <></>

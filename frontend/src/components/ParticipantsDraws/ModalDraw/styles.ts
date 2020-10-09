@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 800px;
+  height: 100%;
 `;
 export const Title = styled.h1`
   font-weight: 700;
@@ -22,12 +22,10 @@ export const Header = styled.header`
 export const ContainerRow = styled.div`
   display: flex;
   margin-top: 90px;
-  height: 700px;
+  height: 100%;
   align-items: center;
+  
 
-  @media only screen and (min-width: 500px) {
-      flex-direction: column;
-  }
 `;
 
 export const ContainerRowInfo = styled.div`
@@ -36,26 +34,30 @@ export const ContainerRowInfo = styled.div`
   height: 700px;
   align-items: center;
   @media only screen and (min-width: 500px) {
-    flex-wrap: wrap;     
+    flex-wrap: wrap;
   }
-
-
 `;
 export const ContainerSlider = styled.div`
-  max-width: 720px;
   width: 100%;
-  height: 660px;
+  height: 100%;
+  object-fit: cover;
+
   overflow-x: scroll;
   display: flex;
   ::-webkit-scrollbar {
     width: 10px;
   }
 `;
-
+export const ImageSlider = styled.img`
+  object-fit: scale-down;
+  width: 100%;
+  height: 100%;
+  display: block;
+`;
 export const ContainerColumn = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 500px;
   width: 100%;
   align-items: center;
 `;
@@ -64,10 +66,11 @@ export const ContainerInfoRow = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
+  height: 100%;
 
   @media only screen and (min-width: 500px) {
-   justify-content: space-evenly;
-   width: 80%;
+    justify-content: space-evenly;
+    width: 80%;
   }
 `;
 
@@ -154,7 +157,6 @@ export const ContainerQuotas = styled.div`
   @media only screen and (min-width: 500px) {
     margin-top: 250px;
   }
-
 `;
 export const QuotasHeader = styled.div`
   width: 100%;
@@ -171,50 +173,50 @@ export const ContainerButtonsFilter = styled.div`
 `;
 
 export const ButtonsFilter = styled.button`
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
   height: 50px;
   width: 150px;
   cursor: pointer;
-  color:#fff;
+  color: #fff;
   border: 1px solid;
   font-size: 16px;
   line-height: 1.5;
-`
+`;
 
-export const ContinerQuotasShow = styled.div `
-  display:flex;
-  flex-wrap:wrap;
+export const ContinerQuotasShow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 40px;
-  justify-content:center;
+  justify-content: center;
   min-height: 200px;
-`
+`;
 export const ButtonQuota = styled.button`
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
   height: 38px;
   width: 53px;
   cursor: pointer;
-  color:#fff;
+  color: #fff;
   border: 1px solid;
   font-size: 16px;
   line-height: 1.5;
-`
-export const ContainerConfirmation = styled.div `
-  bottom: 0px ;
-  display: ${props => props.length > 0?"flex":"none"};
-  position:fixed;
+`;
+export const ContainerConfirmation = styled.div`
+  bottom: 0px;
+  display: ${(props) => (props.length > 0 ? "flex" : "none")};
+  position: fixed;
   background-color: #fff;
   height: 120px;
   width: 100%;
-  align-items:center;
+  align-items: center;
   justify-content: space-around;
- `
- export const ButtonConfirmation = styled.button`
- background-color: yellow;
- height: 50px;
- width: 150px;
- cursor: pointer;
- color:#000;
- border: 0px solid;
- font-size: 16px;
- line-height: 1.5;
-`
+`;
+export const ButtonConfirmation = styled.button`
+  background-color: yellow;
+  height: 50px;
+  width: 150px;
+  cursor: pointer;
+  color: #000;
+  border: 0px solid;
+  font-size: 16px;
+  line-height: 1.5;
+`;

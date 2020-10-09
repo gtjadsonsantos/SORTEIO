@@ -43,6 +43,7 @@ export default {
       draws.draw_id,
       participants_draw.participant_id,
       draw_quotas.draw_quota_id,
+      participants_draw.created_at,
       users.name,
       participants_draw.status,
       draw_quotas.number,
@@ -236,19 +237,19 @@ export default {
     }
   },
   async updateStatusResevation(): Promise<void> {
-   
-    await conn.raw(`
-    UPDATE 
-      participants_draw
-    SET
-      participants_draw.deleted_at = now()
-    WHERE 
-	    participants_draw.status = 'resevation' and 
-      deleted_at is null and
-      HOUR(TIMEDIFF(created_at, now())) >= 12;
-    `)
-    setInterval(() => {
-      this.updateStatusResevation();
-    }, 43200000);
+    // O CLIENTE COMENTOU QUE ESSA FUNCIONALIDADE NÃO É INTERESSANTE
+    //await conn.raw(`
+    //UPDATE 
+    //  participants_draw
+    //SET
+    //  participants_draw.deleted_at = now()
+    //WHERE 
+	  //  participants_draw.status = 'resevation' and 
+    //  deleted_at is null and
+    //  HOUR(TIMEDIFF(created_at, now())) >= 12;
+    //`)
+    //setInterval(() => {
+    //  this.updateStatusResevation();
+    //}, 43200000);
   },
 };

@@ -20,8 +20,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://pilotandomotos.com.br">
-        https://pilotandomotos.com.br
+      <Link color="inherit" href="https://pilotandopremios.com.br">
+        https://pilotandopremios.com.br
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

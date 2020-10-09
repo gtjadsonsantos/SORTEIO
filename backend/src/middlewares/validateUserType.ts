@@ -10,7 +10,7 @@ async function validateJWT(req: Request, res: Response, next: NextFunction) {
 
     const { usertype } = decode;
   
-    if (usertype == "comum") {
+    if (usertype == "admin") {
       next();
     } else {
       res.status(401).send({ status: "Não autorizado" });
