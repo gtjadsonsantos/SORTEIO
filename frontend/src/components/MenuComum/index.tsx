@@ -79,6 +79,7 @@ import WinnerRaffleDelete from "../WinnerRaffle/Delete";
 import ReportsDraw from "../Reports/Draws";
 import ReportsRaffle from "../Reports/Raffles";
 
+import MyShopping from '../MyShopping'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -320,6 +321,10 @@ export default function MenuComum() {
     dispatch<Action>({ type: "set", state: ReportsRaffle });
   }
 
+  function handleMyShopping(){
+    dispatch<Action>({ type: "set", state: MyShopping });
+
+  }
   return (
     <List
       component="nav"
@@ -399,6 +404,12 @@ export default function MenuComum() {
         </ListItem>
       </Collapse>
 
+      <ListItem button onClick={handleMyShopping}>
+        <ListItemIcon>
+          <AccountBalanceIcon />
+        </ListItemIcon>
+        <ListItemText primary="Minhas Compras" />
+      </ListItem>
       <ListItem button onClick={handleClickBanks}>
         <ListItemIcon>
           <AccountBalanceIcon />

@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ForgoutPassword() {
   const classes = useStyles();
   const [cpf, setCpf] = useState("");
+  const [email, setEmail] = useState("");
   const [responseLogin, setResponseLogin] = useState<JSX.Element>();
 
   // const [responseLogin, setResponseLogin] = useState<JSX.Element>();
@@ -59,6 +60,7 @@ export default function ForgoutPassword() {
   async function handleLogin() {
     const payload = JSON.stringify({
       cpf,
+      email,
     });
 
     if (cpf.length === 11) {
@@ -72,7 +74,7 @@ export default function ForgoutPassword() {
         setResponseLogin(<Alert severity="success">{data}</Alert>);
       } else if (data === "O cpf informado é inválido") {
         setResponseLogin(<Alert severity="error">{data}</Alert>);
-      } else if (data === "O cpf informado, não pertence a nenhum usuário") {
+      } else if (data === "O cpf ou email informado, não pertence a nenhum usuário") {
         setResponseLogin(<Alert severity="info">{data}</Alert>);
       }
     }
@@ -105,6 +107,18 @@ export default function ForgoutPassword() {
             }
             name="cpf"
             autoComplete="cpf"
+            autoFocus
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="email"
+            onChange={(element) => setEmail(element.target.value)}
+            name="email"
+            autoComplete="email"
             autoFocus
           />
           {responseLogin}
