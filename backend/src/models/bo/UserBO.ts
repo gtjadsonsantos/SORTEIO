@@ -26,7 +26,7 @@ export default {
 
     if (cpf.isValid(castType)) {
       if (await UserDAO.findOne(userVO)) {
-        response = "Já existe um usuário com este cpf";
+        response = "Já existe um usuário com este cpf ou email";
       } else {
         await UserDAO.create(userVO);
         response = "Usuario criado com sucesso";

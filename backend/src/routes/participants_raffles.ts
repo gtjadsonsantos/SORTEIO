@@ -13,3 +13,4 @@ routePartitipantsRaffle.put("/participant_raffle",validateUserType, Participants
 routePartitipantsRaffle.delete("/participant_raffle",validateUserType, ParticipantsRafflesControllers.delete);
 
 export default routePartitipantsRaffle;
+

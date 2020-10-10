@@ -112,7 +112,7 @@ export default function ForgoutPassword() {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="inherit"
             onClick={handleLogin}
             className={classes.submit}
           >

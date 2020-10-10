@@ -181,7 +181,7 @@ export default function Update() {
                 {
                 `${participant.number}-${participant.status === "sold" ? "Pago" : ""}
                 ${participant.status === "resevation" ? "Reservado" : ""}${participant.status === "free" ? "Livre" : ""}
-                - Horas: ${Timer(new Date(`${participant.created_at}`))?.hours}
+                - Horas: ${Math.abs(Timer(new Date(`${participant.created_at}`))?.hours)}
                 `}
               </MenuItem>
             ) : (

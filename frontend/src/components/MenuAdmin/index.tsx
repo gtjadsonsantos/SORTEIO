@@ -8,6 +8,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
+import ExitToApp from "@material-ui/icons/ExitToApp";
 import PersonIcon from "@material-ui/icons/Person";
 import LensIcon from "@material-ui/icons/Lens";
 import ImageIcon from "@material-ui/icons/Image";
@@ -103,6 +104,7 @@ export default function MenuAdmin() {
   const [images, setImages] = React.useState(false);
   const [users, setUsers] = React.useState(false);
   const [banks, setBanks] = React.useState(false);
+  const usertype:any = JSON.parse(`${sessionStorage.getItem("data")}`)?.type
 
   const dispatch = useDispatch();
 
@@ -323,6 +325,7 @@ export default function MenuAdmin() {
       component="nav"
       aria-labelledby="nested-list-subheader"
       className={classes.root}
+      style={{display: `${usertype === "admin"? "block":"none" }`}}
     >
       <ListItem button onClick={handleClickDraws}>
         <ListItemIcon>
@@ -807,6 +810,14 @@ export default function MenuAdmin() {
           <ListItemText primary="Rifas" />
         </ListItem>
       </Collapse>
+      <ListItem
+          button
+          className={classes.nested}
+          onClick={handleBanksAccountDelete}
+        >
+          <ListItemIcon><ExitToApp/></ListItemIcon>
+          <a href="/" style={{textDecoration: "none",color:"black"}} ><ListItemText primary="Sair" /></a>
+        </ListItem>
     </List>
   );
 }

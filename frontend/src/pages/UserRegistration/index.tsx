@@ -86,7 +86,7 @@ export default function UserRegistration() {
         setResponseLogin(<Alert severity="success">{data}</Alert>);
       } else if (data === "cpf é inválido") {
         setResponseLogin(<Alert severity="error">{data}</Alert>);
-      } else if (data === "Já existe um usuário com este cpf") {
+      } else if (data === "Já existe um usuário com este cpf ou email") {
         setResponseLogin(<Alert severity="info">{data}</Alert>);
       }
     }
@@ -188,7 +188,7 @@ export default function UserRegistration() {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="inherit"
             onClick={handleLogin}
             className={classes.submit}
           >

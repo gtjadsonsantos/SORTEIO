@@ -4,7 +4,7 @@ const transporter = nodemailer.createTransport({
   host: "smtp.umbler.com",
   port: 587,
   secure: false,
-  auth: { user: "suporte@jadsonsantos.com", pass: "suporte@jadson" },
+  auth: { user: process.env.EMAIL || "suporte@jadsonsantos.com", pass:  process.env.PASS || "suporte@jadson" },
 });
 
 export default async function sendMail(password: string | undefined,email:string|undefined): Promise<boolean> {

@@ -71,6 +71,7 @@ export default {
 
     return response;
   },
+ 
   async indexAll(): Promise<Participants_RuffleVO[]> {
     const listParticipants_RuffleVO: Participants_RuffleVO[] = [];
     const listParticipants_Ruffle: IParticipants_Ruffle[] = await conn(

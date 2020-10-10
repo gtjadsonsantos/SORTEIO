@@ -120,7 +120,7 @@ export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const CurrentScreen  = useSelector<IScreenState,IScreenState["screen"]>((state)=> state.screen)
-
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -132,6 +132,8 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
+        style={{backgroundColor: "#000"}}
+        
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >

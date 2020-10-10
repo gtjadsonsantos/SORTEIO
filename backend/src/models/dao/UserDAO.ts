@@ -72,6 +72,7 @@ export default {
     const listUser: IUser[] = await conn("users")
       .select("*")
       .where("cpf", "=", `${userVO.getCpf()}`)
+      .orWhere("email", "=",`${userVO.getEmail()}`)
       .where("deleted_at", null);
 
     return listUser.length > 0 ? true : false;

@@ -159,7 +159,7 @@ export default function Home() {
       <ContainerDraws>
         <TitleDraw id="sorteios">SORTEIOS </TitleDraw>
 
-        <p>Acesso o ambiente para participar dos sorteios</p>
+        <p>Acesse o ambiente para participar dos sorteios</p>
         <ContainerRow>
           {draws.map((draw) => (
             <CardDraw>

@@ -127,11 +127,11 @@ export default function Login() {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="inherit"
             onClick={handleLogin}
             className={classes.submit}
           >
-            Sign In
+            Acessar
           </Button>
           <Grid container>
             <Grid item xs>
