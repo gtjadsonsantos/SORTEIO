@@ -41,6 +41,7 @@ import {
   FooterRow,
   FooterSocial,
   ItemFooter,
+  Hr
 } from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
 import WinnerListDraws from "../../components/WinnerDraw/List";
@@ -225,7 +226,7 @@ export default function Home() {
             </a>
           </FooterSocial>
         </FooterRow>
-        <hr></hr>
+        <Hr/>
         <FooterRow>
           <p style={{ fontFamily: "Roboto,sans-serif", color: "#999999" }}>
             ©{new Date().getFullYear()} Todos os direitos reservados
