@@ -33,6 +33,21 @@ export default {
       console.log(error);
     }
   },
+
+  async indexAllJoinDrawsQuotasParticipantsByUser(
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    try {
+      const response = await ParticipantsDrawDAO.indexAllJoinDrawsQuotasParticipantsByUser(
+        req,
+        res
+      );
+      res.json(response);
+    } catch (error) {
+      console.log(error);
+    }
+  },
   async indexAll(req: Request, res: Response): Promise<void> {
     try {
       const response = await ParticipantsDrawBO.indexAll();

@@ -11,6 +11,9 @@ export default {
       const userVO = new UserVO();
 
       userVO.setCpf(user.cpf);
+      userVO.setEmail(user.email);
+
+      
 
       const response = await ForgoutPasswordBO.indexOne(userVO);
 

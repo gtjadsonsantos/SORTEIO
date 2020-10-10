@@ -62,6 +62,32 @@ export default {
     
   return response
   } ,
+  async indexAllJoinDrawsQuotasParticipantsByUser(req:Request,res:Response):Promise<any[]>{
+
+    const response:any[] = await conn.raw(`  
+    SELECT
+      draws.draw_id,
+      participants_draw.participant_id,
+      draw_quotas.draw_quota_id,
+      participants_draw.created_at,
+      users.name,
+      draws.title,
+      draws.subtitle,
+      participants_draw.status,
+      draw_quotas.number,
+      draws.value
+    FROM draws 
+      INNER JOIN participants_draw ON draws.draw_id = participants_draw.draws_draw_id
+      RIGHT JOIN draw_quotas ON draw_quotas.draw_quota_id  = participants_draw.draw_quotas_draw_quota_id   
+      INNER JOIN users ON users.user_id = participants_draw.users_user_id
+    WHERE 
+	    participants_draw.users_user_id = ${req.params.user_id} and  
+      draws.deleted_at is null and
+      draw_quotas.deleted_at is null and
+      participants_draw.deleted_at is null`)
+    
+  return response
+  } ,
   async indexAll(): Promise<Participants_DrawVO[]> {
     const listParticipants_DrawVO: Participants_DrawVO[] = [];
 

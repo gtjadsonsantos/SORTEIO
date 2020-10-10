@@ -83,8 +83,8 @@ export default {
     const decode:any = jwt.verify(token, config.hashjwt);
     const { dataUser } = decode;
     let response:boolean = false;
-
-    if(dataUser[0].cpf == userVO.getCpf()){
+    
+    if(dataUser[0].user_id == userVO.getUser_id()){
 
       const responseDatabase = await conn("users")
       .update({
@@ -93,7 +93,7 @@ export default {
         email: userVO.getEmail(),
         phone: userVO.getPhone(),
         password: userVO.getPassword(),
-        type: userVO.getType(),
+        type: dataUser[0].type,
         address: userVO.getAddress(),
       })
       .where("user_id","=",`${userVO.getUser_id()}`)
@@ -119,6 +119,7 @@ export default {
     const listUser: IUser[] = await conn("users")
       .select("*")
       .where("cpf", "=", `${userVO.getCpf()}`)
+      .where("email","=",`${userVO.getEmail()}`)
       .where("deleted_at", null);
 
     listUser.forEach((item) => {

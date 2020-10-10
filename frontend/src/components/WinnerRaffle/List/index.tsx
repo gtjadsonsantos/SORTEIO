@@ -30,7 +30,7 @@ export default function MediaCard() {
   useEffect(() => {
     async function getWinnerDraws() {
       const { data } = await api.get(
-        "/join_winners_participants_users_quotas_draw"
+        "/join_raffles_participants_users_quotas_raffles"
       );
 
       setWinnerRaffles(data[0]);

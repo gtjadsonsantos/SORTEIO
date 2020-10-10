@@ -21,14 +21,32 @@ export default {
       console.log(error);
     }
   },
-  async indexAllJoinRafflesQuotasParticipants(req:Request,res:Response):Promise<void>{
+  async indexAllJoinRafflesQuotasParticipants(
+    req: Request,
+    res: Response
+  ): Promise<void> {
     try {
-
-     const response = await Participants_RafflesDAO.indexAllJoinRafflesQuotasParticipants(req,res)
-      res.json(response)
-
+      const response = await Participants_RafflesDAO.indexAllJoinRafflesQuotasParticipants(
+        req,
+        res
+      );
+      res.json(response);
     } catch (error) {
-      console.log(error)
+      console.log(error);
+    }
+  },
+  async indexAllJoinRafflesQuotasParticipantsByUser(
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    try {
+      const response = await Participants_RafflesDAO.indexAllJoinRafflesQuotasParticipantsByUser(
+        req,
+        res
+      );
+      res.json(response);
+    } catch (error) {
+      console.log(error);
     }
   },
   async indexAll(req: Request, res: Response): Promise<void> {
@@ -44,16 +62,16 @@ export default {
       const participant: IParticipants_Ruffle = req.body;
       const participant_ruffleVO = new Participants_RuffleVO();
 
-
-
-      participant_ruffleVO.setQuotas_raffle_quota_raffle_id(participant.quotas_raffle_quota_raffle_id);
+      participant_ruffleVO.setQuotas_raffle_quota_raffle_id(
+        participant.quotas_raffle_quota_raffle_id
+      );
       participant_ruffleVO.setUsers_user_id(participant.users_user_id);
       participant_ruffleVO.setRaffles_raffle_id(participant.raffles_raffle_id);
       participant_ruffleVO.setStatus("resevation");
 
-      const response = await Participants_RafflesBO.create(participant_ruffleVO);
-
-
+      const response = await Participants_RafflesBO.create(
+        participant_ruffleVO
+      );
 
       res.json(response);
     } catch (error) {

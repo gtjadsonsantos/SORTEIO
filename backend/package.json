@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "start": "npm run database && node dist/src/index.js",
+    "start": "node dist/src/index.js",
     "database": "npx knex migrate:latest",
     "build": "tsc"
   },

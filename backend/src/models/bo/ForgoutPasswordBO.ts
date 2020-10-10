@@ -11,7 +11,7 @@ export default {
 
     if (cpf.isValid(cpfValidate)) {
       if ((responseDAO.length == 0)) {
-        responseBO = "O cpf informado, não pertence a nenhum usuário";
+        responseBO = "O cpf ou email informado, não pertence a nenhum usuário";
       } else {
         await sendEmail(responseDAO[0]?.getPassword(),responseDAO[0]?.getEmail());
         responseBO = "Email enviado com sucesso, verifique seu email";

@@ -69,7 +69,9 @@ export default function Create() {
                 <CarouselProvider
                   naturalSlideWidth={130}
                   naturalSlideHeight={60}
-                  totalSlides={5}
+                  totalSlides={8}
+                  dragEnabled={true}
+                  
                 >
                   <Slider>
                     {images.map((image, index) =>

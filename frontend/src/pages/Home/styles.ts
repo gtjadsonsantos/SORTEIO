@@ -140,6 +140,7 @@ export const CardDraw = styled.div`
 export const SliderDraw = styled.div`
   height: 250px;
   width: 100%;
+  display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
   ::-webkit-scrollbar {

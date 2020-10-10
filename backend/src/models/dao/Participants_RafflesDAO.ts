@@ -71,7 +71,35 @@ export default {
 
     return response;
   },
- 
+  async indexAllJoinRafflesQuotasParticipantsByUser(
+    req: Request,
+    res: Response
+  ): Promise<any> {
+    const response: any[] = await conn.raw(`
+    SELECT
+    raffles.raffle_id,
+    participants_raffle.participant_id,
+    participants_raffle.created_at,
+    quotas_raffle.quota_raffle_id,
+    users.name,
+    raffles.title,
+    raffles.subtitle,
+    participants_raffle.status,
+    quotas_raffle.number,
+    raffles.value
+  FROM raffles 
+    INNER JOIN participants_raffle ON raffles.raffle_id = participants_raffle.raffles_raffle_id
+    RIGHT JOIN quotas_raffle ON quotas_raffle.quota_raffle_id  = participants_raffle.quotas_raffle_quota_raffle_id   
+    INNER JOIN users ON users.user_id = participants_raffle.users_user_id
+  WHERE 
+    participants_raffle.users_user_id = ${req.params.user_id} and  
+    raffles.deleted_at is null and
+    quotas_raffle.deleted_at is null and
+    participants_raffle.deleted_at is null
+    `);
+
+    return response;
+  },
   async indexAll(): Promise<Participants_RuffleVO[]> {
     const listParticipants_RuffleVO: Participants_RuffleVO[] = [];
     const listParticipants_Ruffle: IParticipants_Ruffle[] = await conn(

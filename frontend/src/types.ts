@@ -87,7 +87,7 @@ export interface IBusiness {
   phone?: string;
   deleted_at?: string;
   regulation?: string;
-  banner?:string
+  banner?: string;
 }
 
 export interface IQuotas_Raffle {
@@ -128,7 +128,7 @@ export interface IParticipants_Draw {
   participant_id?: number;
   draw_quota_id?: number;
   users_user_id?: number;
-  created_at?:string;
+  created_at?: string;
   name?: string;
   status?: string;
   number?: string;
@@ -160,11 +160,24 @@ export interface Ijoin_winners_participants_users_quotas_draw {
   image?: string;
   video?: string;
   name?: string;
-  number?:string
+  number?: string;
   address?: string;
   date_draw?: string;
   title?: string;
   cotas?: string;
+}
+
+export interface Ijoin_winners_participants_users_quotas_draw_by_user_id {
+  draw_id: number;
+  participant_id: number;
+  draw_quota_id: number;
+  created_at: string;
+  name: string;
+  title: string;
+  subtitle: string;
+  status: string;
+  number: string;
+  value: number;
 }
 
 export interface Ijoin_raffles_participants_users_quotas_raffles {
@@ -172,10 +185,23 @@ export interface Ijoin_raffles_participants_users_quotas_raffles {
   participants_raffle_participant_id?: number;
   image?: string;
   video?: string;
-  number?:string
+  number?: string;
   name?: string;
   address?: string;
   date_raffle?: string;
   title?: string;
   cotas?: string;
+}
+
+export interface Ijoin_raffles_participants_users_quotas_raffles_by_user_id {
+  raffle_id: number;
+  participant_id: number;
+  created_at: string;
+  quota_raffle_id: number;
+  name: string;
+  title: string;
+  subtitle: string;
+  status: string;
+  number: string;
+  value: number;
 }

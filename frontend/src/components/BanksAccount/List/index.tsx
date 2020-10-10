@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     button: {
       margin: theme.spacing(1),
-    }
+    },
   })
 );
 export default function List() {
@@ -49,12 +49,11 @@ export default function List() {
     <Container>
       {banks.length > 0
         ? banks.map((bank) => (
-            <Card className={classes.root} style={{width:"450px"}}>
+            <Card className={classes.root} style={{ width: "290px", margin: "10px 10px 10px 10px" }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   alt={bank.name}
-                  height="300"
                   image={bank.image}
                   title={bank.name}
                 />
@@ -63,16 +62,16 @@ export default function List() {
                     {bank.name}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="h6">
-                   Agencia: {bank.agency}
+                    Agencia: {bank.agency}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="h6">
-                  Cnpj: {bank.cnpj}
+                    Cnpj: {bank.cnpj}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="h6">
-                  Cpf: {bank.cpf}
+                    Cpf: {bank.cpf}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="h6">
-                  Nº Conta: {bank.number_account}
+                    Conta: {bank.number_account}
                   </Typography>
                 </CardContent>
               </CardActionArea>
