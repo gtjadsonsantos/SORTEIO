@@ -1,5 +1,5 @@
 import express from "express";
-import path from 'path'
+import path from "path";
 import ParticipantsDrawDAO from "./models/dao/ParticipantsDrawDAO";
 import Participants_RafflesDAO from "./models/dao/Participants_RafflesDAO";
 import routeUsers from "./routes/users";
@@ -18,6 +18,7 @@ import routeWinnersRaffles from "./routes/winners_raffles";
 import routeFourgoutPassword from "./routes/forgout_password";
 import routeReportDraw from "./routes/resport_draw";
 import routeReportRaffles from "./routes/resport_raffles";
+import routeFrontend from "./routes/frontend";
 
 import cors from "cors";
 
@@ -43,10 +44,11 @@ app.use(routeWinnersRaffles);
 app.use(routeFourgoutPassword);
 app.use(routeReportDraw);
 app.use(routeReportRaffles);
+app.use(routeFrontend);
 
-ParticipantsDrawDAO.updateStatusResevation();
-Participants_RafflesDAO.updateStatusResevation();
+//ParticipantsDrawDAO.updateStatusResevation();
+//Participants_RafflesDAO.updateStatusResevation();
 
-app.listen(process.env.PORT || 3334, () => {
+app.listen(process.env.PORT || 3333, () => {
   console.log("Server Up");
 });
