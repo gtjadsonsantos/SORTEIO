@@ -41,7 +41,7 @@ import {
   FooterRow,
   FooterSocial,
   ItemFooter,
-  Hr
+  Hr,
 } from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
 import WinnerListDraws from "../../components/WinnerDraw/List";
@@ -137,23 +137,23 @@ export default function Home() {
         </CardProcess>
         <CardProcess>
           <ImageProcess src={`${URL}/passo-2.png`} />
-          <TitleProcess>Escolha uma Rifa</TitleProcess>
+          <TitleProcess>Selecione os números</TitleProcess>
           <DescriptionProcess>
-            Muito fácil participar. Comece escolhendo uma Rifa ativa.
+            Escolha quantos quiser! Quanto mais, mais chances de ganhar.
           </DescriptionProcess>
         </CardProcess>
         <CardProcess>
           <ImageProcess src={`${URL}/passo-3.png`} />
-          <TitleProcess>Escolha uma Rifa</TitleProcess>
+          <TitleProcess>Faça o pagamento</TitleProcess>
           <DescriptionProcess>
-            Muito fácil participar. Comece escolhendo uma Rifa ativa.
+            Escolha uma das formas de pagamento disponíveis.
           </DescriptionProcess>
         </CardProcess>
         <CardProcess>
           <ImageProcess src={`${URL}/passo-4.png`} />
-          <TitleProcess>Escolha uma Rifa</TitleProcess>
+          <TitleProcess>Aguarde o sorteio</TitleProcess>
           <DescriptionProcess>
-            Muito fácil participar. Comece escolhendo uma Rifa ativa.
+            Agora é aguardar o sorteio pela Loteria Federal e boa sorte!
           </DescriptionProcess>
         </CardProcess>
       </ContainerProcess>
@@ -226,7 +226,7 @@ export default function Home() {
             </a>
           </FooterSocial>
         </FooterRow>
-        <Hr/>
+        <Hr />
         <FooterRow>
           <p style={{ fontFamily: "Roboto,sans-serif", color: "#999999" }}>
             ©{new Date().getFullYear()} Todos os direitos reservados
