@@ -46,7 +46,7 @@ app.use(routeReportDraw);
 app.use(routeReportRaffles);
 app.use(routeFrontend);
 
-
+console.log(__dirname)
 //ParticipantsDrawDAO.updateStatusResevation();
 //Participants_RafflesDAO.updateStatusResevation();
 
