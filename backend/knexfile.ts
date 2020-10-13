@@ -36,7 +36,7 @@ export default {
   production: {
     client: "mysql",
     connection: {
-      port: process.env.DATABASE_PORT || 3306,
+      //port: process.env.DATABASE_PORT || 3306,
       host: process.env.DATABASE_HOST || "localhost",
       database: process.env.DATABASE_NAME || "test",
       user: process.env.DATABASE_USER || "root",
