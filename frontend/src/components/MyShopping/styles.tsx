@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 export const CardItem = styled.div`
-  height: 140px;
+  height: 166px;
   margin: 10px 10px 10px 10px;
   
   -webkit-box-shadow: -1px -1px 22px -6px rgba(106, 143, 123, 1);

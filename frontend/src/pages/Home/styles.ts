@@ -86,7 +86,9 @@ export const BannerImage = styled.img`
 
 export const ContainerProcess = styled.div`
   width: 100%;
-  height: 340px;
+  min-height: 340px;
+  min-height: 540px;
+  flex-wrap:wrap;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -104,13 +106,12 @@ export const ImageProcess = styled.img`
 `;
 export const TitleProcess = styled.h3`
   font-size: 1.2em;
-  font-family: Roboto,sans-serif
+  font-family: Roboto, sans-serif;
 `;
 export const DescriptionProcess = styled.p`
   font-size: 0.9em;
   line-height: 1.5;
-  font-family: Roboto,sans-serif
-
+  font-family: Roboto, sans-serif;
 `;
 export const ContainerDraws = styled.div`
   display: flex;
@@ -193,24 +194,23 @@ export const FooterRow = styled.div`
   justify-content: space-between;
   display: flex;
 `;
-export const ItemFooter = styled.span` 
+export const ItemFooter = styled.span`
   width: 100px;
   height: 40px;
-  font-family:Roboto,sans-serif;
+  font-family: Roboto, sans-serif;
   font-weight: 700;
   text-align: center;
   line-height: 35px;
-  
+
   cursor: pointer;
 
   &:hover {
     background-color: #ededed;
   }
-
 `;
 export const FooterSocial = styled.div`
   width: 200px;
 `;
 export const Hr = styled.hr`
-background-color: #000;
-`
+  background-color: #000;
+`;
