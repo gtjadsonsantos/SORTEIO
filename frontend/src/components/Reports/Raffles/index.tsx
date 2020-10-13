@@ -11,7 +11,7 @@ import {
   Ijoin_raffles_participants_users_quotas_raffles,
   IRaffles,
 } from "../../../types";
-import { Container, Caption, ContainerPrint } from "./styles";
+import { Container, Caption, ContainerPrint, GlobalCSSPRINT } from "./styles";
 import Printer, { print } from "react-pdf-print";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -67,58 +67,60 @@ export default function Raffles() {
   const handleOpen = () => {
     setOpen(true);
   };
-  return (
-    <Container>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label">Rifas</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={raffle_id}
-          onChange={handleChange}
-        >
-          {raffles.map((raffle) => (
-            <MenuItem key={raffle.raffle_id} value={raffle.raffle_id}>
-              {raffle.title}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
 
-      <ContainerPrint>
-        <Printer id="print">
-          <div
-            id="page"
-            style={{ width: "210mm", height: "297mm", margin: "0px" }}
+  return (
+    <>
+      <GlobalCSSPRINT />
+      <Container>
+        <FormControl id="raffle-select" className={classes.formControl}>
+          <InputLabel id="demo-controlled-open-select-label">Rifas</InputLabel>
+          <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={raffle_id}
+            onChange={handleChange}
           >
-            <table id={ids[0]}>
-              <Caption>RELATÓRIO DE RIFAS | PILOTANDO PRÊMIOS </Caption>
-              <tr>
-                <th>NOME</th>
-                <th>COTA</th>
-              </tr>
-              {participantsDraw.map((participant) => (
+            {raffles.map((raffle) => (
+              <MenuItem key={raffle.raffle_id} value={raffle.raffle_id}>
+                {raffle.title}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <ContainerPrint>
+          <Printer id="print">
+            <div id="page" style={{ width: "100%" }}>
+              <table id={ids[0]}>
+                <Caption>RELATÓRIO DE RIFAS | PILOTANDO PRÊMIOS </Caption>
                 <tr>
-                  <td>{participant.name}</td>
-                  <td>{participant.number}</td>
+                  <th>NOME</th>
+                  <th>COTA</th>
                 </tr>
-              ))}
-            </table>
-          </div>
-        </Printer>
-      </ContainerPrint>
-      <Button
-        fullWidth={true}
-        variant="contained"
-        color="secondary"
-        onClick={() => print(ids)}
-        value="Stampa"
-      >
-        Gerar Pdf
-      </Button>
-    </Container>
+                {participantsDraw.map((participant) => (
+                  <tr>
+                    <td>{participant.name}</td>
+                    <td>{participant.number}</td>
+                  </tr>
+                ))}
+              </table>
+            </div>
+          </Printer>
+        </ContainerPrint>
+        <Button
+          id="button-print"
+          fullWidth={true}
+          variant="contained"
+          color="secondary"
+          onClick={() => window.print()}
+          value="Stampa"
+        >
+          Gerar Pdf
+        </Button>
+      </Container>
+    </>
   );
 }

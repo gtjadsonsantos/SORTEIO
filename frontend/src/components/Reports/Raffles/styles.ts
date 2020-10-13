@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled,{createGlobalStyle} from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -14,7 +14,7 @@ export const Container = styled.div`
     align-items:center;
   }
   #page {
-    width: 70% !important;
+    width: 100% !important;
     
   }
   table {
@@ -58,3 +58,20 @@ export const ContainerPrint = styled.div `
     justify-content: center;
     
  `
+ export const GlobalCSSPRINT = createGlobalStyle`
+ @media print { 
+   #root > div > div { 
+     display:none;
+   }
+   #root > div > header { 
+     display:none;
+   }
+   
+   #button-print { 
+     display: none;
+   }
+   #raffle-select{
+     display: none;
+   }
+ }
+`;

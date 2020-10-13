@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -12,9 +12,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
   }
-  #page {
-    width: 70% !important;
-  }
+
   table {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -54,4 +52,22 @@ export const ContainerPrint = styled.div`
   align-items: center;
   width: 100%;
   justify-content: center;
+`;
+
+export const GlobalCSSPRINT = createGlobalStyle`
+  @media print { 
+    #root > div > div { 
+      display:none;
+    }
+    #root > div > header { 
+      display:none;
+    }
+    
+    #button-print { 
+      display: none;
+    }
+    #draw-select{
+      display: none;
+    }
+  }
 `;

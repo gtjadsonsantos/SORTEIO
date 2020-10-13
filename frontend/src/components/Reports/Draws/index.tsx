@@ -11,7 +11,7 @@ import {
   IDraw,
   Ijoin_winners_participants_users_quotas_draw,
 } from "../../../types";
-import { Container, Caption,ContainerPrint } from "./styles";
+import { Container, Caption, ContainerPrint, GlobalCSSPRINT } from "./styles";
 import Printer, { print } from "react-pdf-print";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -69,57 +69,60 @@ export default function Draws() {
   };
 
   return (
-    <Container>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label">Sorteio</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={draw_id}
-          onChange={handleChange}
-        >
-          {draws.map((draw) => (
-            <MenuItem key={draw.draw_id} value={draw.draw_id}>
-              {draw.title}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <ContainerPrint>
-      <Printer id="print">
-        <div
-          id="page"
-          style={{ width: "210mm", height: "297mm", margin: "0px" }}
-        >
-          <table id={ids[0]}>
-            <Caption>RELATÓRIO DE SORTEIOS | PILOTANDO PRÊMIOS </Caption>
-            <tr>
-              <th>NOME</th>
-              <th>COTA</th>
-            </tr>
-            {participantsDraw.map((participant) => (
-              <tr>
-                <td>{participant.name}</td>
-                <td>{participant.number}</td>
-              </tr>
+    <>
+      <GlobalCSSPRINT />
+      <Container>
+        <FormControl id="draw-select" className={classes.formControl}>
+          <InputLabel id="demo-controlled-open-select-label">
+            Sorteio
+          </InputLabel>
+          <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={draw_id}
+            onChange={handleChange}
+          >
+            {draws.map((draw) => (
+              <MenuItem key={draw.draw_id} value={draw.draw_id}>
+                {draw.title}
+              </MenuItem>
             ))}
-          </table>
-        </div>
-      </Printer>
-      </ContainerPrint>
-      <Button
-        fullWidth={true}
-        variant="contained"
-        color="secondary"
-        onClick={() => print(ids)}
-        value="Stampa"
-      >
-        Gerar Pdf
-      </Button>
-    </Container>
+          </Select>
+        </FormControl>
+
+        <ContainerPrint>
+          <Printer id="print">
+            <div id="page" style={{ width: "100%" }}>
+              <table id={"1"}>
+                <Caption>RELATÓRIO DE SORTEIOS | PILOTANDO PRÊMIOS </Caption>
+                <tr>
+                  <th>NOME</th>
+                  <th>COTA</th>
+                </tr>
+                {participantsDraw.map((participant) => (
+                  <tr>
+                    <td>{participant.name}</td>
+                    <td>{participant.number}</td>
+                  </tr>
+                ))}
+              </table>
+            </div>
+          </Printer>
+        </ContainerPrint>
+        <Button
+         id="button-print"
+          fullWidth={true}
+          variant="contained"
+          color="secondary"
+          onClick={() => window.print()}
+          value="Stampa"
+        >
+          Gerar Pdf
+        </Button>
+      </Container>
+    </>
   );
 }
