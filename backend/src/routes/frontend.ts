@@ -6,6 +6,10 @@ routesFrontend.get("/Signin", (req, res) => {
     
   res.sendFile(path.resolve("public","index.html"));
 });
+routesFrontend.get("/", (req, res) => {
+    
+  res.sendFile(path.resolve("public","index.html"));
+});
 routesFrontend.get("/ForgoutPassword", (req, res) => {
   res.sendFile(path.resolve("public","index.html"));
 });
