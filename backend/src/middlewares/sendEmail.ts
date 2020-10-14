@@ -4,13 +4,19 @@ const transporter = nodemailer.createTransport({
   host: "smtp.umbler.com",
   port: 587,
   secure: false,
-  auth: { user: process.env.EMAIL || "suporte@jadsonsantos.com", pass:  process.env.PASS || "suporte@jadson" },
+  auth: {
+    user: process.env.EMAIL || "suporte@jadsonsantos.com",
+    pass: process.env.PASS || "suporte@jadson",
+  },
 });
 
-export default async function sendMail(password: string | undefined,email:string|undefined): Promise<boolean> {
+export default async function sendMail(
+  password: string | undefined,
+  email: string | undefined
+): Promise<boolean> {
   const mailOptions = {
     to: email,
-    from: "suporte@jadsonsantos.com",
+    from: process.env.EMAIL,
     subject: "Recuperação de senha",
     html: `
     <!DOCTYPE html>

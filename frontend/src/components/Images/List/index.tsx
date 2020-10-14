@@ -48,7 +48,7 @@ export default function Create() {
     <Container>
       {images.length > 0
         ? images.map((images) => (
-            <Card className={classes.root}>
+            <Card className={classes.root} style={{margin: "0px 10px  0px 0px"}}> 
               <CardActionArea>
                 <img
                   style={{objectFit: "scale-down"}}

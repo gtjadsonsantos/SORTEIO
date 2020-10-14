@@ -68,7 +68,7 @@ export default function MediaCard() {
                   >
                     #{winner.cotas}
                   </Typography>
-                  <ReactPlayer style={{diplay: `${winner.video? "block":"none" }`}} url={winner.video} width={360} height={250} controls={true} />
+                  <ReactPlayer style={{diplay: `${winner.video !== " " ? "block":"none" }`}}  url={winner.video} width={winner.video !== " " ? 360:0} height={winner.video !== " " ? 250:0} controls={true} />
                 </CardContent>
               </CardActionArea>
             </Card>
@@ -76,4 +76,5 @@ export default function MediaCard() {
         : ""}
     </Container>
   );
+
 }

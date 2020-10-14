@@ -88,7 +88,7 @@ export const ContainerProcess = styled.div`
   width: 100%;
   min-height: 340px;
   min-height: 540px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -133,6 +133,7 @@ export const ContainerRow = styled.div`
 export const CardDraw = styled.div`
   width: 320px;
   display: flex;
+  margin-left: 15px;
   flex-direction: column;
   align-items: center;
   border-radius: 4em;

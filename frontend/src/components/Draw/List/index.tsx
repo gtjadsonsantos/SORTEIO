@@ -54,7 +54,7 @@ export default function Create() {
         ? draws.map((draw) => (
             <Card
               className={classes.root}
-              style={{ width: "30%", minWidth: "350px" }}
+              style={{ width: "30%", minWidth: "350px", margin: "0px 10px 0px 0px" }}
             >
               <CardActionArea>
                 <CarouselProvider

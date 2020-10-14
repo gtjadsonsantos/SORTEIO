@@ -40,7 +40,7 @@ export default function Create() {
   const [participants, setParticipants] = useState<IParticipants_Ruffle[]>([]);
   const [participant_id, setParticiapant_id] = useState<number>();
   const [image, setImage] = useState<string>();
-  const [video, setVideo] = useState<string>();
+  const [video, setVideo] = useState<string>(" ");
   const [response, setResponse] = React.useState<JSX.Element>();
   const [raffle_idOpen, setRaffle_idOpen] = React.useState(false);
   const [participant_idOpen, setParticipant_idOpen] = useState(false);
@@ -176,9 +176,9 @@ export default function Create() {
       <FormControl fullWidth className={classes.margin}>
         <FileBase64 multiple={false} onDone={handlChangeDataImage} />
       </FormControl>
-      <FormControl fullWidth className={classes.margin}>
+      <FormControl fullWidth required={false}  className={classes.margin}>
         <TextField
-          required={true}
+          required={false}
           onChange={(element) => setVideo(element.target.value)}
           value={video}
           id="outlined-basic"

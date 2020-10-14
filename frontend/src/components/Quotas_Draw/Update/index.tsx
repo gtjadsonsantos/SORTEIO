@@ -133,7 +133,7 @@ export default function Create() {
           style={{ width: "200px" }}
           className={classes.button}
         >
-          Update
+          Atualizar
         </Button>
       </FormControl>
       {response}

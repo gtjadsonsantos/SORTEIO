@@ -10,13 +10,13 @@ import Button from "@material-ui/core/Button";
 import ReactMarkdown from "react-markdown";
 import Typography from "@material-ui/core/Typography";
 import { IRaffles } from "../../../types";
-import {Container} from './styles'
+import { Container } from "./styles";
 import Timer from "../../../global/Timer";
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    margin: 0
+    margin: 0,
   },
 });
 
@@ -35,18 +35,39 @@ export default function List() {
   }, []);
 
   function handleTimerDate(raffle: IRaffles) {
-    const date = new Date(`${raffle.date_raffle}`)
-    return Timer(new Date(date.getUTCFullYear(),date.getUTCMonth(),date.getDate(),date.getUTCHours(),date.getUTCMinutes(),date.getUTCSeconds()));
+    const date = new Date(`${raffle.date_raffle}`);
+    return Timer(
+      new Date(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getDate(),
+        date.getUTCHours(),
+        date.getUTCMinutes(),
+        date.getUTCSeconds()
+      )
+    );
   }
 
-
   return (
-    <Container >
+    <Container>
       {raffles.length > 0
         ? raffles.map((raffle) => (
-            <Card className={classes.root}>
+            <Card
+              className={classes.root}
+              style={{
+                width: "30%",
+                minWidth: "350px",
+                margin: "0px 10px 0px 0px",
+              }}
+            >
               <CardActionArea>
-                <CardMedia component="img" alt={raffle.title} height="180" image={raffle.image} title={raffle.title} />
+                <CardMedia
+                  component="img"
+                  alt={raffle.title}
+                  height="180"
+                  image={raffle.image}
+                  title={raffle.title}
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h6">
                     {raffle.title}
@@ -54,14 +75,31 @@ export default function List() {
                   <Typography gutterBottom variant="h5" component="h2">
                     {raffle.subtitle}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p" >
-                    <ReactMarkdown  source={raffle.description} escapeHtml={true} />
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    <ReactMarkdown
+                      source={raffle.description}
+                      escapeHtml={true}
+                    />
                   </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p" >
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
                     R$ {raffle.value}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p" >
-                    Data da rifa: dias: {handleTimerDate(raffle).days} horas:{" "} {handleTimerDate(raffle).hours} minutos:{" "} {handleTimerDate(raffle).minutes}
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Data da rifa: dias: {handleTimerDate(raffle).days} horas:{" "}
+                    {handleTimerDate(raffle).hours} minutos:{" "}
+                    {handleTimerDate(raffle).minutes}
                   </Typography>
                   <Typography
                     variant="body2"

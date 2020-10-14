@@ -1,8 +1,7 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Container = styled.div`
-    display:flex;
-    flex-direction: row;
-    flex-wrap:wrap;
-    justify-content: space-between;
-`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
