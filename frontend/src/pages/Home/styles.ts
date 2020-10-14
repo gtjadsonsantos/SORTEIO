@@ -71,11 +71,6 @@ export const Banner = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-
-  @media (max-width: 450px) {
-    max-height: 50em;
-    background-size: 190px;
-  }
 `;
 
 export const BannerImage = styled.img`
