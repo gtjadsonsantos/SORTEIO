@@ -44,7 +44,10 @@ var transporter = nodemailer_1.default.createTransport({
     host: "smtp.umbler.com",
     port: 587,
     secure: false,
-    auth: { user: process.env.EMAIL || "suporte@jadsonsantos.com", pass: process.env.PASS || "suporte@jadson" },
+    auth: {
+        user: process.env.EMAIL || "suporte@jadsonsantos.com",
+        pass: process.env.PASS || "suporte@jadson",
+    },
 });
 function sendMail(password, email) {
     return __awaiter(this, void 0, void 0, function () {
@@ -54,7 +57,7 @@ function sendMail(password, email) {
                 case 0:
                     mailOptions = {
                         to: email,
-                        from: "suporte@jadsonsantos.com",
+                        from: process.env.EMAIL,
                         subject: "Recuperação de senha",
                         html: "\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n        <style>\n            * {\n                padding: 0;\n                margin: 0;\n                box-sizing: border-box;\n            }\n            html,body {\n                width: 100%;\n                height: 100%;\n                display: flex;\n                flex-direction: column;\n                justify-content: space-between;\n               \n            }\n            .header {\n                background-color: #fff;   \n                height: 30%;\n                display: flex;\n                align-items: center;\n                justify-content: center;\n            }\n            .header h3 {\n                font-family: \"Roboto\",sans-serif; \n                color: #000;  \n                font-size: 2em;\n            }\n            .main {\n                display: flex;\n                flex-direction: column;\n                align-items: center;\n                height: 60%;\n                margin-top: 30px;\n                justify-content: space-between;\n            }\n            .footer {\n                display: flex;\n                flex-direction: column;\n                align-items: center;\n                height: 10%;\n                margin-top: 30px;\n                justify-content: space-around;\n            }\n    \n    \n        </style>\n    </head>\n    <body>\n        <header class=\"header\">\n            <h3>Pilotando Motos</h3>\n        </header>\n        <main class=\"main\">\n            <p >Ol\u00E1,</p>\n    \n            </p>Segue sua senha: " + password + "</p>\n        </main>\n        <footer class=\"footer\">\n            <a href=\"http://pilotandomotos.com.br\">http://pilotandomotos.com.br</a></p>\n        </footer>\n    </body>\n    </html>\n        ",
                     };

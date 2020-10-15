@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var UserVO_1 = __importDefault(require("../vo/UserVO"));
 var conn_1 = __importDefault(require("../../database/conn"));
+var Cripto_1 = require("../../utils/Cripto");
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var config_1 = __importDefault(require("../../config"));
 exports.default = {
@@ -114,7 +115,7 @@ exports.default = {
                             cpf: userVO.getCpf(),
                             email: userVO.getEmail(),
                             phone: userVO.getPhone(),
-                            password: userVO.getPassword(),
+                            password: Cripto_1.encrypt("" + userVO.getPassword()),
                             type: userVO.getType(),
                             address: userVO.getAddress(),
                         })];
@@ -160,7 +161,7 @@ exports.default = {
                                 cpf: userVO.getCpf(),
                                 email: userVO.getEmail(),
                                 phone: userVO.getPhone(),
-                                password: userVO.getPassword(),
+                                password: Cripto_1.encrypt("" + userVO.getPassword()),
                                 type: dataUser[0].type,
                                 address: userVO.getAddress(),
                             })
@@ -181,7 +182,7 @@ exports.default = {
                     case 0: return [4 /*yield*/, conn_1.default("users")
                             .where("cpf", "=", "" + userVO.getCpf())
                             .where("email", "=", "" + userVO.getEmail())
-                            .where("password", "=", "" + userVO.getPassword())
+                            .where("password", "=", Cripto_1.encrypt("" + userVO.getPassword()))
                             .where("user_id", "=", "" + userVO.getUser_id())
                             .update({
                             deleted_at: new Date(),

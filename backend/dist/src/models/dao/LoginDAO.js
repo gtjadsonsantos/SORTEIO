@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var conn_1 = __importDefault(require("../../database/conn"));
+var Cripto_1 = require("../../utils/Cripto");
 var UserVO_1 = __importDefault(require("../vo/UserVO"));
 exports.default = {
     indexOne: function (userVO) {
@@ -51,7 +52,7 @@ exports.default = {
                         listUserVO = [];
                         return [4 /*yield*/, conn_1.default("users")
                                 .select("*")
-                                .where("password", "=", "" + userVO.getPassword())
+                                .where("password", "=", Cripto_1.encrypt("" + userVO.getPassword()))
                                 .where("email", "=", "" + userVO.getEmail())
                                 .where("deleted_at", null)
                                 .limit(1)];

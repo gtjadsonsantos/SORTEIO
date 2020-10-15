@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var cpf_cnpj_validator_1 = require("cpf-cnpj-validator");
 var UserDAO_1 = __importDefault(require("../dao/UserDAO"));
 var sendEmail_1 = __importDefault(require("../../middlewares/sendEmail"));
+var Cripto_1 = require("../../utils/Cripto");
 exports.default = {
     indexOne: function (userVO) {
         var _a, _b;
@@ -58,7 +59,7 @@ exports.default = {
                         if (!(responseDAO.length == 0)) return [3 /*break*/, 2];
                         responseBO = "O cpf ou email informado, não pertence a nenhum usuário";
                         return [3 /*break*/, 4];
-                    case 2: return [4 /*yield*/, sendEmail_1.default((_a = responseDAO[0]) === null || _a === void 0 ? void 0 : _a.getPassword(), (_b = responseDAO[0]) === null || _b === void 0 ? void 0 : _b.getEmail())];
+                    case 2: return [4 /*yield*/, sendEmail_1.default(Cripto_1.decrypt("" + ((_a = responseDAO[0]) === null || _a === void 0 ? void 0 : _a.getPassword())), (_b = responseDAO[0]) === null || _b === void 0 ? void 0 : _b.getEmail())];
                     case 3:
                         _c.sent();
                         responseBO = "Email enviado com sucesso, verifique seu email";

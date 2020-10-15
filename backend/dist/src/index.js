@@ -47,6 +47,6 @@ app.use(resport_raffles_1.default);
 app.use(frontend_1.default);
 //ParticipantsDrawDAO.updateStatusResevation();
 //Participants_RafflesDAO.updateStatusResevation();
-app.listen(process.env.PORT || 3333, function () {
+app.listen(process.env.PORT || 3334, function () {
     console.log("Server Up");
 });

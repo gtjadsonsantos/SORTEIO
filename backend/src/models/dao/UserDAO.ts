@@ -1,6 +1,7 @@
 import UserVO from "../vo/UserVO";
 import {Request} from 'express'
 import conn from "../../database/conn";
+import {encrypt} from '../../utils/Cripto'
 import { IUser } from "../../types";
 import jwt from 'jsonwebtoken'
 import config from '../../config'
@@ -63,7 +64,7 @@ export default {
       cpf: userVO.getCpf(),
       email: userVO.getEmail(),
       phone: userVO.getPhone(),
-      password: userVO.getPassword(),
+      password: encrypt(`${userVO.getPassword()}`),
       type: userVO.getType(),
       address: userVO.getAddress(),
     });
@@ -92,7 +93,7 @@ export default {
         cpf: userVO.getCpf(),
         email: userVO.getEmail(),
         phone: userVO.getPhone(),
-        password: userVO.getPassword(),
+        password: encrypt(`${userVO.getPassword()}`),
         type: dataUser[0].type,
         address: userVO.getAddress(),
       })
@@ -107,7 +108,7 @@ export default {
     await conn("users")
       .where("cpf", "=", `${userVO.getCpf()}`)
       .where("email", "=", `${userVO.getEmail()}`)
-      .where("password", "=", `${userVO.getPassword()}`)
+      .where("password", "=", encrypt(`${userVO.getPassword()}`))
       .where("user_id","=",`${userVO.getUser_id()}`)
       .update({
         deleted_at: new Date(),

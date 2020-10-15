@@ -1,5 +1,6 @@
 import conn from "../../database/conn";
 import { IUser } from "../../types";
+import {encrypt} from '../../utils/Cripto'
 import UserVO from "../vo/UserVO";
 
 export default {
@@ -8,7 +9,7 @@ export default {
     
         const listUser: IUser[] = await conn("users")
           .select("*")
-          .where("password", "=", `${userVO.getPassword()}`)
+          .where("password", "=", encrypt(`${userVO.getPassword()}`))
           .where("email","=",`${userVO.getEmail()}`)
           .where("deleted_at", null)
           .limit(1)
