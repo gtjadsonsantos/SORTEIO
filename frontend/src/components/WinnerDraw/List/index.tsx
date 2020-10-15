@@ -45,7 +45,7 @@ export default function MediaCard() {
     <Container>
       {winnerDraws.length > 0
         ? winnerDraws.map((winner) => (
-            <Card className={classes.root}>
+            <Card className={classes.root} style={{margin: "10px 10px 10px 10px"}}>
               <CardActionArea>
                 <CardMedia
                   component="img"

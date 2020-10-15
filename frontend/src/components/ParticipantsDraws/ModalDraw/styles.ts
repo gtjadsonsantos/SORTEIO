@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  
 `;
 export const Title = styled.h1`
   font-weight: 700;
@@ -128,8 +128,8 @@ export const Timer = styled.div`
   align-items: center;
   justify-content: space-around;
   border-radius: 20px;
-  height: 90px;
-  font-size: 20px;
+  height: 120px;
+  font-size: 16px;
   font-weight: bold;
   color: #fff;
   background-color: #343a40;

@@ -114,11 +114,13 @@ export const ContainerDraws = styled.div`
   margin-top: 30px;
   padding-top: 50px;
   padding-left: 20px;
+  justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
 `;
 export const TitleDraw = styled.h1`
   font-family: Roboto, sans-serif;
+  font-size: 1.3em;
 `;
 export const ContainerRow = styled.div`
   display: flex;
@@ -126,9 +128,9 @@ export const ContainerRow = styled.div`
   flex-wrap: wrap;
 `;
 export const CardDraw = styled.div`
-  width: 320px;
+  width: 301px;
   display: flex;
-  margin-left: 15px;
+  margin: 15px 15px 15px 15px;
   flex-direction: column;
   align-items: center;
   border-radius: 4em;
@@ -155,7 +157,7 @@ export const StatusDraw = styled.div`
   width: 100%;
   font-family: Roboto, sans-serif;
   display: flex;
-  margin-top: 40px;
+  margin-top: 48px;
   border-radius: 50px;
   color: #fff;
   justify-content: center;
@@ -167,11 +169,8 @@ export const StatusDraw = styled.div`
 export const ContainerRowWinners = styled.div`
   display: flex;
   margin-top: 20px;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
+  overflow-x: auto; 
+
 `;
 
 export const Footer = styled.footer`

@@ -174,7 +174,7 @@ export default function Home() {
                 )}
               </SliderDraw>
               <TitleDraw>{draw.title}</TitleDraw>
-              <h4 style={{ color: "#8c8c8c" }}>{draw.subtitle}</h4>
+              <h4 style={{ color: "#8c8c8c",textAlign: "center" }}>{draw.subtitle}</h4>
               <StatusDraw status={draw.status}>
                 <p>{draw.status === "active" ? "Ativo" : "Encerrado"}</p>
               </StatusDraw>

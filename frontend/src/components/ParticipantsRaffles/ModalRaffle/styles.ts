@@ -130,7 +130,7 @@ export const Timer = styled.div`
   justify-content: space-around;
   border-radius: 20px;
   height: 90px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   color: #fff;
   background-color: #343a40;

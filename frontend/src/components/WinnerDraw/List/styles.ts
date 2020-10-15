@@ -1,8 +1,12 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Container = styled.div`
-    height: 100%;
-    width: 100%;
-    display:flex;
-    flex-wrap: wrap;
-`
+  height: 670px;
+  width: 100%;
+  display: flex;
+  overflow-y: auto;
+  flex-wrap: wrap;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+`;
