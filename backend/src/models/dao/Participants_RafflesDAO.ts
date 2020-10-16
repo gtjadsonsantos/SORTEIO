@@ -197,6 +197,7 @@ export default {
           users_user_id: participant_ruffleVO.getUsers_user_id(),
           raffles_raffle_id: participant_ruffleVO.getRaffles_raffle_id(),
           status: participant_ruffleVO.getStatus(),
+          created_at: new Date()
         });
 
         responseDAO = true;

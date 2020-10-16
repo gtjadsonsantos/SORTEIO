@@ -157,6 +157,7 @@ export default {
           users_user_id: participant_DrawVO.getUsers_user_id(),
           draws_draw_id: participant_DrawVO.getDraws_draw_id(),
           status: participant_DrawVO.getStatus(),
+          created_at: new Date()
         });
 
         responseDAO = true;
