@@ -198,10 +198,7 @@ export default function Home() {
           </ItemFooter>
           <FooterSocial>
             <a
-              href={businnes?.social
-                ?.split(",")[0]
-                .replace(`"`, "")
-                .replace(`"`, "")}
+              href={businnes?.social?.split(",")[0].replace(`"`, "").replace(`"`, "")}
               style={{ color: "#083aa6" }}
             >
               <Facebook fontSize={"large"} />

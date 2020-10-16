@@ -65,11 +65,12 @@ export default function Create() {
     setLogo(business[index].logo);
     setBanner(business[index].banner)
 
-    const socials: ISocial = JSON.parse(`${business[index].social}`);
 
-    setFacebook(socials.facebook);
-    setWhatsapp(socials.whatsapp);
-    setInstagram(socials.instagram);
+    const socials:any = business[index].social
+    
+    setFacebook(socials.split(",")[0].replace(`"`, "").replace(`"`, ""));
+    setWhatsapp(socials.split(",")[1].replace(`"`, "").replace(`"`, ""));
+    setInstagram(socials.split(",")[2].replace(`"`, "").replace(`"`, ""));
   };
 
   const handleCloseBusiness_id = () => {
