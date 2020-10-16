@@ -68,7 +68,7 @@ export const ContainerInfoRow = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-
+  height: 41%;
   @media only screen and (min-width: 500px) {
    justify-content: space-evenly;
    width: 80%;

@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS business (
 );
 
 
-INSERT INTO users (cpf,email,phone,password,created_at,type,name,address) values ("00000000000","pilitandopremios@pilitandopremios.com.br","48000000000","f4932tjip2n34kgkjwi4jgijasv",now(),"admin","Anderson","Florianópolis");
+INSERT INTO users (cpf,email,phone,password,created_at,type,name,address) values ("00000000000","pilitandopremios@pilitandopremios.com.br","48000000000","MjQwSVQ1SjRHTktSRVJKSEJVTzNLRzQzMDlUWUlKUlROT0VLTVdGUlZFTTQzVExSSEIzSjI0TUzDh1E=",now(),"admin","Anderson","Florianópolis");
 
 
 INSERT INTO draw_quotas(number, created_at) VALUES ("000",now());
